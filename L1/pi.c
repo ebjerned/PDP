@@ -27,11 +27,13 @@ int main(int argc, char *argv[]) {
 
   dx  = 1.0/(size*chunk);
   sum = 0.0;
+  double t_begin = MPI_Wtime();
   for (i = istart; i <= istop; i++) { /* The local loop */
     double tmp = dx*(0.5 + i);
     sum += dx*4.0/(1.0 + tmp*tmp);
   }
-
+  double t_end = MPI_Wtime();
+  printf("Local loop %i done in %lf\n", rank, t_end-t_begin);
   if (rank == 0) {
     double globsum = sum;
 

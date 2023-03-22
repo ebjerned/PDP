@@ -38,8 +38,9 @@ int main(int argc, char *argv[]) {
     MPI_Recv(&b, 1, MPI_DOUBLE, 1, 222, MPI_COMM_WORLD, &status);
     printf("Processor 0 got %f from processor 1\n", b);
   } else {
-    MPI_Ssend(&a, 1, MPI_DOUBLE, 0, 222, MPI_COMM_WORLD);
     MPI_Recv(&b, 1, MPI_DOUBLE, 0, 111, MPI_COMM_WORLD, &status);
+
+    MPI_Ssend(&a, 1, MPI_DOUBLE, 0, 222, MPI_COMM_WORLD);
     printf("Processor 1 got %f from processor 0\n", b);
   }
 
