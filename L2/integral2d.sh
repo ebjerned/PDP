@@ -7,4 +7,4 @@
 #SBATCH -t 5:00
 
 module load gcc openmpi
-mpirun -np 2 alltoall
+mpirun integral2d
