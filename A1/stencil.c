@@ -1,6 +1,6 @@
 #include "stencil.h"
 #include <string.h>
-
+#include <assert.h>
 int main(int argc, char **argv) {
 	if (4 != argc) {
 		printf("Usage: stencil input_file output_file number_of_applications\n");
@@ -27,24 +27,42 @@ int main(int argc, char **argv) {
 	MPI_Init(&argc, &argv);
 	MPI_Comm_size(MPI_COMM_WORLD, &size);
 	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+	double* output = NULL;
 
 	const int partition = num_values / size;
+	double** sub_inputs = (double**)malloc(size*sizeof(double*));
 
-	double* sub_input = (double*)malloc((partition+4)*sizeof(double));
+	for(int i = 0; i < size; i++){
+		sub_inputs[i] = (double*)malloc((partition+4)*sizeof(double));
+	}
+	if (rank == 0){
+			output = (double*)malloc(num_values * sizeof(double));
+			if(NULL == output) {
+				perror("Couldn't allocate memory for output");
+				return 2;
+			}
+	}
+	
+	double* sub_input = sub_inputs[rank];
+	// Start timer
+	double  start = MPI_Wtime();
+	// Allocate data for result
 
+	// Repeatedly apply stencil
+	for (int s=0; s<num_steps; s++) {
 	if(rank == 0){
 		if(size == 1){
-			memcpy(&(sub_input[2]), input, num_values*sizeof(double));
-			memcpy(sub_input, &(input[num_values-2]), 2*sizeof(double));
-			memcpy(&(sub_input[num_values+2]), input, 2*sizeof(double));
-			
+			memcpy(&(sub_inputs[rank][2]), input, num_values*sizeof(double));
+			memcpy(sub_inputs[rank], &(input[num_values-2]), 2*sizeof(double));
+			memcpy(&(sub_inputs[rank][num_values+2]), input, 2*sizeof(double));
+
 		}else{
 			for(int i = 0; i < size; i++){
 				printf("PE: %i\n", i);
 				if(i == 0){
 					double* padded_input = (double*) malloc((partition+4)*sizeof(double));
-					memcpy(sub_input, input, (partition+2)*sizeof(double));
-					memcpy(&(sub_input[partition+2]), &(input[num_values-2]), 2*sizeof(double));
+					memcpy(&(sub_inputs[i][2]), input, (partition+2)*sizeof(double));
+					memcpy(sub_inputs[i], &(input[num_values-2]), 2*sizeof(double));
 
 					printf("Rank 0 finished\n");
 
@@ -52,8 +70,9 @@ int main(int argc, char **argv) {
 				} else if (i == size-1){
 					double* padded_input = (double*) malloc((partition+4)*sizeof(double));
 
-					memcpy(&(padded_input[2]), &(input[i*partition-2]), (partition+2)*sizeof(double));
-					memcpy(padded_input, input, 2*sizeof(double));
+					memcpy(padded_input, &(input[i*partition-2]), (partition+2)*sizeof(double));
+					memcpy(&(padded_input[partition+2]), input, 2*sizeof(double));
+
 					MPI_Ssend(padded_input,  partition+4, MPI_DOUBLE, i, 1, MPI_COMM_WORLD);
 
 
@@ -68,25 +87,8 @@ int main(int argc, char **argv) {
 		}
 
 	} else {
-		MPI_Recv(&sub_input, partition+4, MPI_DOUBLE, 0, 1, MPI_COMM_WORLD, &status);
+		MPI_Recv(sub_inputs[rank], partition+4, MPI_DOUBLE, 0, 1, MPI_COMM_WORLD, &status);
 	}
-	for(int i = 0; i < size; i++){
-		for(int j = 0; j < partition+4; j++){
-			printf("PE %i, %lf \n", i, sub_input[j]);
-		}
-	}
-	// Start timer
-	double  start = MPI_Wtime();
-	// Allocate data for result
-	double *output;
-	if (NULL == (output = malloc(num_values * sizeof(double)))) {
-		perror("Couldn't allocate memory for output");
-		return 2;
-	}
-
-	// Repeatedly apply stencil
-	for (int s=0; s<num_steps; s++) {
-
 		// Apply stencil
 		// This loop handles left hand side wrapping
 /*
@@ -107,13 +109,16 @@ int main(int argc, char **argv) {
 			}
 			output[i] = result;
 		}*/
-		for (int i=EXTENT; i < partition; i++) {
+		double* sub_output = (double*)malloc(partition*sizeof(double));
+		int counter = 0;
+		for (int i=EXTENT; i < partition+EXTENT; i++) {
 			double result = 0;
 			for (int j=0; j<STENCIL_WIDTH; j++) {
 				int index = i - EXTENT + j;
 				result += STENCIL[j] * sub_input[index];
 			}
-			output[i-EXTENT] = result;
+			sub_output[i-EXTENT] = result;
+			counter++;
 		}
 		// This loop handles right hand side wrapping
 /*		for (int i=num_values-EXTENT; i<num_values; i++) {
@@ -124,18 +129,20 @@ int main(int argc, char **argv) {
 			}
 			output[i] = result;
 		}*/
+
+		MPI_Gather(sub_output, partition, MPI_DOUBLE, output, partition, MPI_DOUBLE, 0, MPI_COMM_WORLD);
+
 		// Swap input and output
-		if (s < num_steps-1) {
+/*		if (s < num_steps-1 && rank == 0) {
 			double *tmp = input;
 			input = output;
 			output = tmp;
-		}
+		}*/
 	}
 
 
 
 
-	free(input);
 	// Stop timer
 	double my_execution_time = MPI_Wtime() - start;
 
@@ -146,21 +153,25 @@ int main(int argc, char **argv) {
 
 
 #ifdef PRODUCE_OUTPUT_FILE
-	if (0 != write_output(output_name, output, num_values)) {
-		return 2;
+	if(rank== 0){
+		if (0 != write_output(output_name, output, num_values)) {
+			return 2;
+		}
 	}
 #endif
 
 	// Clean up
-	free(output);
 	MPI_Finalize();
+	for(int i = 0; i < size; i++){
+		free(sub_inputs[i]);
+	}
+	free(input);
+	free(output);
+
 	return 0;
 }
 
 
-void applyStencil(double* input_data, const int STENCIL_WIDTH, const int EXTENT, const double STENCIL[]){
-
-}
 
 
 int read_input(const char *file_name, double **values) {
