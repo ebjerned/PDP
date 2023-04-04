@@ -133,11 +133,11 @@ int main(int argc, char **argv) {
 		MPI_Gather(sub_output, partition, MPI_DOUBLE, output, partition, MPI_DOUBLE, 0, MPI_COMM_WORLD);
 
 		// Swap input and output
-/*		if (s < num_steps-1 && rank == 0) {
+		if (s < num_steps-1 && rank == 0) {
 			double *tmp = input;
 			input = output;
 			output = tmp;
-		}*/
+		}
 	}
 
 
