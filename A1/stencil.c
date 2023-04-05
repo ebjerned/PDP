@@ -23,11 +23,14 @@ int main(int argc, char **argv) {
 	const int EXTENT = STENCIL_WIDTH/2;
 	const double STENCIL[] = {1.0/(12*h), -8.0/(12*h), 0.0, 8.0/(12*h), -1.0/(12*h)};
 	int rank, size;
+
+
 	MPI_Status status;
 	MPI_Init(&argc, &argv);
 	MPI_Comm_size(MPI_COMM_WORLD, &size);
 	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 	double* output = NULL;
+	double ex_time[size];
 
 	const int partition = num_values / size;
 	double** sub_inputs = (double**)malloc(size*sizeof(double*));
@@ -46,69 +49,47 @@ int main(int argc, char **argv) {
 	double* sub_input = sub_inputs[rank];
 	// Start timer
 	double  start = MPI_Wtime();
-	// Allocate data for result
 
 	// Repeatedly apply stencil
 	for (int s=0; s<num_steps; s++) {
-	if(rank == 0){
-		if(size == 1){
-			memcpy(&(sub_inputs[rank][2]), input, num_values*sizeof(double));
-			memcpy(sub_inputs[rank], &(input[num_values-2]), 2*sizeof(double));
-			memcpy(&(sub_inputs[rank][num_values+2]), input, 2*sizeof(double));
+		// Process data for parallellization.
+		double sstart = MPI_Wtime();
+		if(rank == 0){
+			if(size == 1){
+				memcpy(&(sub_inputs[rank][2]), input, num_values*sizeof(double));
+				memcpy(sub_inputs[rank], &(input[num_values-2]), 2*sizeof(double));
+				memcpy(&(sub_inputs[rank][num_values+2]), input, 2*sizeof(double));
 
-		}else{
-			for(int i = 0; i < size; i++){
-				printf("PE: %i\n", i);
-				if(i == 0){
-					double* padded_input = (double*) malloc((partition+4)*sizeof(double));
-					memcpy(&(sub_inputs[i][2]), input, (partition+2)*sizeof(double));
-					memcpy(sub_inputs[i], &(input[num_values-2]), 2*sizeof(double));
+			}else{
+				for(int i = 0; i < size; i++){
+					if(i == 0){
+						double* padded_input = (double*) malloc((partition+4)*sizeof(double));
+						memcpy(&(sub_inputs[i][2]), input, (partition+2)*sizeof(double));
+						memcpy(sub_inputs[i], &(input[num_values-2]), 2*sizeof(double));
 
-					printf("Rank 0 finished\n");
+					} else if (i == size-1){
+						double* padded_input = (double*) malloc((partition+4)*sizeof(double));
 
+						memcpy(padded_input, &(input[i*partition-2]), (partition+2)*sizeof(double));
+						memcpy(&(padded_input[partition+2]), input, 2*sizeof(double));
 
-				} else if (i == size-1){
-					double* padded_input = (double*) malloc((partition+4)*sizeof(double));
-
-					memcpy(padded_input, &(input[i*partition-2]), (partition+2)*sizeof(double));
-					memcpy(&(padded_input[partition+2]), input, 2*sizeof(double));
-
-					MPI_Ssend(padded_input,  partition+4, MPI_DOUBLE, i, 1, MPI_COMM_WORLD);
+						MPI_Ssend(padded_input,  partition+4, MPI_DOUBLE, i, 1, MPI_COMM_WORLD);
 
 
-				} else {
-					MPI_Ssend(&(input[i*partition-2]),  partition+4, MPI_DOUBLE, i, 1, MPI_COMM_WORLD);
+					} else {
+						MPI_Ssend(&(input[i*partition-2]),  partition+4, MPI_DOUBLE, i, 1, MPI_COMM_WORLD);
 
+
+					}
 
 				}
 
 			}
 
+		} else {
+			MPI_Recv(sub_inputs[rank], partition+4, MPI_DOUBLE, 0, 1, MPI_COMM_WORLD, &status);
 		}
-
-	} else {
-		MPI_Recv(sub_inputs[rank], partition+4, MPI_DOUBLE, 0, 1, MPI_COMM_WORLD, &status);
-	}
-		// Apply stencil
-		// This loop handles left hand side wrapping
-/*
-		for (int i=0; i<EXTENT; i++) {
-			double result = 0;
-			for (int j=0; j<STENCIL_WIDTH; j++) {
-				int index = (i - EXTENT + j + num_values) % num_values;
-				result += STENCIL[j] * input[index];
-			}
-			output[i] = result;
-		}*/
-		// This loop handles all values in the central entries with no special cases
-		/*for (int i=EXTENT; i<num_values-EXTENT; i++) {
-			double result = 0;
-			for (int j=0; j<STENCIL_WIDTH; j++) {
-				int index = i - EXTENT + j;
-				result += STENCIL[j] * input[index];
-			}
-			output[i] = result;
-		}*/
+//		printf("Dataprocessed in %f\n", MPI_Wtime()-sstart);
 		double* sub_output = (double*)malloc(partition*sizeof(double));
 		int counter = 0;
 		for (int i=EXTENT; i < partition+EXTENT; i++) {
@@ -120,18 +101,9 @@ int main(int argc, char **argv) {
 			sub_output[i-EXTENT] = result;
 			counter++;
 		}
-		// This loop handles right hand side wrapping
-/*		for (int i=num_values-EXTENT; i<num_values; i++) {
-			double result = 0;
-			for (int j=0; j<STENCIL_WIDTH; j++) {
-				int index = (i - EXTENT + j) % num_value;
-				result += STENCIL[j] * input[index];
-			}
-			output[i] = result;
-		}*/
 
 		MPI_Gather(sub_output, partition, MPI_DOUBLE, output, partition, MPI_DOUBLE, 0, MPI_COMM_WORLD);
-
+		free(sub_output);
 		// Swap input and output
 		if (s < num_steps-1 && rank == 0) {
 			double *tmp = input;
@@ -145,15 +117,21 @@ int main(int argc, char **argv) {
 
 	// Stop timer
 	double my_execution_time = MPI_Wtime() - start;
+	double max_time = 0;
 
-	// Write result
-	printf("%f\n", my_execution_time);
+	
+	MPI_Reduce(&my_execution_time, &max_time, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
+	if(rank== 0){
+		// Write result
+		printf("%f\n", max_time);
+	}
+
 
 
 
 
 #ifdef PRODUCE_OUTPUT_FILE
-	if(rank== 0){
+	if(rank == 0){
 		if (0 != write_output(output_name, output, num_values)) {
 			return 2;
 		}
