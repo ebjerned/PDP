@@ -44,14 +44,14 @@ int main(int argc, char **argv) {
 		}
 	}
 	
-	double l_padding[2], r_padding[2];
+	double l_padding[2];
+	double r_padding[2];
 
 	MPI_Scatter(input, partition, MPI_DOUBLE, sub_input, partition, MPI_DOUBLE, 0, MPI_COMM_WORLD);
 
-	// Starting the timer.
 	double start = MPI_Wtime();
-	
-	// Repeatedly applying the stencil.
+
+
 	for (int s = 0; s < num_steps; s++) {
 		double l_edge_data[] = {sub_input[0], sub_input[1]};
 		double r_edge_data[] = {sub_input[partition - 2], sub_input[partition - 1]};
@@ -59,27 +59,27 @@ int main(int argc, char **argv) {
 		int u_dest = (rank+1)%size;
 		int l_dest = rank == 0 ? size - 1 : rank-1;
 
-		MPI_Send(l_edge_data, 2, MPI_DOUBLE, u_dest, 000, MPI_COMM_WORLD);
-		MPI_Recv(r_padding, 2, MPI_DOUBLE, l_dest, 000, MPI_COMM_WORLD, &status);
-		MPI_Send(r_edge_data, 2, MPI_DOUBLE, l_dest, 111, MPI_COMM_WORLD);
-		MPI_Recv(l_padding, 2, MPI_DOUBLE, u_dest, 111, MPI_COMM_WORLD, &status);
-	
-        // Applying the stencil on the left boundary with periodic boundary conditions.
+		MPI_Send(l_edge_data, 2, MPI_DOUBLE, u_dest, 0, MPI_COMM_WORLD);
+		MPI_Recv(r_padding, 2, MPI_DOUBLE, l_dest, 0, MPI_COMM_WORLD, &status);
+		MPI_Send(r_edge_data, 2, MPI_DOUBLE, l_dest, 0, MPI_COMM_WORLD);
+		MPI_Recv(l_padding, 2, MPI_DOUBLE, u_dest, 0, MPI_COMM_WORLD, &status);
+
+
 		for (int i = 0; i < EXTENT; i++) {
 			double result = 0;
 			for (int j = 0; j < STENCIL_WIDTH; j++) {
 				int index = (i - EXTENT + j + partition) % partition;
-				if (index == partition - 2)
-					result += STENCIL[j] * l_padding[0];
-				else if (index == partition - 1)
-					result += STENCIL[j] * l_padding[1];
-				else
+				if (index < partition - 2){
 					result += STENCIL[j] * sub_input[index];
+				} else if (index == partition - 2) {
+					result += STENCIL[j] * l_padding[0];
+				} else if (index == partition - 1) {
+					result += STENCIL[j] * l_padding[1];
+				}
 			}
 			sub_output[i] = result;
 		}
-        
-        // Applying the stencil on the inner points.
+
 		for (int i = EXTENT; i < partition - EXTENT; i++) {
 			double result = 0;
 			for (int j = 0; j < STENCIL_WIDTH; j++) {
@@ -88,31 +88,28 @@ int main(int argc, char **argv) {
 			}
 			sub_output[i] = result;
 		}
-        
-        // Applying the stencil on the right boundary with periodic boundary conditions.
+
 		for (int i = partition - EXTENT; i < partition; i++) {
 			double result = 0;
 			for (int j = 0; j < STENCIL_WIDTH; j++) {
 				int index = (i - EXTENT + j) % partition;
-				if (index == 0)
-					result += STENCIL[j] * r_padding[0];
-				else if (index == 1) 
-					result += STENCIL[j] * r_padding[1];
-				else
+				if(index > 1){
 					result += STENCIL[j] * sub_input[index];
+				} else if (index == 0) {
+					result += STENCIL[j] * r_padding[0];
+				} else if (index == 1) {
+					result += STENCIL[j] * r_padding[1];
+				}
 			}
 			sub_output[i] = result;
 		}
-        
-		// Swapping the input and the output.
-		if (s < num_steps - 1) { // The variable num_steps decides how many times we apply the stencil.
-			double *hold = sub_input;
+
+		if (s < num_steps - 1) {
+			double* tmp = sub_input;
 			sub_input = sub_output;
-			sub_output = hold;
+			sub_output = tmp;
 		}
 	}
-	
-	// Stop timer
 
 	double my_execution_time = MPI_Wtime() - start;
 
@@ -125,7 +122,7 @@ int main(int argc, char **argv) {
 	MPI_Reduce(&my_execution_time, &max_time, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
 	if(rank== 0){
 		// Write result
-		printf("%f\n", max_time);
+		printf("%f ", max_time);
 	}
 
 
