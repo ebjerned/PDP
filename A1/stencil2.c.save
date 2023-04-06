@@ -36,7 +36,7 @@ int main(int argc, char **argv) {
 	double** sub_inputs = (double**)malloc(size*sizeof(double*));
 
 	for(int i = 0; i < size; i++){
-		sub_inputs[i] = (double*)malloc((partition+4)*sizeof(double));
+		sub_inputs[i] = (double*)malloc((partition)*sizeof(double));
 	}
 	if (rank == 0){
 			output = (double*)malloc(num_values * sizeof(double));
@@ -46,6 +46,9 @@ int main(int argc, char **argv) {
 			}
 	}
 	
+	double process_input[partition];
+	MPI_Scatter(input, partition, MPI_DOUBLE, process_input, partition, MPI_DOUBLE, 0, MPI_COMM_WORLD);
+
 	double* sub_input = sub_inputs[rank];
 	// Start timer
 	double  start = MPI_Wtime();
