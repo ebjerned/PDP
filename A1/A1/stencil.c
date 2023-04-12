@@ -26,6 +26,7 @@ int main(int argc, char **argv) {
 
 
 	MPI_Status status;
+	MPI_Request request;
 	MPI_Init(&argc, &argv);
 	MPI_Comm_size(MPI_COMM_WORLD, &size);
 	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
@@ -58,12 +59,24 @@ int main(int argc, char **argv) {
 
 		int u_dest = (rank+1)%size;
 		int l_dest = rank == 0 ? size - 1 : rank-1;
-		MPI_Send(l_edge_data, 2, MPI_DOUBLE, l_dest, 0, MPI_COMM_WORLD);
-		MPI_Recv(r_padding, 2, MPI_DOUBLE, u_dest, 0, MPI_COMM_WORLD, &status);
-		MPI_Send(r_edge_data, 2, MPI_DOUBLE, u_dest, 1, MPI_COMM_WORLD);
+		MPI_Isend(l_edge_data, 2, MPI_DOUBLE, l_dest, 0, MPI_COMM_WORLD, &request);
+		MPI_Isend(r_edge_data, 2, MPI_DOUBLE, u_dest, 1, MPI_COMM_WORLD, &request);
+
+
+		
+		for (int i = EXTENT; i < partition - EXTENT; i++) {
+			double result = 0;
+			for (int j = 0; j < STENCIL_WIDTH; j++) {
+				int index = i - EXTENT + j;
+				result += STENCIL[j] * sub_input[index];
+			}
+			sub_output[i] = result;
+		}
+
 		MPI_Recv(l_padding, 2, MPI_DOUBLE, l_dest, 1, MPI_COMM_WORLD, &status);
 
 
+		
 		for (int i = 0; i < EXTENT; i++) {
 			double result = 0;
 			for (int j = 0; j < STENCIL_WIDTH; j++) {
@@ -78,15 +91,7 @@ int main(int argc, char **argv) {
 			}
 			sub_output[i] = result;
 		}
-
-		for (int i = EXTENT; i < partition - EXTENT; i++) {
-			double result = 0;
-			for (int j = 0; j < STENCIL_WIDTH; j++) {
-				int index = i - EXTENT + j;
-				result += STENCIL[j] * sub_input[index];
-			}
-			sub_output[i] = result;
-		}
+		MPI_Recv(r_padding, 2, MPI_DOUBLE, u_dest, 0, MPI_COMM_WORLD, &status);
 
 		for (int i = partition - EXTENT; i < partition; i++) {
 			double result = 0;
@@ -121,7 +126,7 @@ int main(int argc, char **argv) {
 	MPI_Reduce(&my_execution_time, &max_time, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
 	if(rank== 0){
 		// Write result
-		printf("%f\n", max_time);
+		printf("%f ", max_time);
 	}
 
 
