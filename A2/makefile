@@ -6,7 +6,7 @@ BIN = matrix
 
 all: $(BIN)
 
-matrix: matrix.c
+matrix: test_arrays.c
 	$(CC) $(CFLAGS) -o $@ $< $(LIBS)
 	
 clean:
