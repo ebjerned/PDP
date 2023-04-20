@@ -5,7 +5,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <string.h>
 /**
  * Read function data from an input file and store in an array. The input file
  * is supposed to contain an integer representing the number of function values,
@@ -15,7 +14,7 @@
  * @param values Pointer to array where the values are to be stored
  * @return 0 on success, -1 on error
  */
-int read_input(const char *file_name, float **values, float **values2);
+int read_input(const char *file_name, double **values, double **values2);
 
 /**
  * Write function data to a file, with 4 decimal places. The values are
@@ -25,7 +24,7 @@ int read_input(const char *file_name, float **values, float **values2);
  * @param num_values Number of values to print
  * @return 0 on success, -1 on error
  */
-int write_output(char *file_name, const float *output, int num_values);
+int write_output(char *file_name, const double *output, int num_values);
 
 
 
@@ -50,7 +49,7 @@ int main(int argc, char **argv) {
   int dims[2];
   int periods[2];
   int left,right,up,down;
-  float start,end;
+  double start,end;
     
   
   MPI_Init(&argc, &argv);
@@ -63,10 +62,9 @@ int main(int argc, char **argv) {
   const int BLOCKROWS = ROWS/NPROWS;  /* number of rows in _block_ */
   const int BLOCKCOLS = COLS/NPCOLS; /* number of cols in _block_ */
 
-
   ////READING
-  float *input;
-  float *input2;
+  double *input;
+  double *input2;
   if (rank == 0) {
  
 	  int size_of_matrix;
@@ -84,18 +82,18 @@ int main(int argc, char **argv) {
   
   
   //ALLOCATING MEMORY ON EACH PROCESSOR
-  float *A = (float*)malloc(sizeof(float)*BLOCKROWS*BLOCKCOLS);
+  double *A = (double*)malloc(sizeof(double)*BLOCKROWS*BLOCKCOLS);
 
-  float *B = (float*)malloc(sizeof(float)*BLOCKROWS*BLOCKCOLS);
+  double *B = (double*)malloc(sizeof(double)*BLOCKROWS*BLOCKCOLS);
   
-  float *result = (float*)calloc(BLOCKROWS*BLOCKCOLS,sizeof(float));
-  memset(result, 0, BLOCKROWS*BLOCKCOLS*sizeof(float));
+  double *result = (double*)calloc(BLOCKROWS*BLOCKCOLS,sizeof(double));
 
+ 
   //Creating vectorized datatype
   MPI_Datatype blocktype;
   MPI_Datatype blocktype2;
-  MPI_Type_vector(BLOCKROWS, BLOCKCOLS, COLS, MPI_FLOAT, &blocktype2);
-  MPI_Type_create_resized( blocktype2, 0, sizeof(float), &blocktype);
+  MPI_Type_vector(BLOCKROWS, BLOCKCOLS, COLS, MPI_DOUBLE, &blocktype2);
+  MPI_Type_create_resized( blocktype2, 0, sizeof(double), &blocktype);
   MPI_Type_commit(&blocktype);
 
  
@@ -110,195 +108,91 @@ int main(int argc, char **argv) {
   }
 
   //Distribute data between processors
-  MPI_Scatterv(input, counts, disps, blocktype, A, BLOCKROWS*BLOCKCOLS, MPI_FLOAT, 0, MPI_COMM_WORLD);
-  MPI_Scatterv(input2, counts, disps, blocktype, B, BLOCKROWS*BLOCKCOLS, MPI_FLOAT, 0, MPI_COMM_WORLD);
-//  printf("You are done with scattering matrix on proc %d \n ",rank);
- 
-    //Create the square setup of processors
-  dims[0]=0; dims[1]=0;
+  MPI_Scatterv(input, counts, disps, blocktype, A, BLOCKROWS*BLOCKCOLS, MPI_DOUBLE, 0, MPI_COMM_WORLD);
+  MPI_Scatterv(input2, counts, disps, blocktype, B, BLOCKROWS*BLOCKCOLS, MPI_DOUBLE, 0, MPI_COMM_WORLD);
+
+  //Create the square setup of processors
+  dims[0]=sqrt(p); dims[1]=sqrt(p);
   periods[0]=1; periods[1]=1;
-  MPI_Dims_create(p,2,dims); 
-//  printf("dims %d, %d : \n", dims[0], dims[1]);
+
+ 
   if(dims[0]!=dims[1]) {
     if(rank==0) printf("The number of processors must be a square.\n");
     MPI_Finalize();
     return 0;
   }
   //Start the shifting, creating the sprt p x sqrt p size grid for communication
-  MPI_Cart_create(MPI_COMM_WORLD,2,dims,periods,1,&Cycle_Communication);
+  
+  int mycoords[2];
+  
 
+  MPI_Cart_create(MPI_COMM_WORLD,2,dims,periods,1,&Cycle_Communication);
+  MPI_Comm_rank(Cycle_Communication, &rank); 
+  MPI_Cart_coords(Cycle_Communication, rank, 2, mycoords); 
+  MPI_Cart_shift(Cycle_Communication,1,-1,&right,&left);
+  MPI_Cart_shift(Cycle_Communication,0,-1,&down,&up);
   
   
-  MPI_Cart_shift(Cycle_Communication,0,1,&left,&right);
-  MPI_Cart_shift(Cycle_Communication,1,1,&up,&down);
   
-//  printf("You are done with creating cart shift on proc %d \n ",rank);
+  for(int i = 1; i < p; i++ ){
+    if(mycoords[0] == i){
+      for(int j = 0; j<i;j++){
+      MPI_Sendrecv_replace(A, BLOCKROWS*BLOCKCOLS, MPI_DOUBLE, left, 3, right, 3, Cycle_Communication, &status);
+      }
+    }
+    if(mycoords[1] == i){
+        for(int j = 0;j<i;j++)
+          MPI_Sendrecv_replace(B, BLOCKROWS*BLOCKCOLS, MPI_DOUBLE,up, 3, down, 3, Cycle_Communication, &status);
+    }  
+  }
+  
+  
+  MPI_Cart_shift(Cycle_Communication,1,-1,&right,&left);
+  MPI_Cart_shift(Cycle_Communication,0,-1,&down,&up);
+
+
   start=MPI_Wtime();
   for(shift=0;shift<dims[0];shift++) {
-  
-    for (int proc=0; proc<p; proc++) {
-        if (proc == rank) {
-            printf("Rank = %d\n", rank);
-            
-            
-            if (rank == 0) {
-                printf("Global matrix a: \n");
-                for (int ii=0; ii<ROWS; ii++) {
-                    for (int jj=0; jj<COLS; jj++) {
-                        printf("%lf ",input[ii*COLS+jj]);
-                    }
-                    printf("\n");
-                }
-            }
-	    if (rank == 0) {
-                printf("Global matrix b: \n");
-                for (int ii=0; ii<ROWS; ii++) {
-                    for (int jj=0; jj<COLS; jj++) {
-                        printf("%lf ",input2[ii*COLS+jj]);
-                    }
-                    printf("\n");
-                }
-            }
-
-            printf("Local Matrix a at rank:%d\n",rank);
-            for (int ii=0; ii<BLOCKROWS; ii++) {
-                for (int jj=0; jj<BLOCKCOLS; jj++) {
-                    printf("%lf ",A[ii*BLOCKCOLS+jj]);
-                }
-                printf("\n");
-            }
-            
-            printf("Local matrix b at rank:%d\n",rank);
-            for (int ii=0; ii<BLOCKROWS; ii++) {
-                for (int jj=0; jj<BLOCKCOLS; jj++) {
-                    printf("%lf ",B[ii*BLOCKCOLS+jj]);
-                }
-                printf("\n");
-            }
-            
-/*            printf("\n");
-            printf("Local result:\n");
-            for (int ii=0; ii<BLOCKROWS; ii++) {
-                for (int jj=0; jj<BLOCKCOLS; jj++) {
-                    printf("%lf ",result[ii*BLOCKCOLS+jj]);
-                }
-                printf("\n");
-            }*/
-            
-        }
-        MPI_Barrier(MPI_COMM_WORLD);
-    }
-  
-  printf("SHIFT: %d, proc %d\n",shift,rank);
+ // printf("SHIFT: %d, proc %d\n",shift,rank);
   // Matrix multiplication
     for(int i=0;i<BLOCKROWS;i++){
       for(int k=0;k<BLOCKROWS;k++){
         for(int j=0;j<BLOCKROWS;j++){
-          result[i*BLOCKROWS+j]+=A[i*BLOCKROWS+k]*B[k*BLOCKROWS+j];
+          result[i*BLOCKROWS+j] += A[i*BLOCKROWS+k]*B[k*BLOCKROWS+j];
         }
       }
-      printf("\n");
     }
-      
     
-//    printf("test\n");
-    if(shift==dims[0]-1){
-	printf("Result of rank %i\n", rank);
-	for (int ii=0; ii<BLOCKROWS; ii++) {
-		for (int jj=0; jj<BLOCKCOLS; jj++) {
-			printf("%lf ", result[ii*BLOCKCOLS+jj]);
-		}
-		printf("\n");
-	}
 
-	 break;
-    }
   // Communication
-    MPI_Sendrecv_replace(A,BLOCKROWS*BLOCKCOLS,MPI_FLOAT,left,1,right,1,Cycle_Communication,&status);
 
-    MPI_Sendrecv_replace(B,BLOCKROWS*BLOCKCOLS,MPI_FLOAT,up,2,down,2,Cycle_Communication,&status);
-
+  MPI_Sendrecv_replace(A, BLOCKROWS*BLOCKCOLS, MPI_DOUBLE, left, 1, right, 1, Cycle_Communication, &status);
+  MPI_Sendrecv_replace(B, BLOCKROWS*BLOCKCOLS, MPI_DOUBLE, up, 1, down, 1, Cycle_Communication, &status); 
     
+
+  
 
   }
    //Finalize
 
   end=MPI_Wtime();  
   
-    /* each proc prints it's "b" out, in order */ //Test printof A B
-/*
-    for (int proc=0; proc<p; proc++) {
-        if (proc == rank) {
-            printf("Rank = %d\n", rank);
-            
-            
-            if (rank == 0) {
-                printf("Global matrix a: \n");
-                for (int ii=0; ii<ROWS; ii++) {
-                    for (int jj=0; jj<COLS; jj++) {
-                        printf("%lf ",input[ii*COLS+jj]);
-                    }
-                    printf("\n");
-                }
-            }
-	    if (rank == 0) {
-                printf("Global matrix b: \n");
-                for (int ii=0; ii<ROWS; ii++) {
-                    for (int jj=0; jj<COLS; jj++) {
-                        printf("%lf ",input2[ii*COLS+jj]);
-                    }
-                    printf("\n");
-                }
-            }
-
-            printf("Local Matrix a at rank:%d\n",rank);
-            for (int ii=0; ii<BLOCKROWS; ii++) {
-                for (int jj=0; jj<BLOCKCOLS; jj++) {
-                    printf("%lf ",A[ii*BLOCKCOLS+jj]);
-                }
-                printf("\n");
-            }
-            
-            printf("Local matrix b at rank:%d\n",rank);
-            for (int ii=0; ii<BLOCKROWS; ii++) {
-                for (int jj=0; jj<BLOCKCOLS; jj++) {
-                    printf("%lf ",B[ii*BLOCKCOLS+jj]);
-                }
-                printf("\n");
-            }
-            
-            printf("\n");
-            printf("Local result:\n");
-            for (int ii=0; ii<BLOCKROWS; ii++) {
-                for (int jj=0; jj<BLOCKCOLS; jj++) {
-                    printf("%lf ",result[ii*BLOCKCOLS+jj]);
-                }
-                printf("\n");
-            }
-            
-        }
-        MPI_Barrier(MPI_COMM_WORLD);
-    }
-
-  */
   
-  float *rbuf;
+  
+  double *rbuf;
   if(rank == 0) { 
-    rbuf = (float *)malloc(BLOCKROWS*BLOCKCOLS*p*sizeof(float)); 
+    rbuf = (double *)malloc(BLOCKROWS*BLOCKCOLS*p*sizeof(double)); 
   }
   
   
   MPI_Barrier(Cycle_Communication);
-  MPI_Gather(result, BLOCKROWS*BLOCKCOLS, MPI_FLOAT, rbuf ,BLOCKROWS*BLOCKCOLS, MPI_FLOAT, 0, Cycle_Communication);
+  MPI_Gather(result, BLOCKROWS*BLOCKCOLS, MPI_DOUBLE, rbuf ,BLOCKROWS*BLOCKCOLS, MPI_DOUBLE, 0, Cycle_Communication);
 
-  
-  
-   printf("Rank = %d\n", rank);
    if (rank == 0) {
      printf("Global result: \n");
      for (int ii=0; ii<ROWS; ii++) {
        for (int jj=0; jj<COLS; jj++) {
-         printf("%f ",rbuf[ii*COLS+jj]);
+         printf("%lf ",rbuf[ii*COLS+jj]);
        }
        printf("\n");
      }
@@ -314,11 +208,7 @@ int main(int argc, char **argv) {
   free(A);
  // printf("testA\n");
   free(B);
- // printf("testB\n");
-  //free(buf);
-  //printf("testbuf\n");
-  //free(tmp);
-  //printf("testtmp\n");
+
   free(result);
   
   //printf("testresult\n");
@@ -328,7 +218,7 @@ int main(int argc, char **argv) {
 
 
 
-int read_input(const char *file_name, float **values,float **values2) {
+int read_input(const char *file_name, double **values,double **values2) {
 	FILE *file;
 	if (NULL == (file = fopen(file_name, "r"))) {
 		perror("Couldn't open input file");
@@ -339,22 +229,22 @@ int read_input(const char *file_name, float **values,float **values2) {
 		perror("Couldn't read element count from input file");
 		return -1;
 	}
-	if (NULL == (*values = malloc(num_values * sizeof(float)))) {
+	if (NULL == (*values = malloc(num_values * sizeof(double)))) {
 		perror("Couldn't allocate memory for input");
 		return -1;
 	}
- 	if (NULL == (*values2 = malloc(num_values * sizeof(float)))) {
+ 	if (NULL == (*values2 = malloc(num_values * sizeof(double)))) {
 		perror("Couldn't allocate memory for input");
 		return -1;
 	}
 	for (int i=0; i<num_values; i++) {
-		if (EOF == fscanf(file, "%f", &((*values)[i]))) {
+		if (EOF == fscanf(file, "%lf", &((*values)[i]))) {
 			perror("Couldn't read elements from input file");
 			return -1;
 		}
 	}
   for (int i=0; i<num_values; i++) {
-		if (EOF == fscanf(file, "%f", &((*values2)[i]))) {
+		if (EOF == fscanf(file, "%lf", &((*values2)[i]))) {
 			perror("Couldn't read elements from input file");
 			return -1;
 		}
@@ -366,7 +256,7 @@ int read_input(const char *file_name, float **values,float **values2) {
 }
 
 
-int write_output(char *file_name, const float *output, int num_values) {
+int write_output(char *file_name, const double *output, int num_values) {
 	FILE *file;
 	if (NULL == (file = fopen(file_name, "w"))) {
 		perror("Couldn't open output file");
