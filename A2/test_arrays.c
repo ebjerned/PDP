@@ -1,5 +1,5 @@
 
-#define PRODUCE_OUTPUT_FILE
+//#define PRODUCE_OUTPUT_FILE
 
 #include <mpi.h>
 #include <stdio.h>

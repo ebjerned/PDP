@@ -1,0 +1,24 @@
+--------------------------------------------------------------------------
+By default, for Open MPI 4.0 and later, infiniband ports on a device
+are not used by default.  The intent is to use UCX for these devices.
+You can override this policy by setting the btl_openib_allow_ib MCA parameter
+to true.
+
+  Local host:              s119
+  Local adapter:           mlx4_0
+  Local port:              1
+
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+WARNING: There was an error initializing an OpenFabrics device.
+
+  Local host:   s119
+  Local device: mlx4_0
+--------------------------------------------------------------------------
+Rank 0 sending to 1
+Rank 1 sending to 2
+Rank 2 sending to 3
+Rank 3 sending to 0
+[s119.uppmax.uu.se:20155] 3 more processes have sent help message help-mpi-btl-openib.txt / ib port not selected
+[s119.uppmax.uu.se:20155] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+[s119.uppmax.uu.se:20155] 3 more processes have sent help message help-mpi-btl-openib.txt / error in device init

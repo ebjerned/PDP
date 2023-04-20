@@ -8,6 +8,7 @@ int main(int argc, char* argv[]){
 	
 	MPI_Init(&argc, &argv);
 	MPI_Datatype contigous;
+	MPI_Datatype column_t;
 	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 	MPI_Comm_size(MPI_COMM_WORLD, &size);
 	MPI_Status status;
@@ -23,10 +24,19 @@ int main(int argc, char* argv[]){
 	int* recv_data = (int*) malloc(m*n*sizeof(int));
 	MPI_Type_contiguous(m*n, MPI_INT, &contigous);
 	MPI_Type_commit(&contigous);
+
+
 	printf("Rank %i sending to %i\n", rank, (rank+1)%size);
-	
 	MPI_Sendrecv(&local_array[(k-m)*n], 1, contigous, (rank+1)%size, 0, &recv_data, 1, contigous, rank, 0, MPI_COMM_WORLD, &status);
+
+
+
+	MPI_Type_vector(k, 1, n, MPI_INT, &column_t);
+	MPI_Type_commit(&column_t);
 	
+
+	
+
 	MPI_Finalize();
 	return 0;
 
