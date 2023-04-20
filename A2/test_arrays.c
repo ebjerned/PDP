@@ -136,6 +136,58 @@ int main(int argc, char **argv) {
   start=MPI_Wtime();
   for(shift=0;shift<dims[0];shift++) {
   
+    for (int proc=0; proc<p; proc++) {
+        if (proc == rank) {
+            printf("Rank = %d\n", rank);
+            
+            
+            if (rank == 0) {
+                printf("Global matrix a: \n");
+                for (int ii=0; ii<ROWS; ii++) {
+                    for (int jj=0; jj<COLS; jj++) {
+                        printf("%lf ",input[ii*COLS+jj]);
+                    }
+                    printf("\n");
+                }
+            }
+	    if (rank == 0) {
+                printf("Global matrix b: \n");
+                for (int ii=0; ii<ROWS; ii++) {
+                    for (int jj=0; jj<COLS; jj++) {
+                        printf("%lf ",input2[ii*COLS+jj]);
+                    }
+                    printf("\n");
+                }
+            }
+
+            printf("Local Matrix a at rank:%d\n",rank);
+            for (int ii=0; ii<BLOCKROWS; ii++) {
+                for (int jj=0; jj<BLOCKCOLS; jj++) {
+                    printf("%lf ",A[ii*BLOCKCOLS+jj]);
+                }
+                printf("\n");
+            }
+            
+            printf("Local matrix b at rank:%d\n",rank);
+            for (int ii=0; ii<BLOCKROWS; ii++) {
+                for (int jj=0; jj<BLOCKCOLS; jj++) {
+                    printf("%lf ",B[ii*BLOCKCOLS+jj]);
+                }
+                printf("\n");
+            }
+            
+/*            printf("\n");
+            printf("Local result:\n");
+            for (int ii=0; ii<BLOCKROWS; ii++) {
+                for (int jj=0; jj<BLOCKCOLS; jj++) {
+                    printf("%lf ",result[ii*BLOCKCOLS+jj]);
+                }
+                printf("\n");
+            }*/
+            
+        }
+        MPI_Barrier(MPI_COMM_WORLD);
+    }
   
   printf("SHIFT: %d, proc %d\n",shift,rank);
   // Matrix multiplication
@@ -145,6 +197,7 @@ int main(int argc, char **argv) {
           result[i*BLOCKROWS+j]+=A[i*BLOCKROWS+k]*B[k*BLOCKROWS+j];
         }
       }
+      printf("\n");
     }
       
     
@@ -173,7 +226,7 @@ int main(int argc, char **argv) {
   end=MPI_Wtime();  
   
     /* each proc prints it's "b" out, in order */ //Test printof A B
-
+/*
     for (int proc=0; proc<p; proc++) {
         if (proc == rank) {
             printf("Rank = %d\n", rank);
@@ -227,7 +280,7 @@ int main(int argc, char **argv) {
         MPI_Barrier(MPI_COMM_WORLD);
     }
 
-  
+  */
   
   float *rbuf;
   if(rank == 0) { 
