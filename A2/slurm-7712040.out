@@ -1,0 +1,7 @@
+Extracting and entering A2 directory
+Building
+rm -f matmul
+mpicc -std=c99 -g -O3 -o matmul test_arrays.c -lm
+OK
+Checking result of serial runs
+Wrong result for command ./matmul /proj/uppmax2023-2-13/nobackup/matmul_indata/input4.txt output_to_remove.txt

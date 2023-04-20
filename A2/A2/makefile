@@ -2,11 +2,11 @@ CC = mpicc
 CFLAGS = -std=c99 -g -O3
 LIBS = -lm
 
-BIN = matrix
+BIN = matmul
 
 all: $(BIN)
 
-matrix: test_arrays.c
+matmul: test_arrays.c
 	$(CC) $(CFLAGS) -o $@ $< $(LIBS)
 	
 clean:

@@ -1,12 +1,12 @@
 
-//#define PRODUCE_OUTPUT_FILE
+#define PRODUCE_OUTPUT_FILE
 
 #include <mpi.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 
-int read_input(const char *file_name, float **values, float **values2, int* num_values);
+int read_input(const char *file_name, float **values, float **values2);
 int write_output(char *file_name, const float *output, int num_values);
 
 
@@ -40,18 +40,17 @@ int main(int argc, char **argv) {
 	float* input_A;
 	float* input_B;
 	if (rank == 0) {
-		int size_of_matrix;
-		if (0 > (size_of_matrix = read_input(input_name, &input_A, &input_B, &N))) {
+		if (0 > (N = read_input(input_name, &input_A, &input_B))) {
 			return 2;
 		}
 	}
 
 
-
 	MPI_Bcast(&N, 1, MPI_INT, 0, MPI_COMM_WORLD);
+	MPI_Barrier(MPI_COMM_WORLD);
 
-	const int COLS = sqrt(N);
-	const int ROWS = sqrt(N);
+	const int COLS = N;
+	const int ROWS = N;
 	const int NPROWS=sqrt(p);
 	const int NPCOLS=sqrt(p);
 	const int BLOCKROWS = ROWS/NPROWS;
@@ -139,8 +138,8 @@ int main(int argc, char **argv) {
 	}
 
 	MPI_Gatherv(local_result, BLOCKROWS*BLOCKCOLS, MPI_FLOAT, global_result, counts, disps, blocktype, 0, MPI_COMM_WORLD);
-/*
-	if (rank == 0) {
+
+	/*if (rank == 0) {
 		printf("Global result: \n");
 		for (int ii=0; ii<ROWS; ii++) {
 			for (int jj=0; jj<COLS; jj++) {
@@ -175,7 +174,7 @@ int main(int argc, char **argv) {
 
 
 
-int read_input(const char *file_name, float **values, float **values2, int* num_values) {
+int read_input(const char *file_name, float **values, float **values2) {
 	FILE *file;
 	if (NULL == (file = fopen(file_name, "r"))) {
 		perror("Couldn't open input file");
@@ -186,22 +185,22 @@ int read_input(const char *file_name, float **values, float **values2, int* num_
 		perror("Couldn't read element count from input file");
 		return -1;
 	}
-	*num_values = num;
-	if (NULL == (*values = malloc(num * sizeof(float)))) {
+	num;
+	if (NULL == (*values = malloc(num * num * sizeof(float)))) {
 		perror("Couldn't allocate memory for input");
 		return -1;
 	}
- 	if (NULL == (*values2 = malloc(num * sizeof(float)))) {
+ 	if (NULL == (*values2 = malloc(num * num * sizeof(float)))) {
 		perror("Couldn't allocate memory for input");
 		return -1;
 	}
-	for (int i=0; i<num; i++) {
+	for (int i=0; i<num*num; i++) {
 		if (EOF == fscanf(file, "%f", &((*values)[i]))) {
 			perror("Couldn't read elements from input file");
 			return -1;
 		}
 	}
-  for (int i=0; i<num; i++) {
+  for (int i=0; i<num*num; i++) {
 		if (EOF == fscanf(file, "%f", &((*values2)[i]))) {
 			perror("Couldn't read elements from input file");
 			return -1;
@@ -220,8 +219,8 @@ int write_output(char *file_name, const float *output, int num_values) {
 		perror("Couldn't open output file");
 		return -1;
 	}
-	for (int i = 0; i < num_values; i++) {
-		if (0 > fprintf(file, "%.4f ", output[i])) {
+	for (int i = 0; i < num_values*num_values; i++) {
+		if (0 > fprintf(file, "%.6f ", output[i])) {
 			perror("Couldn't write to output file");
 		}
 	}
