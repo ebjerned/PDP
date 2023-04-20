@@ -157,15 +157,17 @@ int main(int argc, char **argv) {
 		write_output(output_name, global_result, N);
 		#endif
 		printf("%.10f\n",end-start);
+	}
 		free(global_result);
 		free(input_A);
 		free(input_B);
-	}
 
 
 	free(local_result);
 	free(A);
 	free(B);
+	MPI_Type_free(&blocktype);
+	MPI_Type_free(&blocktype2);
 	MPI_Finalize();
 	return 0;
 }
