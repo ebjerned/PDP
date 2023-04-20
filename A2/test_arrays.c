@@ -202,21 +202,23 @@ int main(int argc, char **argv) {
       
     
 //    printf("test\n");
-    if(shift==dims[0]-1){
-	printf("Result of rank %i\n", rank);
+
+	printf("Result of rank %i with shift %i\n", rank,shift);
 	for (int ii=0; ii<BLOCKROWS; ii++) {
 		for (int jj=0; jj<BLOCKCOLS; jj++) {
 			printf("%lf ", result[ii*BLOCKCOLS+jj]);
 		}
 		printf("\n");
 	}
+    if(shift==dims[0]-1){
+	
 
 	 break;
     }
   // Communication
-    MPI_Sendrecv_replace(A,BLOCKROWS*BLOCKCOLS,MPI_FLOAT,left,1,right,1,Cycle_Communication,&status);
+    MPI_Sendrecv_replace(B,BLOCKROWS*BLOCKCOLS,MPI_FLOAT,left,1,right,1,Cycle_Communication,&status);
 
-    MPI_Sendrecv_replace(B,BLOCKROWS*BLOCKCOLS,MPI_FLOAT,up,2,down,2,Cycle_Communication,&status);
+    MPI_Sendrecv_replace(A,BLOCKROWS*BLOCKCOLS,MPI_FLOAT,up,2,down,2,Cycle_Communication,&status);
 
     
 
