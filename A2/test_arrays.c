@@ -85,8 +85,8 @@ int main(int argc, char **argv) {
 	MPI_Scatterv(input_A, counts, disps, blocktype, A, BLOCKROWS*BLOCKCOLS, MPI_FLOAT, 0, MPI_COMM_WORLD);
 	MPI_Scatterv(input_B, counts, disps, blocktype, B, BLOCKROWS*BLOCKCOLS, MPI_FLOAT, 0, MPI_COMM_WORLD);
 	if(rank==0){
-		free(input_A);
-		free(input_B);
+//		free(input_A);
+//		free(input_B);
 	}
 
 	dims[0]=sqrt(p);
@@ -137,6 +137,8 @@ int main(int argc, char **argv) {
 	free(B);
 	MPI_Barrier(Cycle_Communication);
 	if(rank == 0) {
+		free(input_A);
+		free(input_B);
 		global_result = (float*)malloc(BLOCKROWS*BLOCKCOLS*p*sizeof(float));
 	}
 

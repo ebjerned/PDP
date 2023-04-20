@@ -1,0 +1,354 @@
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[47268,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[47366,1],16]
+  Exit code:    1
+--------------------------------------------------------------------------
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[47415,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[47553,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[47570,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[47587,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[47596,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+./matrix: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by ./matrix)
