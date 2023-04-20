@@ -6,8 +6,8 @@
 #include <stdlib.h>
 #include <math.h>
 
-int read_input(const char *file_name, double **values, double **values2, int* num_values);
-int write_output(char *file_name, const double *output, int num_values);
+int read_input(const char *file_name, float **values, float **values2, int* num_values);
+int write_output(char *file_name, const float *output, int num_values);
 
 
 
@@ -37,8 +37,8 @@ int main(int argc, char **argv) {
 	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
 	int N;
-	double* input_A;
-	double* input_B;
+	float* input_A;
+	float* input_B;
 	if (rank == 0) {
 		int size_of_matrix;
 		if (0 > (size_of_matrix = read_input(input_name, &input_A, &input_B, &N))) {
@@ -58,20 +58,20 @@ int main(int argc, char **argv) {
 	const int BLOCKROWS = ROWS/NPROWS;
 	const int BLOCKCOLS = COLS/NPCOLS;
 
-	double* A = (double*)malloc(sizeof(double)*BLOCKROWS*BLOCKCOLS);
-	double* B = (double*)malloc(sizeof(double)*BLOCKROWS*BLOCKCOLS);
-	double* local_result = (double*)calloc(BLOCKROWS*BLOCKCOLS,sizeof(double));
+	float* A = (float*)malloc(sizeof(float)*BLOCKROWS*BLOCKCOLS);
+	float* B = (float*)malloc(sizeof(float)*BLOCKROWS*BLOCKCOLS);
+	float* local_result = (float*)calloc(BLOCKROWS*BLOCKCOLS,sizeof(float));
 
-	double* global_result;
+	float* global_result;
 	if(rank == 0) {
-		global_result = (double *)malloc(BLOCKROWS*BLOCKCOLS*p*sizeof(double));
+		global_result = (float*)malloc(BLOCKROWS*BLOCKCOLS*p*sizeof(float));
 	}
 
 	/* Setting up datatypes for selecting blocks for sub-matricies */
 	MPI_Datatype blocktype;
 	MPI_Datatype blocktype2;
-	MPI_Type_vector(BLOCKROWS, BLOCKCOLS, COLS, MPI_DOUBLE, &blocktype2);
-	MPI_Type_create_resized( blocktype2, 0, sizeof(double), &blocktype);
+	MPI_Type_vector(BLOCKROWS, BLOCKCOLS, COLS, MPI_FLOAT, &blocktype2);
+	MPI_Type_create_resized( blocktype2, 0, sizeof(float), &blocktype);
 	MPI_Type_commit(&blocktype);
 
 
@@ -85,8 +85,8 @@ int main(int argc, char **argv) {
 	}
 
 	/* Scattering sub-matricies*/
-	MPI_Scatterv(input_A, counts, disps, blocktype, A, BLOCKROWS*BLOCKCOLS, MPI_DOUBLE, 0, MPI_COMM_WORLD);
-	MPI_Scatterv(input_B, counts, disps, blocktype, B, BLOCKROWS*BLOCKCOLS, MPI_DOUBLE, 0, MPI_COMM_WORLD);
+	MPI_Scatterv(input_A, counts, disps, blocktype, A, BLOCKROWS*BLOCKCOLS, MPI_FLOAT, 0, MPI_COMM_WORLD);
+	MPI_Scatterv(input_B, counts, disps, blocktype, B, BLOCKROWS*BLOCKCOLS, MPI_FLOAT, 0, MPI_COMM_WORLD);
 
 
 	dims[0]=sqrt(p);
@@ -108,12 +108,12 @@ int main(int argc, char **argv) {
 	for(int i = 1; i < p; i++ ){
 		if(mycoords[0] == i){
 			for(int j = 0; j<i;j++){
-				MPI_Sendrecv_replace(A, BLOCKROWS*BLOCKCOLS, MPI_DOUBLE, left, 3, right, 3, Cycle_Communication, &status);
+				MPI_Sendrecv_replace(A, BLOCKROWS*BLOCKCOLS, MPI_FLOAT, left, 3, right, 3, Cycle_Communication, &status);
 			}
 		}
 		if(mycoords[1] == i){
 			for(int j = 0;j<i;j++){
-				MPI_Sendrecv_replace(B, BLOCKROWS*BLOCKCOLS, MPI_DOUBLE,up, 3, down, 3, Cycle_Communication, &status);
+				MPI_Sendrecv_replace(B, BLOCKROWS*BLOCKCOLS, MPI_FLOAT,up, 3, down, 3, Cycle_Communication, &status);
 			}
 		}
 	}
@@ -129,19 +129,19 @@ int main(int argc, char **argv) {
 			}
 		}
 		/* Send new matricies to neighbourgs, shifting in Cannon's algorithm */
-		MPI_Sendrecv_replace(A, BLOCKROWS*BLOCKCOLS, MPI_DOUBLE, left, 1, right, 1, Cycle_Communication, &status);
-		MPI_Sendrecv_replace(B, BLOCKROWS*BLOCKCOLS, MPI_DOUBLE, up, 1, down, 1, Cycle_Communication, &status); 
+		MPI_Sendrecv_replace(A, BLOCKROWS*BLOCKCOLS, MPI_FLOAT, left, 1, right, 1, Cycle_Communication, &status);
+		MPI_Sendrecv_replace(B, BLOCKROWS*BLOCKCOLS, MPI_FLOAT, up, 1, down, 1, Cycle_Communication, &status); 
 	}
 
 
 	MPI_Barrier(Cycle_Communication);
-	MPI_Gatherv(local_result, BLOCKROWS*BLOCKCOLS, MPI_DOUBLE, global_result, counts, disps, blocktype, 0, MPI_COMM_WORLD);
+	MPI_Gatherv(local_result, BLOCKROWS*BLOCKCOLS, MPI_FLOAT, global_result, counts, disps, blocktype, 0, MPI_COMM_WORLD);
 /*
 	if (rank == 0) {
 		printf("Global result: \n");
 		for (int ii=0; ii<ROWS; ii++) {
 			for (int jj=0; jj<COLS; jj++) {
-				printf("%lf ",global_result[ii*COLS+jj]);
+				printf("%f ",global_result[ii*COLS+jj]);
 			}
 			printf("\n");
 		}
@@ -168,7 +168,7 @@ int main(int argc, char **argv) {
 
 
 
-int read_input(const char *file_name, double **values,double **values2, int* num_values) {
+int read_input(const char *file_name, float **values, float **values2, int* num_values) {
 	FILE *file;
 	if (NULL == (file = fopen(file_name, "r"))) {
 		perror("Couldn't open input file");
@@ -180,11 +180,11 @@ int read_input(const char *file_name, double **values,double **values2, int* num
 		return -1;
 	}
 	*num_values = num;
-	if (NULL == (*values = malloc(num * sizeof(double)))) {
+	if (NULL == (*values = malloc(num * sizeof(float)))) {
 		perror("Couldn't allocate memory for input");
 		return -1;
 	}
- 	if (NULL == (*values2 = malloc(num * sizeof(double)))) {
+ 	if (NULL == (*values2 = malloc(num * sizeof(float)))) {
 		perror("Couldn't allocate memory for input");
 		return -1;
 	}
@@ -207,7 +207,7 @@ int read_input(const char *file_name, double **values,double **values2, int* num
 }
 
 
-int write_output(char *file_name, const double *output, int num_values) {
+int write_output(char *file_name, const float *output, int num_values) {
 	FILE *file;
 	if (NULL == (file = fopen(file_name, "w"))) {
 		perror("Couldn't open output file");

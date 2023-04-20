@@ -1,0 +1,21 @@
+0.0105835500
+0.0033475590
+0.0038330540
+0.0090266090
+*** Error in `./matrix': free(): invalid next size (normal): 0x000000000229ecb0 ***
+[s37:61175] *** Process received signal ***
+[s37:61175] Signal: Segmentation fault (11)
+[s37:61175] Signal code:  (128)
+[s37:61175] Failing at address: (nil)
+slurmstepd: error: *** JOB 7711230 ON s37 CANCELLED AT 2023-04-20T16:38:44 ***
+--------------------------------------------------------------------------
+ORTE has lost communication with a remote daemon.
+
+  HNP daemon   : [[52593,0],0] on node s37
+  Remote daemon: [[52593,0],1] on node s38
+
+This is usually due to either a failure of the TCP network
+connection to the node, or possibly an internal failure of
+the daemon itself. We cannot recover from this failure, and
+therefore will terminate the job.
+--------------------------------------------------------------------------
