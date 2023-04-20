@@ -63,9 +63,6 @@ int main(int argc, char **argv) {
 	float* local_result = (float*)calloc(BLOCKROWS*BLOCKCOLS,sizeof(float));
 
 	float* global_result;
-	if(rank == 0) {
-		global_result = (float*)malloc(BLOCKROWS*BLOCKCOLS*p*sizeof(float));
-	}
 
 	/* Setting up datatypes for selecting blocks for sub-matricies */
 	MPI_Datatype blocktype;
@@ -87,7 +84,10 @@ int main(int argc, char **argv) {
 	/* Scattering sub-matricies*/
 	MPI_Scatterv(input_A, counts, disps, blocktype, A, BLOCKROWS*BLOCKCOLS, MPI_FLOAT, 0, MPI_COMM_WORLD);
 	MPI_Scatterv(input_B, counts, disps, blocktype, B, BLOCKROWS*BLOCKCOLS, MPI_FLOAT, 0, MPI_COMM_WORLD);
-
+	if(rank==0){
+		free(input_A);
+		free(input_B);
+	}
 
 	dims[0]=sqrt(p);
 	dims[1]=sqrt(p);
@@ -133,8 +133,13 @@ int main(int argc, char **argv) {
 		MPI_Sendrecv_replace(B, BLOCKROWS*BLOCKCOLS, MPI_FLOAT, up, 1, down, 1, Cycle_Communication, &status); 
 	}
 
-
+	free(A);
+	free(B);
 	MPI_Barrier(Cycle_Communication);
+	if(rank == 0) {
+		global_result = (float*)malloc(BLOCKROWS*BLOCKCOLS*p*sizeof(float));
+	}
+
 	MPI_Gatherv(local_result, BLOCKROWS*BLOCKCOLS, MPI_FLOAT, global_result, counts, disps, blocktype, 0, MPI_COMM_WORLD);
 /*
 	if (rank == 0) {
@@ -154,12 +159,9 @@ int main(int argc, char **argv) {
 		#endif
 		printf("%.10f\n",end-start);
 		free(global_result);
-		free(input_A);
-		free(input_B);
 	}
 
-	free(A);
-	free(B);
+
 	free(local_result);
 
 	MPI_Finalize();
@@ -189,13 +191,13 @@ int read_input(const char *file_name, float **values, float **values2, int* num_
 		return -1;
 	}
 	for (int i=0; i<num; i++) {
-		if (EOF == fscanf(file, "%lf", &((*values)[i]))) {
+		if (EOF == fscanf(file, "%f", &((*values)[i]))) {
 			perror("Couldn't read elements from input file");
 			return -1;
 		}
 	}
   for (int i=0; i<num; i++) {
-		if (EOF == fscanf(file, "%lf", &((*values2)[i]))) {
+		if (EOF == fscanf(file, "%f", &((*values2)[i]))) {
 			perror("Couldn't read elements from input file");
 			return -1;
 		}
