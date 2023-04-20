@@ -46,7 +46,6 @@ int main(int argc, char **argv) {
 		}
 	}
 
-	start=MPI_Wtime();
 
 
 	MPI_Bcast(&N, 1, MPI_INT, 0, MPI_COMM_WORLD);
@@ -80,6 +79,7 @@ int main(int argc, char **argv) {
 			counts[ii*NPCOLS+jj] = 1;
 		}
 	}
+	start=MPI_Wtime();
 
 	/* Scattering sub-matricies*/
 	MPI_Scatterv(input_A, counts, disps, blocktype, A, BLOCKROWS*BLOCKCOLS, MPI_FLOAT, 0, MPI_COMM_WORLD);
@@ -128,13 +128,13 @@ int main(int argc, char **argv) {
 		MPI_Sendrecv_replace(A, BLOCKROWS*BLOCKCOLS, MPI_FLOAT, left, 1, right, 1, Cycle_Communication, &status);
 		MPI_Sendrecv_replace(B, BLOCKROWS*BLOCKCOLS, MPI_FLOAT, up, 1, down, 1, Cycle_Communication, &status); 
 	}
-	MPI_Barrier(Cycle_Communication);
+//	MPI_Barrier(Cycle_Communication);
 
-//	free(A);
-//	free(B);
+	free(A);
+	free(B);
 	if(rank == 0) {
-//		free(input_A);
-//		free(input_B);
+		free(input_A);
+		free(input_B);
 		global_result = (float*)malloc(BLOCKROWS*BLOCKCOLS*p*sizeof(float));
 	}
 
@@ -151,21 +151,22 @@ int main(int argc, char **argv) {
 	}*/
 
 	end=MPI_Wtime();
-	MPI_Barrier(Cycle_Communication);
+//	MPI_Barrier(Cycle_Communication);
 	if(rank==0){
 		#ifdef PRODUCE_OUTPUT_FILE
 		write_output(output_name, global_result, N);
 		#endif
 		printf("%.10f\n",end-start);
-	}
+//		free(input_A);
+//		free(input_B);
 		free(global_result);
-		free(input_A);
-		free(input_B);
+
+	}
 
 
 	free(local_result);
-	free(A);
-	free(B);
+//	free(A);
+//	free(B);
 	MPI_Type_free(&blocktype);
 	MPI_Type_free(&blocktype2);
 	MPI_Finalize();
