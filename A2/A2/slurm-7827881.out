@@ -1,0 +1,12 @@
+slurmstepd: error: *** JOB 7827881 ON s5 CANCELLED AT 2023-05-05T22:35:52 ***
+--------------------------------------------------------------------------
+ORTE has lost communication with a remote daemon.
+
+  HNP daemon   : [[39869,0],0] on node s5
+  Remote daemon: [[39869,0],1] on node s8
+
+This is usually due to either a failure of the TCP network
+connection to the node, or possibly an internal failure of
+the daemon itself. We cannot recover from this failure, and
+therefore will terminate the job.
+--------------------------------------------------------------------------

@@ -1,0 +1,16 @@
+[s5:52637] *** Process received signal ***
+[s5:52637] Signal: Floating point exception (8)
+[s5:52637] Signal code: Integer divide-by-zero (1)
+[s5:52637] Failing at address: 0x4015f3
+[s5:52637] [ 0] /lib64/libpthread.so.0(+0xf630)[0x2baa8f43c630]
+[s5:52637] [ 1] ./matmul[0x4015f3]
+[s5:52637] [ 2] /lib64/libc.so.6(__libc_start_main+0xf5)[0x2baa8f66b555]
+[s5:52637] [ 3] ./matmul[0x401b36]
+[s5:52637] *** End of error message ***
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 0 on node s5 exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------

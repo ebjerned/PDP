@@ -15,15 +15,17 @@ int main(int argc, char* argv[]){
 	int numberOfValues = 100;
 
 	MPI_Init(&argc, &argv);
-	
+	srand(0);
 	MPI_Comm_size(MPI_COMM_WORLD, &p);
 	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
 	if(rank == 0){
 		values = (int*)malloc(numberOfValues*sizeof(int));
 		pivots = (int*)malloc(p*sizeof(int));
-		for(int i = 0; i < numberOfValues; i++)
+		for(int i = 0; i < numberOfValues; i++){
 			values[i] = rand() % 50;
+			printf("%i\n", values[i]);
+		}
 	}
 	int* localValues = (int*)malloc(numberOfValues/p*sizeof(int));
 
@@ -33,11 +35,20 @@ int main(int argc, char* argv[]){
 	int localPivot = median(localValues, numberOfValues/p);
 	MPI_Gather(&localPivot, 1, MPI_INT, pivots, 1, MPI_INT, 0, MPI_COMM_WORLD);
 	if(rank == 0){
-		pivotFromStrategy = findPivot(pivots, p, 0);
+		pivotFromStrategy = findPivot(pivots, p, 1);
+		printf("Pivot from strategy %i\n", pivotFromStrategy);
 
 	}
 	MPI_Bcast(&pivotFromStrategy, 1, MPI_INT, 0, MPI_COMM_WORLD);
 
+	
+
+
+	free(localValues);
+	if(rank==0){
+		free(values);
+		free(pivots);
+	}
 	MPI_Finalize();
 
 }
