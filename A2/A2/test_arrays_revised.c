@@ -114,9 +114,16 @@ int main(int argc, char **argv) {
 	}
 	
 	int CACHEBLOCKSIZE;
-
+	int* BLOCKSIZE_ARR;
 	// L1 cache 32kB -> 4000 doubles -> ~60 a side
 	int suitable_block = (BLOCKROWS/NPROWS) % 60;
+	if(BLOCKROWS % 60 != 0){
+		
+
+	} else{
+		BLOCKSIZE_ARR = calloc(BLOCKROWS/60, sizeof(int));
+						
+	}
 	CACHEBLOCKSIZE = suitable_block == 0 ? 60 : suitable_block;
 	if(BLOCKROWS % CACHEBLOCKSIZE != 0){
 		MPI_Abort(MPI_COMM_WORLD, 1);
@@ -145,7 +152,7 @@ int main(int argc, char **argv) {
 		int bi, bj, bk, i, j, k;
 		for(bi=0; bi < BLOCKROWS; bi += CACHEBLOCKSIZE)	
 			for(bk=0; bk < BLOCKROWS; bk += CACHEBLOCKSIZE)
-				for(bj=0; bj < BLOCKCOLS; bj += CACHEBLOCKSIZE)	
+				for(bj=0; bj < BLOCKROWS; bj += CACHEBLOCKSIZE)	
 					for(i=bi; i < bi+CACHEBLOCKSIZE; i++)
 						for(k=bk; k < bk+CACHEBLOCKSIZE; k++){
 						int a = A[i*BLOCKROWS+k];

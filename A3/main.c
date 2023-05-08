@@ -73,7 +73,7 @@ int main(int argc, char **argv) {
   rcv_buffer = Parallel_Qsort(MPI_COMM_WORLD,rank, size, local_arr,n);
   
   for(int i = 0; i< n; i++){
-    printf("val %lf \n", rcv_buffer[i] );  
+    printf("val %i %lf \n", rank, rcv_buffer[i] );  
   }
 
   
@@ -108,8 +108,8 @@ double* Parallel_Qsort(MPI_Comm curr_group, int rank, int size, double* local_ar
    		h_high = h_high+1;
    	}
   }
-  printf("Pivot = %lf \n", PivotPoint);
-  printf("h_high = %d, l_low = %d \n", h_high,l_low);
+  printf("Pivot %i  = %lf \n",rank, PivotPoint);
+  printf("rank %i, h_high = %d, l_low = %d \n", rank, h_high,l_low);
   //Group up processes into two group, high and low, every process has a pair-process in other group
   
   int group_size = size /2;
@@ -314,7 +314,7 @@ double pivot(int pivot_strat,int len, double *rcv_buffer, int rank, int size, MP
             }
        
             MPI_Bcast ( &l_pivot, 1, MPI_DOUBLE, 0, group);
-            
+//            printf("%d %lf\n", group, &l_pivot);
 	    return l_pivot;
         }
         break;
@@ -389,4 +389,5 @@ int write_output(char *file_name, const double *output, int num_values) {
 	}
 	return 0;
 }
+
 
