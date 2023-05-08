@@ -1,3 +1,4 @@
+
 #include <mpi.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -72,7 +73,7 @@ int main(int argc, char **argv) {
   rcv_buffer = Parallel_Qsort(MPI_COMM_WORLD,rank, size, local_arr,n);
   
   for(int i = 0; i< n; i++){
-    printf("val %i %lf \n", rank, rcv_buffer[i] );  
+    printf("val %lf \n", rcv_buffer[i] );  
   }
 
   
@@ -107,8 +108,8 @@ double* Parallel_Qsort(MPI_Comm curr_group, int rank, int size, double* local_ar
    		h_high = h_high+1;
    	}
   }
-  printf("Pivot %i  = %lf \n",rank, PivotPoint);
-  printf("rank %i, h_high = %d, l_low = %d \n", rank, h_high,l_low);
+  printf("Pivot = %lf \n", PivotPoint);
+  printf("h_high = %d, l_low = %d \n", h_high,l_low);
   //Group up processes into two group, high and low, every process has a pair-process in other group
   
   int group_size = size /2;
@@ -313,7 +314,7 @@ double pivot(int pivot_strat,int len, double *rcv_buffer, int rank, int size, MP
             }
        
             MPI_Bcast ( &l_pivot, 1, MPI_DOUBLE, 0, group);
-//            printf("%d %lf\n", group, &l_pivot);
+            
 	    return l_pivot;
         }
         break;
@@ -348,7 +349,7 @@ int read_input(const char *file_name, double **values) {
 		return -1;
 	}
 	int num_values;
-	if (EOF == fscanf(file, "%i", &num_values)) {
+	if (EOF == fscanf(file, "%d", &num_values)) {
 		perror("Couldn't read element count from input file");
 		return -1;
 	}
@@ -388,8 +389,4 @@ int write_output(char *file_name, const double *output, int num_values) {
 	}
 	return 0;
 }
-<<<<<<< HEAD
 
-
-=======
->>>>>>> bbdd66e820adb5123fb263cc3c41225ba2c77cfe
