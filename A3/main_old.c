@@ -1,3 +1,4 @@
+
 #include <mpi.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -348,7 +349,7 @@ int read_input(const char *file_name, double **values) {
 		return -1;
 	}
 	int num_values;
-	if (EOF == fscanf(file, "%i", &num_values)) {
+	if (EOF == fscanf(file, "%d", &num_values)) {
 		perror("Couldn't read element count from input file");
 		return -1;
 	}
@@ -388,3 +389,4 @@ int write_output(char *file_name, const double *output, int num_values) {
 	}
 	return 0;
 }
+
