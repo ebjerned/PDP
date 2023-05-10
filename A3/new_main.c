@@ -3,6 +3,9 @@
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
+
+//#define PRODUCE_OUTPUT
+
 //Readwrite
 int read_input(const char *file_name, double **values);
 int write_output(char *file_name, const double *output, int num_values);
@@ -121,7 +124,9 @@ int main(int argc, char **argv){
   
   if (rank==0){  
     double *finald = finaldata + padding;
-    write_output(output_name, finald, SIZE-padding);
+    #ifdef PRODUCE_OUTPUT
+    	write_output(output_name, finald, SIZE-padding);
+    #endif
     printf("%lf\n", end);
     free(input);
     free(finaldata);

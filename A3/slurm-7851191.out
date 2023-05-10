@@ -1,0 +1,1103 @@
+1 2 125000000
+*** Error in `./main': munmap_chunk(): invalid pointer: 0x0000000000401346 ***
+======= Backtrace: =========
+/lib64/libc.so.6(+0x7f474)[0x2b9180220474]
+./main[0x4010e1]
+/lib64/libc.so.6(__libc_start_main+0xf5)[0x2b91801c3555]
+./main[0x40136f]
+======= Memory map: ========
+00400000-00403000 r-xp 00000000 00:2b 9246547079325110615                /domus/h1/ebjerned/PDP/A3/main
+00602000-00603000 r--p 00002000 00:2b 9246547079325110615                /domus/h1/ebjerned/PDP/A3/main
+00603000-00604000 rw-p 00003000 00:2b 9246547079325110615                /domus/h1/ebjerned/PDP/A3/main
+01401000-01550000 rw-p 00000000 00:00 0                                  [heap]
+01550000-01560000 rw-p 00000000 00:00 0                                  [heap]
+01560000-015ab000 rw-p 00000000 00:00 0                                  [heap]
+015ab000-015ac000 rw-p 00000000 00:00 0                                  [heap]
+015ac000-015b0000 rw-p 00000000 00:00 0                                  [heap]
+015b0000-015b1000 rw-p 00000000 00:00 0                                  [heap]
+015b1000-015b3000 rw-p 00000000 00:00 0                                  [heap]
+015b3000-015b4000 rw-p 00000000 00:00 0                                  [heap]
+015b4000-015b6000 rw-p 00000000 00:00 0                                  [heap]
+015b6000-015bb000 rw-p 00000000 00:00 0                                  [heap]
+015bb000-015bc000 rw-p 00000000 00:00 0                                  [heap]
+015bc000-015c1000 rw-p 00000000 00:00 0                                  [heap]
+015c1000-015c2000 rw-p 00000000 00:00 0                                  [heap]
+015c2000-015db000 rw-p 00000000 00:00 0                                  [heap]
+015db000-015dc000 rw-p 00000000 00:00 0                                  [heap]
+015dc000-015f5000 rw-p 00000000 00:00 0                                  [heap]
+015f5000-01608000 rw-p 00000000 00:00 0                                  [heap]
+01608000-0160a000 rw-p 00000000 00:00 0                                  [heap]
+0160a000-0160d000 rw-p 00000000 00:00 0                                  [heap]
+0160d000-0160f000 rw-p 00000000 00:00 0                                  [heap]
+0160f000-01612000 rw-p 00000000 00:00 0                                  [heap]
+01612000-01623000 rw-p 00000000 00:00 0                                  [heap]
+01623000-01626000 rw-p 00000000 00:00 0                                  [heap]
+01626000-01637000 rw-p 00000000 00:00 0                                  [heap]
+01637000-0163a000 rw-p 00000000 00:00 0                                  [heap]
+0163a000-0164b000 rw-p 00000000 00:00 0                                  [heap]
+0164b000-0164e000 rw-p 00000000 00:00 0                                  [heap]
+0164e000-0165f000 rw-p 00000000 00:00 0                                  [heap]
+0165f000-01662000 rw-p 00000000 00:00 0                                  [heap]
+01662000-01673000 rw-p 00000000 00:00 0                                  [heap]
+01673000-01676000 rw-p 00000000 00:00 0                                  [heap]
+01676000-01687000 rw-p 00000000 00:00 0                                  [heap]
+01687000-0168a000 rw-p 00000000 00:00 0                                  [heap]
+0168a000-0169b000 rw-p 00000000 00:00 0                                  [heap]
+0169b000-0169e000 rw-p 00000000 00:00 0                                  [heap]
+0169e000-016af000 rw-p 00000000 00:00 0                                  [heap]
+016af000-016de000 rw-p 00000000 00:00 0                                  [heap]
+2b917f724000-2b917f746000 r-xp 00000000 09:01 1574138                    /usr/lib64/ld-2.17.so
+2b917f746000-2b917f747000 rw-p 00000000 00:00 0 
+2b917f747000-2b917f748000 rw-s 00000000 09:03 156499982                  /scratch/7851191/ompi.s7.4024316/pid.51463/pmix_dstor_ds12_51463/dstore_sm.lock
+2b917f748000-2b917f749000 r--s 00000000 09:03 156499981                  /scratch/7851191/ompi.s7.4024316/pid.51463/pmix_dstor_ds12_51463/initial-pmix_shared-segment-0
+2b917f749000-2b917f74a000 rw-s 00000000 09:03 156499980                  /scratch/7851191/ompi.s7.4024316/pid.51463/pmix_dstor_ds21_51463/smlockseg-3416195073
+2b917f74a000-2b917f74b000 r--s 00000000 09:03 156499979                  /scratch/7851191/ompi.s7.4024316/pid.51463/pmix_dstor_ds21_51463/initial-pmix_shared-segment-0
+2b917f74b000-2b917f74c000 -w-s 00000000 00:05 13606                      /dev/infiniband/uverbs0
+2b917f74c000-2b917f74d000 -w-s 00001000 00:05 13606                      /dev/infiniband/uverbs0
+2b917f74d000-2b917f74e000 r--s 00003000 00:05 13606                      /dev/infiniband/uverbs0
+2b917f74e000-2b917f74f000 -w-s 00000000 00:05 13606                      /dev/infiniband/uverbs0
+2b917f74f000-2b917f750000 -w-s 00001000 00:05 13606                      /dev/infiniband/uverbs0
+2b917f750000-2b917f751000 r--s 00003000 00:05 13606                      /dev/infiniband/uverbs0
+2b917f751000-2b917f762000 rw-p 00000000 00:00 0 
+2b917f762000-2b917f763000 rw-p 00000000 00:00 0 
+2b917f763000-2b917f76d000 rw-p 00000000 00:00 0 
+2b917f76d000-2b917f780000 rw-p 00000000 00:00 0 
+2b917f780000-2b917f924000 rw-p 00000000 00:00 0 
+2b917f924000-2b917f944000 rw-p 00000000 00:00 0 
+2b917f944000-2b917f945000 rw-p 00000000 00:00 0 
+2b917f945000-2b917f946000 r--p 00021000 09:01 1574138                    /usr/lib64/ld-2.17.so
+2b917f946000-2b917f947000 rw-p 00022000 09:01 1574138                    /usr/lib64/ld-2.17.so
+2b917f947000-2b917f948000 rw-p 00000000 00:00 0 
+2b917f948000-2b917fa49000 r-xp 00000000 09:01 1574158                    /usr/lib64/libm-2.17.so
+2b917fa49000-2b917fc48000 ---p 00101000 09:01 1574158                    /usr/lib64/libm-2.17.so
+2b917fc48000-2b917fc49000 r--p 00100000 09:01 1574158                    /usr/lib64/libm-2.17.so
+2b917fc49000-2b917fc4a000 rw-p 00101000 09:01 1574158                    /usr/lib64/libm-2.17.so
+2b917fc4a000-2b917fd61000 r-xp 00000000 00:2a 9246547088009410382        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libmpi.so.40.30.5
+2b917fd61000-2b917ff60000 ---p 00117000 00:2a 9246547088009410382        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libmpi.so.40.30.5
+2b917ff60000-2b917ff62000 r--p 00116000 00:2a 9246547088009410382        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libmpi.so.40.30.5
+2b917ff62000-2b917ff73000 rw-p 00118000 00:2a 9246547088009410382        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libmpi.so.40.30.5
+2b917ff73000-2b917ff85000 rw-p 00000000 00:00 0 
+2b917ff85000-2b917ff9c000 r-xp 00000000 09:01 1574180                    /usr/lib64/libpthread-2.17.so
+2b917ff9c000-2b918019b000 ---p 00017000 09:01 1574180                    /usr/lib64/libpthread-2.17.so
+2b918019b000-2b918019c000 r--p 00016000 09:01 1574180                    /usr/lib64/libpthread-2.17.so
+2b918019c000-2b918019d000 rw-p 00017000 09:01 1574180                    /usr/lib64/libpthread-2.17.so
+2b918019d000-2b91801a1000 rw-p 00000000 00:00 0 
+2b91801a1000-2b9180296000 r-xp 00000000 09:01 1574148                    /usr/lib64/libc-2.17.so
+2b9180296000-2b9180297000 r-xp 000f5000 09:01 1574148                    /usr/lib64/libc-2.17.so
+2b9180297000-2b9180299000 r-xp 000f6000 09:01 1574148                    /usr/lib64/libc-2.17.so
+2b9180299000-2b918029b000 r-xp 000f8000 09:01 1574148                    /usr/lib64/libc-2.17.so
+2b918029b000-2b91802a0000 r-xp 000fa000 09:01 1574148                    /usr/lib64/libc-2.17.so
+2b91802a0000-2b91802a2000 r-xp 000ff000 09:01 1574148                    /usr/lib64/libc-2.17.so
+2b91802a2000-2b9180365000 r-xp 00101000 09:01 1574148                    /usr/lib64/libc-2.17.so
+2b9180365000-2b9180564000 ---p 001c4000 09:01 1574148                    /usr/lib64/libc-2.17.so
+2b9180564000-2b9180568000 r--p 001c3000 09:01 1574148                    /usr/lib64/libc-2.17.so
+2b9180568000-2b918056a000 rw-p 001c7000 09:01 1574148                    /usr/lib64/libc-2.17.so
+2b918056a000-2b918056f000 rw-p 00000000 00:00 0 
+2b918056f000-2b9180621000 r-xp 00000000 00:2a 9246547088009410184        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libopen-rte.so.40.30.3
+2b9180621000-2b9180820000 ---p 000b2000 00:2a 9246547088009410184        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libopen-rte.so.40.30.3
+2b9180820000-2b9180822000 r--p 000b1000 00:2a 9246547088009410184        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libopen-rte.so.40.30.3
+2b9180822000-2b9180826000 rw-p 000b3000 00:2a 9246547088009410184        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libopen-rte.so.40.30.3
+2b9180826000-2b9180828000 rw-p 00000000 00:00 0 
+2b9180828000-2b9180926000 r-xp 00000000 00:2a 9246547088009410032        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libopen-pal.so.40.30.3
+2b9180926000-2b9180b25000 ---p 000fe000 00:2a 9246547088009410032        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libopen-pal.so.40.30.3
+2b9180b25000-2b9180b29000 r--p 000fd000 00:2a 9246547088009410032        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libopen-pal.so.40.30.3
+2b9180b29000-2b9180b2f000 rw-p 00101000 00:2a 9246547088009410032        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libopen-pal.so.40.30.3
+2b9180b2f000-2b9180b36000 rw-p 00000000 00:00 0 
+2b9180b36000-2b9180b38000 r-xp 00000000 09:01 1574155                    /usr/lib64/libdl-2.17.so
+2b9180b38000-2b9180d38000 ---p 00002000 09:01 1574155                    /usr/lib64/libdl-2.17.so
+2b9180d38000-2b9180d39000 r--p 00002000 09:01 1574155                    /usr/lib64/libdl-2.17.so
+2b9180d39000-2b9180d3a000 rw-p 00003000 09:01 1574155                    /usr/lib64/libdl-2.17.so
+2b9180d3a000-2b9180d4e000 r-xp 00000000 09:01 1577830                    /usr/lib64/libudev.so.1.6.2
+2b9180d4e000-2b9180f4e000 ---p 00014000 09:01 1577830                    /usr/lib64/libudev.so.1.6.2
+2b9180f4e000-2b9180f4f000 r--p 00014000 09:01 1577830                    /usr/lib64/libudev.so.1.6.2
+2b9180f4f000-2b9180f50000 rw-p 00015000 09:01 1577830                    /usr/lib64/libudev.so.1.6.2
+2b9180f50000-2b9180f57000 r-xp 00000000 09:01 1590744                    /usr/lib64/librt-2.17.so
+2b9180f57000-2b9181156000 ---p 00007000 09:01 1590744                    /usr/lib64/librt-2.17.so
+2b9181156000-2b9181157000 r--p 00006000 09:01 1590744                    /usr/lib64/librt-2.17.so
+2b9181157000-2b9181158000 rw-p 00007000 09:01 1590744                    /usr/lib64/librt-2.17.so
+2b9181158000-2b918115a000 r-xp 00000000 09:01 1574188                    /usr/lib64/libutil-2.17.so
+2b918115a000-2b9181359000 ---p 00002000 09:01 1574188                    /usr/lib64/libutil-2.17.so
+2b9181359000-2b918135a000 r--p 00001000 09:01 1574188                    /usr/lib64/libutil-2.17.so
+2b918135a000-2b918135b000 rw-p 00002000 09:01 1574188                    /usr/lib64/libutil-2.17.so
+2b918135b000-2b9181370000 r-xp 00000000 09:01 1574198                    /usr/lib64/libz.so.1.2.7
+2b9181370000-2b918156f000 ---p 00015000 09:01 1574198                    /usr/lib64/libz.so.1.2.7
+2b918156f000-2b9181570000 r--p 00014000 09:01 1574198                    /usr/lib64/libz.so.1.2.7
+2b9181570000-2b9181571000 rw-p 00015000 09:01 1574198                    /usr/lib64/libz.so.1.2.7
+2b9181571000-2b9181575000 r-xp 00000000 09:01 1574580                    /usr/lib64/libcap.so.2.22
+2b9181575000-2b9181774000 ---p 00004000 09:01 1574580                    /usr/lib64/libcap.so.2.22
+2b9181774000-2b9181775000 r--p 00003000 09:01 1574580                    /usr/lib64/libcap.so.2.22
+2b9181775000-2b9181776000 rw-p 00004000 09:01 1574580                    /usr/lib64/libcap.so.2.22
+2b9181776000-2b91817c4000 r-xp 00000000 09:01 1577821                    /usr/lib64/libdw-0.176.so
+2b91817c4000-2b91819c4000 ---p 0004e000 09:01 1577821                    /usr/lib64/libdw-0.176.so
+2b91819c4000-2b91819c6000 r--p 0004e000 09:01 1577821                    /usr/lib64/libdw-0.176.so
+2b91819c6000-2b91819c7000 rw-p 00050000 09:01 1577821                    /usr/lib64/libdw-0.176.so
+2b91819c7000-2b91819e9000 r-xp 00000000 00:2a 9246547087846600187        /sw/comp/gcc/13.1.0_snowy/lib64/libgcc_s.so.1
+2b91819e9000-2b9181be8000 ---p 00022000 00:2a 9246547087846600187        /sw/comp/gcc/13.1.0_snowy/lib64/libgcc_s.so.1
+2b9181be8000-2b9181be9000 r--p 00021000 00:2a 9246547087846600187        /sw/comp/gcc/13.1.0_snowy/lib64/libgcc_s.so.1
+2b9181be9000-2b9181bea000 rw-p 00022000 00:2a 9246547087846600187        /sw/comp/gcc/13.1.0_snowy/lib64/libgcc_s.so.1
+2b9181bea000-2b9181bee000 r-xp 00000000 09:01 1574578                    /usr/lib64/libattr.so.1.1.0
+2b9181bee000-2b9181ded000 ---p 00004000 09:01 1574578                    /usr/lib64/libattr.so.1.1.0
+2b9181ded000-2b9181dee000 r--p 00003000 09:01 1574578                    /usr/lib64/libattr.so.1.1.0
+2b9181dee000-2b9181def000 rw-p 00004000 09:01 1574578                    /usr/lib64/libattr.so.1.1.0
+2b9181def000-2b9181e06000 r-xp 00000000 09:01 1574568                    /usr/lib64/libelf-0.176.so
+2b9181e06000-2b9182005000 ---p 00017000 09:01 1574568                    /usr/lib64/libelf-0.176.so
+2b9182005000-2b9182006000 r--p 00016000 09:01 1574568                    /usr/lib64/libelf-0.176.so
+2b9182006000-2b9182007000 rw-p 00017000 09:01 1574568                    /usr/lib64/libelf-0.176.so
+2b9182007000-2b918202c000 r-xp 00000000 09:01 1574360                    /usr/lib64/liblzma.so.5.2.2
+2b918202c000-2b918222b000 ---p 00025000 09:01 1574360                    /usr/lib64/liblzma.so.5.2.2
+2b918222b000-2b918222c000 r--p 00024000 09:01 1574360                    /usr/lib64/liblzma.so.5.2.2
+2b918222c000-2b918222d000 rw-p 00025000 09:01 1574360                    /usr/lib64/liblzma.so.5.2.2
+2b918222d000-2b918223c000 r-xp 00000000 09:01 1574398                    /usr/lib64/libbz2.so.1.0.6
+2b918223c000-2b918243b000 ---p 0000f000 09:01 1574398                    /usr/lib64/libbz2.so.1.0.6
+2b918243b000-2b918243c000 r--p 0000e000 09:01 1574398                    /usr/lib64/libbz2.so.1.0.6
+2b918243c000-2b918243d000 rw-p 0000f000 09:01 1574398                    /usr/lib64/libbz2.so.1.0.6
+2b918243d000-2b9182440000 r-xp 00000000 00:2a 9246547088009410157        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_shmem_mmap.so
+2b9182440000-2b918263f000 ---p 00003000 00:2a 9246547088009410157        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_shmem_mmap.so
+2b918263f000-2b9182640000 r--p 00002000 00:2a 9246547088009410157        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_shmem_mmap.so
+2b9182640000-2b9182641000 rw-p 00003000 00:2a 9246547088009410157        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_shmem_mmap.so
+2b9182641000-2b9182643000 r-xp 00000000 00:2a 9246547088009410154        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_reachable_weighted.so
+2b9182643000-2b9182842000 ---p 00002000 00:2a 9246547088009410154        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_reachable_weighted.so
+2b9182842000-2b9182843000 r--p 00001000 00:2a 9246547088009410154        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_reachable_weighted.so
+2b9182843000-2b9182844000 rw-p 00002000 00:2a 9246547088009410154        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_reachable_weighted.so
+2b9182844000-2b9182845000 r-xp 00000000 00:2a 9246547088009410283        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_flux.so
+2b9182845000-2b9182a45000 ---p 00001000 00:2a 9246547088009410283        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_flux.so
+2b9182a45000-2b9182a46000 r--p 00001000 00:2a 9246547088009410283        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_flux.so
+2b9182a46000-2b9182a47000 rw-p 00002000 00:2a 9246547088009410283        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_flux.so
+2b9182a47000-2b9182a4f000 r-xp 00000000 00:2a 9246547088009410285        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_ompi.so
+2b9182a4f000-2b9182c4e000 ---p 00008000 00:2a 9246547088009410285        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_ompi.so
+2b9182c4e000-2b9182c4f000 r--p 00007000 00:2a 9246547088009410285        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_ompi.so
+2b9182c4f000-2b9182c51000 rw-p 00008000 00:2a 9246547088009410285        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_ompi.so
+2b9182c51000-2b9182c52000 r-xp 00000000 00:2a 9246547088009410287        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_orte.so
+2b9182c52000-2b9182e52000 ---p 00001000 00:2a 9246547088009410287        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_orte.so
+2b9182e52000-2b9182e53000 r--p 00001000 00:2a 9246547088009410287        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_orte.so
+2b9182e53000-2b9182e54000 rw-p 00002000 00:2a 9246547088009410287        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_orte.so
+2b9182e54000-2b9182e55000 r-xp 00000000 00:2a 9246547088009410289        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_jsm.so
+2b9182e55000-2b9183055000 ---p 00001000 00:2a 9246547088009410289        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_jsm.so
+2b9183055000-2b9183056000 r--p 00001000 00:2a 9246547088009410289        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_jsm.so
+2b9183056000-2b9183057000 rw-p 00002000 00:2a 9246547088009410289        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_jsm.so
+2b9183057000-2b9183058000 r-xp 00000000 00:2a 9246547088009410291        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_singularity.so
+2b9183058000-2b9183258000 ---p 00001000 00:2a 9246547088009410291        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_singularity.so
+2b9183258000-2b9183259000 r--p 00001000 00:2a 9246547088009410291        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_singularity.so
+2b9183259000-2b918325a000 rw-p 00002000 00:2a 9246547088009410291        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_singularity.so
+2b918325a000-2b918325c000 r-xp 00000000 00:2a 9246547088009410293        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_slurm.so
+2b918325c000-2b918345b000 ---p 00002000 00:2a 9246547088009410293        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_slurm.so
+2b918345b000-2b918345c000 r--p 00001000 00:2a 9246547088009410293        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_slurm.so
+2b918345c000-2b918345d000 rw-p 00002000 00:2a 9246547088009410293        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_slurm.so
+2b918345d000-2b9183462000 r-xp 00000000 00:2a 9246547088009410206        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_ess_pmi.so
+2b9183462000-2b9183661000 ---p 00005000 00:2a 9246547088009410206        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_ess_pmi.so
+2b9183661000-2b9183662000 r--p 00004000 00:2a 9246547088009410206        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_ess_pmi.so
+2b9183662000-2b9183663000 rw-p 00005000 00:2a 9246547088009410206        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_ess_pmi.so
+2b9183663000-2b9183664000 ---p 00000000 00:00 0 
+2b9183664000-2b9183864000 rw-p 00000000 00:00 0 
+2b9183864000-2b9183866000 r-xp 00000000 00:2a 9246547088009410136        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_psquash_flex128.so
+2b9183866000-2b9183a65000 ---p 00002000 00:2a 9246547088009410136        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_psquash_flex128.so
+2b9183a65000-2b9183a66000 r--p 00001000 00:2a 9246547088009410136        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_psquash_flex128.so
+2b9183a66000-2b9183a67000 rw-p 00002000 00:2a 9246547088009410136        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_psquash_flex128.so
+2b9183a6a000-2b9183b76000 r-xp 00000000 00:2a 9246547088009410148        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_pmix_pmix3x.so
+2b9183b76000-2b9183d76000 ---p 0010c000 00:2a 9246547088009410148        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_pmix_pmix3x.so
+2b9183d76000-2b9183d77000 r--p 0010c000 00:2a 9246547088009410148        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_pmix_pmix3x.so
+2b9183d77000-2b9183d7c000 rw-p 0010d000 00:2a 9246547088009410148        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_pmix_pmix3x.so
+2b9183d7c000-2b9183d7f000 rw-p 00000000 00:00 0 
+2b9183d7f000-2b9183d80000 r-xp 00000000 00:2a 9246547088009410138        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_psquash_native.so
+2b9183d80000-2b9183f80000 ---p 00001000 00:2a 9246547088009410138        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_psquash_native.so
+2b9183f80000-2b9183f81000 r--p 00001000 00:2a 9246547088009410138        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_psquash_native.so
+2b9183f81000-2b9183f82000 rw-p 00002000 00:2a 9246547088009410138        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_psquash_native.so
+2b9183f82000-2b9183fb2000 rw-p 00000000 00:00 0 
+2b9184000000-2b9184021000 rw-p 00000000 00:00 0 
+2b9184021000-2b9188000000 ---p 00000000 00:00 0 
+2b9188000000-2b9188012000 r-xp 00000000 00:2a 9246547088009410098        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_bfrops_v12.so
+2b9188012000-2b9188211000 ---p 00012000 00:2a 9246547088009410098        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_bfrops_v12.so
+2b9188211000-2b9188212000 r--p 00011000 00:2a 9246547088009410098        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_bfrops_v12.so
+2b9188212000-2b9188213000 rw-p 00012000 00:2a 9246547088009410098        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_bfrops_v12.so
+2b9188213000-2b918822b000 r-xp 00000000 00:2a 9246547088009410100        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_bfrops_v20.so
+2b918822b000-2b918842a000 ---p 00018000 00:2a 9246547088009410100        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_bfrops_v20.so
+2b918842a000-2b918842b000 r--p 00017000 00:2a 9246547088009410100        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_bfrops_v20.so
+2b918842b000-2b918842c000 rw-p 00018000 00:2a 9246547088009410100        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_bfrops_v20.so
+2b918842c000-2b9188434000 r-xp 00000000 00:2a 9246547088009410102        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_bfrops_v21.so
+2b9188434000-2b9188633000 ---p 00008000 00:2a 9246547088009410102        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_bfrops_v21.so
+2b9188633000-2b9188634000 r--p 00007000 00:2a 9246547088009410102        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_bfrops_v21.so
+2b9188634000-2b9188635000 rw-p 00008000 00:2a 9246547088009410102        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_bfrops_v21.so
+2b9188635000-2b918863d000 r-xp 00000000 00:2a 9246547088009410104        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_bfrops_v3.so
+2b918863d000-2b918883c000 ---p 00008000 00:2a 9246547088009410104        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_bfrops_v3.so
+2b918883c000-2b918883d000 r--p 00007000 00:2a 9246547088009410104        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_bfrops_v3.so
+2b918883d000-2b918883e000 rw-p 00008000 00:2a 9246547088009410104        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_bfrops_v3.so
+2b918883e000-2b9188840000 r-xp 00000000 00:2a 9246547088009410112        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_pcompress_zlib.so
+2b9188840000-2b9188a3f000 ---p 00002000 00:2a 9246547088009410112        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_pcompress_zlib.so
+2b9188a3f000-2b9188a40000 r--p 00001000 00:2a 9246547088009410112        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_pcompress_zlib.so
+2b9188a40000-2b9188a41000 rw-p 00002000 00:2a 9246547088009410112        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_pcompress_zlib.so
+2b9188a41000-2b9188a53000 r-xp 00000000 00:2a 9246547088009410140        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_ptl_tcp.so
+2b9188a53000-2b9188c52000 ---p 00012000 00:2a 9246547088009410140        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_ptl_tcp.so
+2b9188c52000-2b9188c53000 r--p 00011000 00:2a 9246547088009410140        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_ptl_tcp.so
+2b9188c53000-2b9188c54000 rw-p 00012000 00:2a 9246547088009410140        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_ptl_tcp.so
+2b9188c54000-2b9188c5d000 r-xp 00000000 00:2a 9246547088009410142        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_ptl_usock.so
+2b9188c5d000-2b9188e5c000 ---p 00009000 00:2a 9246547088009410142        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_ptl_usock.so
+2b9188e5c000-2b9188e5d000 r--p 00008000 00:2a 9246547088009410142        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_ptl_usock.so
+2b9188e5d000-2b9188e5e000 rw-p 00009000 00:2a 9246547088009410142        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_ptl_usock.so
+2b9188e5e000-2b9188e60000 r-xp 00000000 00:2a 9246547088009410124        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_psec_native.so
+2b9188e60000-2b918905f000 ---p 00002000 00:2a 9246547088009410124        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_psec_native.so
+2b918905f000-2b9189060000 r--p 00001000 00:2a 9246547088009410124        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_psec_native.so
+2b9189060000-2b9189061000 rw-p 00002000 00:2a 9246547088009410124        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_psec_native.so
+2b9189061000-2b9189075000 r-xp 00000000 00:2a 9246547088009410106        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_gds_hash.so
+2b9189075000-2b9189274000 ---p 00014000 00:2a 9246547088009410106        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_gds_hash.so
+2b9189274000-2b9189275000 r--p 00013000 00:2a 9246547088009410106        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_gds_hash.so
+2b9189275000-2b9189276000 rw-p 00014000 00:2a 9246547088009410106        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_gds_hash.so
+2b9189276000-2b918927a000 r-xp 00000000 00:2a 9246547088009410108        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_gds_ds12.so
+2b918927a000-2b9189479000 ---p 00004000 00:2a 9246547088009410108        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_gds_ds12.so
+2b9189479000-2b918947a000 r--p 00003000 00:2a 9246547088009410108        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_gds_ds12.so
+2b918947a000-2b918947b000 rw-p 00004000 00:2a 9246547088009410108        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_gds_ds12.so
+2b918947b000-2b9189489000 r-xp 00000000 00:2a 9246547088009410093        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libmca_common_dstore.so.1.0.2
+2b9189489000-2b9189688000 ---p 0000e000 00:2a 9246547088009410093        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libmca_common_dstore.so.1.0.2
+2b9189688000-2b9189689000 r--p 0000d000 00:2a 9246547088009410093        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libmca_common_dstore.so.1.0.2
+2b9189689000-2b918968a000 rw-p 0000e000 00:2a 9246547088009410093        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libmca_common_dstore.so.1.0.2
+2b918968a000-2b918968e000 r-xp 00000000 00:2a 9246547088009410110        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_gds_ds21.so
+2b918968e000-2b918988d000 ---p 00004000 00:2a 9246547088009410110        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_gds_ds21.so
+2b918988d000-2b918988e000 r--p 00003000 00:2a 9246547088009410110        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_gds_ds21.so
+2b918988e000-2b918988f000 rw-p 00004000 00:2a 9246547088009410110        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_gds_ds21.so
+2b918988f000-2b9189891000 r-xp 00000000 00:2a 9246547088009410134        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_pshmem_mmap.so
+2b9189891000-2b9189a90000 ---p 00002000 00:2a 9246547088009410134        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_pshmem_mmap.so
+2b9189a90000-2b9189a91000 r--p 00001000 00:2a 9246547088009410134        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_pshmem_mmap.so
+2b9189a91000-2b9189a92000 rw-p 00002000 00:2a 9246547088009410134        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_pshmem_mmap.so
+2b9189a92000-2b9189a94000 r-xp 00000000 00:2a 9246547088009410120        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_preg_compress.so
+2b9189a94000-2b9189c93000 ---p 00002000 00:2a 9246547088009410120        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_preg_compress.so
+2b9189c93000-2b9189c94000 r--p 00001000 00:2a 9246547088009410120        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_preg_compress.so
+2b9189c94000-2b9189c95000 rw-p 00002000 00:2a 9246547088009410120        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_preg_compress.so
+2b9189c95000-2b9189c99000 r-xp 00000000 00:2a 9246547088009410122        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_preg_native.so
+2b9189c99000-2b9189e98000 ---p 00004000 00:2a 9246547088009410122        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_preg_native.so
+2b9189e98000-2b9189e99000 r--p 00003000 00:2a 9246547088009410122        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_preg_native.so
+2b9189e99000-2b9189e9a000 rw-p 00004000 00:2a 9246547088009410122        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_preg_native.so
+2b9189e9a000-2b9189e9d000 r-xp 00000000 00:2a 9246547088009410114        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_plog_default.so
+2b9189e9d000-2b918a09c000 ---p 00003000 00:2a 9246547088009410114        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_plog_default.so
+2b918a09c000-2b918a09d000 r--p 00002000 00:2a 9246547088009410114        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_plog_default.so
+2b918a09d000-2b918a09e000 rw-p 00003000 00:2a 9246547088009410114        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_plog_default.so
+2b918a09e000-2b918a09f000 r-xp 00000000 00:2a 9246547088009410116        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_plog_stdfd.so
+2b918a09f000-2b918a29e000 ---p 00001000 00:2a 9246547088009410116        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_plog_stdfd.so
+2b918a29e000-2b918a29f000 r--p 00000000 00:2a 9246547088009410116        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_plog_stdfd.so
+2b918a29f000-2b918a2a0000 rw-p 00001000 00:2a 9246547088009410116        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_plog_stdfd.so
+2b918a2a0000-2b918a2a2000 r-xp 00000000 00:2a 9246547088009410118        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_plog_syslog.so
+2b918a2a2000-2b918a4a1000 ---p 00002000 00:2a 9246547088009410118        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_plog_syslog.so
+2b918a4a1000-2b918a4a2000 r--p 00001000 00:2a 9246547088009410118        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_plog_syslog.so
+2b918a4a2000-2b918a4a3000 rw-p 00002000 00:2a 9246547088009410118        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_plog_syslog.so
+2b918a4a3000-2b918a4a4000 ---p 00000000 00:00 0 
+2b918a4a4000-2b918a6a4000 rw-p 00000000 00:00 0 
+2b918a6a4000-2b918aaa4000 r--s 00000000 09:03 156499983                  /scratch/7851191/ompi.s7.4024316/pid.51463/pmix_dstor_ds21_51463/smseg-3416195073-0
+2b918aaa4000-2b918aea4000 r--s 00000000 09:03 156499984                  /scratch/7851191/ompi.s7.4024316/pid.51463/pmix_dstor_ds21_51463/smdataseg-3416195073-0
+2b918aea4000-2b918aea6000 r-xp 00000000 00:2a 9246547088009410295        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_state_app.so
+2b918aea6000-2b918b0a5000 ---p 00002000 00:2a 9246547088009410295        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_state_app.so
+2b918b0a5000-2b918b0a6000 r--p 00001000 00:2a 9246547088009410295        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_state_app.so
+2b918b0a6000-2b918b0a7000 rw-p 00002000 00:2a 9246547088009410295        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_state_app.so
+2b918b0a7000-2b918b0a9000 r-xp 00000000 00:2a 9246547088009410194        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_errmgr_default_app.so
+2b918b0a9000-2b918b2a8000 ---p 00002000 00:2a 9246547088009410194        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_errmgr_default_app.so
+2b918b2a8000-2b918b2a9000 r--p 00001000 00:2a 9246547088009410194        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_errmgr_default_app.so
+2b918b2a9000-2b918b2aa000 rw-p 00002000 00:2a 9246547088009410194        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_errmgr_default_app.so
+2b918b2aa000-2b918b2d7000 r-xp 00000000 00:2a 9246547088009410884        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_op_avx.so
+2b918b2d7000-2b918b4d6000 ---p 0002d000 00:2a 9246547088009410884        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_op_avx.so
+2b918b4d6000-2b918b4d7000 r--p 0002c000 00:2a 9246547088009410884        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_op_avx.so
+2b918b4d7000-2b918b4df000 rw-p 0002d000 00:2a 9246547088009410884        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_op_avx.so
+2b918b4df000-2b918b4e1000 r-xp 00000000 00:2a 9246547088009410049        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_allocator_basic.so
+2b918b4e1000-2b918b6e1000 ---p 00002000 00:2a 9246547088009410049        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_allocator_basic.so
+2b918b6e1000-2b918b6e2000 r--p 00002000 00:2a 9246547088009410049        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_allocator_basic.so
+2b918b6e2000-2b918b6e3000 rw-p 00003000 00:2a 9246547088009410049        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_allocator_basic.so
+2b918b6e3000-2b918b6e5000 r-xp 00000000 00:2a 9246547088009410051        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_allocator_bucket.so
+2b918b6e5000-2b918b8e4000 ---p 00002000 00:2a 9246547088009410051        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_allocator_bucket.so
+2b918b8e4000-2b918b8e5000 r--p 00001000 00:2a 9246547088009410051        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_allocator_bucket.so
+2b918b8e5000-2b918b8e6000 rw-p 00002000 00:2a 9246547088009410051        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_allocator_bucket.so
+2b918b8e6000-2b918b8e9000 r-xp 00000000 00:2a 9246547088009410152        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_rcache_grdma.so
+2b918b8e9000-2b918bae9000 ---p 00003000 00:2a 9246547088009410152        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_rcache_grdma.so
+2b918bae9000-2b918baea000 r--p 00003000 00:2a 9246547088009410152        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_rcache_grdma.so
+2b918baea000-2b918baeb000 rw-p 00004000 00:2a 9246547088009410152        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_rcache_grdma.so
+2b918baeb000-2b918baee000 r-xp 00000000 00:2a 9246547088009410078        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_mpool_hugepage.so
+2b918baee000-2b918bcee000 ---p 00003000 00:2a 9246547088009410078        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_mpool_hugepage.so
+2b918bcee000-2b918bcef000 r--p 00003000 00:2a 9246547088009410078        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_mpool_hugepage.so
+2b918bcef000-2b918bcf0000 rw-p 00004000 00:2a 9246547088009410078        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_mpool_hugepage.so
+2b918bcf0000-2b918bcf4000 r-xp 00000000 00:2a 9246547088009410840        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_bml_r2.so
+2b918bcf4000-2b918bef3000 ---p 00004000 00:2a 9246547088009410840        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_bml_r2.so
+2b918bef3000-2b918bef4000 r--p 00003000 00:2a 9246547088009410840        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_bml_r2.so
+2b918bef4000-2b918bef5000 rw-p 00004000 00:2a 9246547088009410840        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_bml_r2.so
+2b918bef5000-2b918bef6000 rw-p 00000000 00:00 0 
+2b918bef6000-2b918bf77000 rw-p 00000000 00:00 0 
+2b918bf77000-2b918bf79000 rw-p 00000000 00:00 0 
+2b918bf79000-2b918bffa000 rw-p 00000000 00:00 0 
+2b918bffa000-2b918bffb000 rw-p 00000000 00:00 0 
+2b918c000000-2b918c021000 rw-p 00000000 00:00 0 
+2b918c021000-2b9190000000 ---p 00000000 00:00 0 
+2b9190000000-2b9190003000 r-xp 00000000 00:2a 9246547088009410053        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_btl_self.so
+2b9190003000-2b9190202000 ---p 00003000 00:2a 9246547088009410053        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_btl_self.so
+2b9190202000-2b9190203000 r--p 00002000 00:2a 9246547088009410053        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_btl_self.so
+2b9190203000-2b9190204000 rw-p 00003000 00:2a 9246547088009410053        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_btl_self.so
+2b9190204000-2b9190239000 r-xp 00000000 00:2a 9246547088009410060        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_btl_openib.so
+2b9190239000-2b9190438000 ---p 00035000 00:2a 9246547088009410060        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_btl_openib.so
+2b9190438000-2b9190439000 r--p 00034000 00:2a 9246547088009410060        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_btl_openib.so
+2b9190439000-2b919043b000 rw-p 00035000 00:2a 9246547088009410060        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_btl_openib.so
+2b919043b000-2b919043c000 rw-p 00000000 00:00 0 
+2b919043c000-2b9190451000 r-xp 00000000 09:01 1590724                    /usr/lib64/librdmacm.so.1.1.22.4
+2b9190451000-2b9190650000 ---p 00015000 09:01 1590724                    /usr/lib64/librdmacm.so.1.1.22.4
+2b9190650000-2b9190651000 r--p 00014000 09:01 1590724                    /usr/lib64/librdmacm.so.1.1.22.4
+2b9190651000-2b9190652000 rw-p 00015000 09:01 1590724                    /usr/lib64/librdmacm.so.1.1.22.4
+2b9190652000-2b9190653000 rw-p 00000000 00:00 0 
+2b9190653000-2b9190657000 r-xp 00000000 00:2a 9246547088009410043        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libmca_common_verbs.so.40.30.0
+2b9190657000-2b9190856000 ---p 00004000 00:2a 9246547088009410043        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libmca_common_verbs.so.40.30.0
+2b9190856000-2b9190857000 r--p 00003000 00:2a 9246547088009410043        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libmca_common_verbs.so.40.30.0
+2b9190857000-2b9190858000 rw-p 00004000 00:2a 9246547088009410043        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libmca_common_verbs.so.40.30.0
+2b9190858000-2b9190870000 r-xp 00000000 09:01 1590587                    /usr/lib64/libibverbs.so.1.5.22.4
+2b9190870000-2b9190a6f000 ---p 00018000 09:01 1590587                    /usr/lib64/libibverbs.so.1.5.22.4
+2b9190a6f000-2b9190a70000 r--p 00017000 09:01 1590587                    /usr/lib64/libibverbs.so.1.5.22.4
+2b9190a70000-2b9190a71000 rw-p 00018000 09:01 1590587                    /usr/lib64/libibverbs.so.1.5.22.4
+2b9190a71000-2b9190ad5000 r-xp 00000000 09:01 1575419                    /usr/lib64/libnl-route-3.so.200.23.0
+2b9190ad5000-2b9190cd4000 ---p 00064000 09:01 1575419                    /usr/lib64/libnl-route-3.so.200.23.0
+2b9190cd4000-2b9190cd7000 r--p 00063000 09:01 1575419                    /usr/lib64/libnl-route-3.so.200.23.0
+2b9190cd7000-2b9190cdc000 rw-p 00066000 09:01 1575419                    /usr/lib64/libnl-route-3.so.200.23.0
+2b9190cdc000-2b9190cde000 rw-p 00000000 00:00 0 
+2b9190cde000-2b9190cfc000 r-xp 00000000 09:01 1575411                    /usr/lib64/libnl-3.so.200.23.0
+2b9190cfc000-2b9190efc000 ---p 0001e000 09:01 1575411                    /usr/lib64/libnl-3.so.200.23.0
+2b9190efc000-2b9190efe000 r--p 0001e000 09:01 1575411                    /usr/lib64/libnl-3.so.200.23.0
+2b9190efe000-2b9190eff000 rw-p 00020000 09:01 1575411                    /usr/lib64/libnl-3.so.200.23.0
+2b9190eff000-2b9190f00000 r-xp 00000000 00:2a 9246547088009410063        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_btl_sm.so
+2b9190f00000-2b91910ff000 ---p 00001000 00:2a 9246547088009410063        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_btl_sm.so
+2b91910ff000-2b9191100000 r--p 00000000 00:2a 9246547088009410063        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_btl_sm.so
+2b9191100000-2b9191101000 rw-p 00001000 00:2a 9246547088009410063        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_btl_sm.so
+2b9191101000-2b9191111000 r-xp 00000000 00:2a 9246547088009410066        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_btl_tcp.so
+2b9191111000-2b9191311000 ---p 00010000 00:2a 9246547088009410066        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_btl_tcp.so
+2b9191311000-2b9191312000 r--p 00010000 00:2a 9246547088009410066        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_btl_tcp.so
+2b9191312000-2b9191314000 rw-p 00011000 00:2a 9246547088009410066        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_btl_tcp.so
+2b9191314000-2b919131e000 r-xp 00000000 00:2a 9246547088009410069        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_btl_vader.so
+2b919131e000-2b919151d000 ---p 0000a000 00:2a 9246547088009410069        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_btl_vader.so
+2b919151d000-2b919151e000 r--p 00009000 00:2a 9246547088009410069        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_btl_vader.so
+2b919151e000-2b9191520000 rw-p 0000a000 00:2a 9246547088009410069        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_btl_vader.so
+2b9191520000-2b9191528000 r-xp 00000000 09:01 1711438                    /usr/lib64/libibverbs/libhns-rdmav22.so
+2b9191528000-2b9191727000 ---p 00008000 09:01 1711438                    /usr/lib64/libibverbs/libhns-rdmav22.so
+2b9191727000-2b9191728000 r--p 00007000 09:01 1711438                    /usr/lib64/libibverbs/libhns-rdmav22.so
+2b9191728000-2b9191729000 rw-p 00008000 09:01 1711438                    /usr/lib64/libibverbs/libhns-rdmav22.so
+2b9191729000-2b9191750000 r-xp 00000000 09:01 1590591                    /usr/lib64/libmlx5.so.1.8.22.4
+2b9191750000-2b919194f000 ---p 00027000 09:01 1590591                    /usr/lib64/libmlx5.so.1.8.22.4
+2b919194f000-2b9191950000 r--p 00026000 09:01 1590591                    /usr/lib64/libmlx5.so.1.8.22.4
+2b9191950000-2b9191951000 rw-p 00027000 09:01 1590591                    /usr/lib64/libmlx5.so.1.8.22.4
+2b9191951000-2b9191955000 r-xp 00000000 09:01 1711448                    /usr/lib64/libibverbs/libvmw_pvrdma-rdmav22.so
+2b9191955000-2b9191b55000 ---p 00004000 09:01 1711448                    /usr/lib64/libibverbs/libvmw_pvrdma-rdmav22.so
+2b9191b55000-2b9191b56000 r--p 00004000 09:01 1711448                    /usr/lib64/libibverbs/libvmw_pvrdma-rdmav22.so
+2b9191b56000-2b9191b57000 rw-p 00005000 09:01 1711448                    /usr/lib64/libibverbs/libvmw_pvrdma-rdmav22.so
+2b9191b57000-2b9191b60000 r-xp 00000000 09:01 1711436                    /usr/lib64/libibverbs/libcxgb4-rdmav22.so
+2b9191b60000-2b9191d60000 ---p 00009000 09:01 1711436                    /usr/lib64/libibverbs/libcxgb4-rdmav22.so
+2b9191d60000-2b9191d61000 r--p 00009000 09:01 1711436                    /usr/lib64/libibverbs/libcxgb4-rdmav22.so
+2b9191d61000-2b9191d62000 rw-p 0000a000 09:01 1711436                    /usr/lib64/libibverbs/libcxgb4-rdmav22.so
+2b9191d62000-2b9191d6d000 r-xp 00000000 09:01 1590589                    /usr/lib64/libmlx4.so.1.0.22.4
+2b9191d6d000-2b9191f6c000 ---p 0000b000 09:01 1590589                    /usr/lib64/libmlx4.so.1.0.22.4
+2b9191f6c000-2b9191f6d000 r--p 0000a000 09:01 1590589                    /usr/lib64/libmlx4.so.1.0.22.4
+2b9191f6d000-2b9191f6e000 rw-p 0000b000 09:01 1590589                    /usr/lib64/libmlx4.so.1.0.22.4
+2b9191f6e000-2b9191f73000 r-xp 00000000 09:01 1711444                    /usr/lib64/libibverbs/libnes-rdmav22.so
+2b9191f73000-2b9192173000 ---p 00005000 09:01 1711444                    /usr/lib64/libibverbs/libnes-rdmav22.so
+2b9192173000-2b9192174000 r--p 00005000 09:01 1711444                    /usr/lib64/libibverbs/libnes-rdmav22.so
+2b9192174000-2b9192175000 rw-p 00006000 09:01 1711444                    /usr/lib64/libibverbs/libnes-rdmav22.so
+2b9192175000-2b919217d000 r-xp 00000000 09:01 1711443                    /usr/lib64/libibverbs/libmthca-rdmav22.so
+2b919217d000-2b919237c000 ---p 00008000 09:01 1711443                    /usr/lib64/libibverbs/libmthca-rdmav22.so
+2b919237c000-2b919237d000 r--p 00007000 09:01 1711443                    /usr/lib64/libibverbs/libmthca-rdmav22.so
+2b919237d000-2b919237e000 rw-p 00008000 09:01 1711443                    /usr/lib64/libibverbs/libmthca-rdmav22.so
+2b919237e000-2b9192387000 r-xp 00000000 09:01 1711446                    /usr/lib64/libibverbs/libqedr-rdmav22.so
+2b9192387000-2b9192586000 ---p 00009000 09:01 1711446                    /usr/lib64/libibverbs/libqedr-rdmav22.so
+2b9192586000-2b9192587000 r--p 00008000 09:01 1711446                    /usr/lib64/libibverbs/libqedr-rdmav22.so
+2b9192587000-2b9192588000 rw-p 00009000 09:01 1711446                    /usr/lib64/libibverbs/libqedr-rdmav22.so
+2b9192588000-2b919258c000 r-xp 00000000 09:01 1711437                    /usr/lib64/libibverbs/libhfi1verbs-rdmav22.so
+2b919258c000-2b919278b000 ---p 00004000 09:01 1711437                    /usr/lib64/libibverbs/libhfi1verbs-rdmav22.so
+2b919278b000-2b919278c000 r--p 00003000 09:01 1711437                    /usr/lib64/libibverbs/libhfi1verbs-rdmav22.so
+2b919278c000-2b919278d000 rw-p 00004000 09:01 1711437                    /usr/lib64/libibverbs/libhfi1verbs-rdmav22.so
+2b919278d000-2b9192792000 r-xp 00000000 09:01 1711435                    /usr/lib64/libibverbs/libcxgb3-rdmav22.so
+2b9192792000-2b9192992000 ---p 00005000 09:01 1711435                    /usr/lib64/libibverbs/libcxgb3-rdmav22.so
+2b9192992000-2b9192993000 r--p 00005000 09:01 1711435                    /usr/lib64/libibverbs/libcxgb3-rdmav22.so
+2b9192993000-2b9192994000 rw-p 00006000 09:01 1711435                    /usr/lib64/libibverbs/libcxgb3-rdmav22.so
+2b9192994000-2b919299b000 r-xp 00000000 09:01 1711439                    /usr/lib64/libibverbs/libi40iw-rdmav22.so
+2b919299b000-2b9192b9a000 ---p 00007000 09:01 1711439                    /usr/lib64/libibverbs/libi40iw-rdmav22.so
+2b9192b9a000-2b9192b9b000 r--p 00006000 09:01 1711439                    /usr/lib64/libibverbs/libi40iw-rdmav22.so
+2b9192b9b000-2b9192b9c000 rw-p 00007000 09:01 1711439                    /usr/lib64/libibverbs/libi40iw-rdmav22.so
+2b9192b9c000-2b9192ba0000 r-xp 00000000 09:01 1711440                    /usr/lib64/libibverbs/libipathverbs-rdmav22.so
+2b9192ba0000-2b9192d9f000 ---p 00004000 09:01 1711440                    /usr/lib64/libibverbs/libipathverbs-rdmav22.so
+2b9192d9f000-2b9192da0000 r--p 00003000 09:01 1711440                    /usr/lib64/libibverbs/libipathverbs-rdmav22.so
+2b9192da0000-2b9192da1000 rw-p 00004000 09:01 1711440                    /usr/lib64/libibverbs/libipathverbs-rdmav22.so
+2b9192da1000-2b9192da7000 r-xp 00000000 09:01 1711434                    /usr/lib64/libibverbs/libbnxt_re-rdmav22.so
+2b9192da7000-2b9192fa6000 ---p 00006000 09:01 1711434                    /usr/lib64/libibverbs/libbnxt_re-rdmav22.so
+2b9192fa6000-2b9192fa7000 r--p 00005000 09:01 1711434                    /usr/lib64/libibverbs/libbnxt_re-rdmav22.so
+2b9192fa7000-2b9192fa8000 rw-p 00006000 09:01 1711434                    /usr/lib64/libibverbs/libbnxt_re-rdmav22.so
+2b9192fa8000-2b9192fac000 r-xp 00000000 09:01 1711447                    /usr/lib64/libibverbs/librxe-rdmav22.so
+2b9192fac000-2b91931ab000 ---p 00004000 09:01 1711447                    /usr/lib64/libibverbs/librxe-rdmav22.so
+2b91931ab000-2b91931ac000 r--p 00003000 09:01 1711447                    /usr/lib64/libibverbs/librxe-rdmav22.so
+2b91931ac000-2b91931ad000 rw-p 00004000 09:01 1711447                    /usr/lib64/libibverbs/librxe-rdmav22.so
+2b91931ad000-2b91931b3000 r-xp 00000000 09:01 1711445                    /usr/lib64/libibverbs/libocrdma-rdmav22.so
+2b91931b3000-2b91933b2000 ---p 00006000 09:01 1711445                    /usr/lib64/libibverbs/libocrdma-rdmav22.so
+2b91933b2000-2b91933b3000 r--p 00005000 09:01 1711445                    /usr/lib64/libibverbs/libocrdma-rdmav22.so
+2b91933b3000-2b91933b4000 rw-p 00006000 09:01 1711445                    /usr/lib64/libibverbs/libocrdma-rdmav22.so
+2b91933b4000-2b91933b5000 r-xp 00000000 00:2a 9246547088009410080        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_patcher_overwrite.so
+2b91933b5000-2b91935b5000 ---p 00001000 00:2a 9246547088009410080        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_patcher_overwrite.so
+2b91935b5000-2b91935b6000 r--p 00001000 00:2a 9246547088009410080        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_patcher_overwrite.so
+2b91935b6000-2b91935b7000 rw-p 00002000 00:2a 9246547088009410080        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_patcher_overwrite.so
+2b91935b7000-2b91939b8000 rw-s 00000000 00:13 20095319                   /dev/shm/vader_segment.s7.4024316.cb9f0001.1
+2b91939b8000-2b91939bc000 r-xp 00000000 00:2a 9246547088009410848        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_inter.so
+2b91939bc000-2b9193bbb000 ---p 00004000 00:2a 9246547088009410848        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_inter.so
+2b9193bbb000-2b9193bbc000 r--p 00003000 00:2a 9246547088009410848        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_inter.so
+2b9193bbc000-2b9193bbd000 rw-p 00004000 00:2a 9246547088009410848        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_inter.so
+2b9193bbd000-2b9193fbe000 rw-s 00000000 00:13 20102565                   /dev/shm/vader_segment.s7.4024316.cb9f0001.0
+2b9193fcd000-2b9193fef000 r-xp 00000000 00:2a 9246547088009410900        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_pml_ob1.so
+2b9193fef000-2b91941ee000 ---p 00022000 00:2a 9246547088009410900        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_pml_ob1.so
+2b91941ee000-2b91941ef000 r--p 00021000 00:2a 9246547088009410900        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_pml_ob1.so
+2b91941ef000-2b91941f0000 rw-p 00022000 00:2a 9246547088009410900        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_pml_ob1.so
+2b91941f0000-2b91941fc000 r-xp 00000000 00:2a 9246547088009410842        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_adapt.so
+2b91941fc000-2b91943fb000 ---p 0000c000 00:2a 9246547088009410842        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_adapt.so
+2b91943fb000-2b91943fc000 r--p 0000b000 00:2a 9246547088009410842        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_adapt.so
+2b91943fc000-2b91943fd000 rw-p 0000c000 00:2a 9246547088009410842        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_adapt.so
+2b91943fd000-2b919440f000 r-xp 00000000 00:2a 9246547088009410844        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_basic.so
+2b919440f000-2b919460e000 ---p 00012000 00:2a 9246547088009410844        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_basic.so
+2b919460e000-2b919460f000 r--p 00011000 00:2a 9246547088009410844        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_basic.so
+2b919460f000-2b9194610000 rw-p 00012000 00:2a 9246547088009410844        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_basic.so
+2b9194610000-2b9194629000 r-xp 00000000 00:2a 9246547088009410846        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_han.so
+2b9194629000-2b9194829000 ---p 00019000 00:2a 9246547088009410846        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_han.so
+2b9194829000-2b919482a000 r--p 00019000 00:2a 9246547088009410846        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_han.so
+2b919482a000-2b919482b000 rw-p 0001a000 00:2a 9246547088009410846        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_han.so
+2b919482b000-2b919484c000 r-xp 00000000 00:2a 9246547088009410850        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_libnbc.so
+2b919484c000-2b9194a4c000 ---p 00021000 00:2a 9246547088009410850        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_libnbc.so
+2b9194a4c000-2b9194a4d000 r--p 00021000 00:2a 9246547088009410850        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_libnbc.so
+2b9194a4d000-2b9194a4e000 rw-p 00022000 00:2a 9246547088009410850        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_libnbc.so
+2b9194a4e000-2b9194a50000 r-xp 00000000 00:2a 9246547088009410852        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_self.so
+2b9194a50000-2b9194c50000 ---p 00002000 00:2a 9246547088009410852        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_self.so
+2b9194c50000-2b9194c51000 r--p 00002000 00:2a 9246547088009410852        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_self.so
+2b9194c51000-2b9194c52000 rw-p 00003000 00:2a 9246547088009410852        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_self.so
+2b9194c52000-2b9194c5b000 r-xp 00000000 00:2a 9246547088009410855        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_sm.so
+2b9194c5b000-2b9194e5a000 ---p 00009000 00:2a 9246547088009410855        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_sm.so
+2b9194e5a000-2b9194e5b000 r--p 00008000 00:2a 9246547088009410855        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_sm.so
+2b9194e5b000-2b9194e5c000 rw-p 00009000 00:2a 9246547088009410855        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_sm.so
+2b9194e5c000-2b9194e5e000 r-xp 00000000 00:2a 9246547088009410038        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libmca_common_sm.so.40.30.0
+2b9194e5e000-2b919505d000 ---p 00002000 00:2a 9246547088009410038        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libmca_common_sm.so.40.30.0
+2b919505d000-2b919505e000 r--p 00001000 00:2a 9246547088009410038        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libmca_common_sm.so.40.30.0
+2b919505e000-2b919505f000 rw-p 00002000 00:2a 9246547088009410038        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libmca_common_sm.so.40.30.0
+2b919505f000-2b9195062000 r-xp 00000000 00:2a 9246547088009410858        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_sync.so
+2b9195062000-2b9195262000 ---p 00003000 00:2a 9246547088009410858        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_sync.so
+2b9195262000-2b9195263000 r--p 00003000 00:2a 9246547088009410858        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_sync.so
+2b9195263000-2b9195264000 rw-p 00004000 00:2a 9246547088009410858        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_sync.so
+2b9195264000-2b9195275000 r-xp 00000000 00:2a 9246547088009410860        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_tuned.so
+2b9195275000-2b9195475000 ---p 00011000 00:2a 9246547088009410860        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_tuned.so
+2b9195475000-2b9195476000 r--p 00011000 00:2a 9246547088009410860        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_tuned.so
+2b9195476000-2b9195477000 rw-p 00012000 00:2a 9246547088009410860        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_tuned.so
+2b9195477000-2b9195677000 rw-p 00000000 00:00 0 
+2b9195686000-2b919568c000 r-xp 00000000 00:2a 9246547088009410886        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_osc_sm.so
+2b919568c000-2b919588b000 ---p 00006000 00:2a 9246547088009410886        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_osc_sm.so
+2b919588b000-2b919588c000 r--p 00005000 00:2a 9246547088009410886        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_osc_sm.so
+2b919588c000-2b919588e000 rw-p 00006000 00:2a 9246547088009410886        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_osc_sm.so
+2b919588e000-2b919588f000 rw-p 00000000 00:00 0 
+2b919588f000-2b91958f0000 rw-p 00000000 00:00 0 
+2b91958f0000-2b91958f2000 rw-p 00000000 00:00 0 
+2b91958f2000-2b9195953000 rw-p 00000000 00:00 0 
+2b9195953000-2b9195955000 rw-p 00000000 00:00 0 
+2b9195955000-2b91959b6000 rw-p 00000000 00:00 0 
+2b91959b6000-2b91959b8000 rw-p 00000000 00:00 0 
+2b91959b8000-2b9195a19000 rw-p 00000000 00:00 0 
+2b9195a19000-2b9195a1b000 rw-p 00000000 00:00 0 
+2b9195a1b000-2b9195a7c000 rw-p 00000000 00:00 0 
+2b9195a7c000-2b9195a7d000 rw-p 00000000 00:00 0 
+2b9195a99000-2b9195ab4000 r-xp 00000000 00:2a 9246547088009410891        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_osc_pt2pt.so
+2b9195ab4000-2b9195cb4000 ---p 0001b000 00:2a 9246547088009410891        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_osc_pt2pt.so
+2b9195cb4000-2b9195cb5000 r--p 0001b000 00:2a 9246547088009410891        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_osc_pt2pt.so
+2b9195cb5000-2b9195cb6000 rw-p 0001c000 00:2a 9246547088009410891        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_osc_pt2pt.so
+2b9195cb6000-2b9195cd5000 r-xp 00000000 00:2a 9246547088009410893        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_osc_rdma.so
+2b9195cd5000-2b9195ed5000 ---p 0001f000 00:2a 9246547088009410893        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_osc_rdma.so
+2b9195ed5000-2b9195ed6000 r--p 0001f000 00:2a 9246547088009410893        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_osc_rdma.so
+2b9195ed6000-2b9195ed7000 rw-p 00020000 00:2a 9246547088009410893        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_osc_rdma.so
+2b9195ed7000-2b9195ed8000 rw-p 00000000 00:00 0 
+2b9195ed8000-2b9195f39000 rw-p 00000000 00:00 0 
+2b9195f39000-2b9195f3b000 rw-p 00000000 00:00 0 
+2b9195f3b000-2b9195f9c000 rw-p 00000000 00:00 0 
+2b9195f9c000-2b9195f9e000 rw-p 00000000 00:00 0 
+2b9195f9e000-2b9195fff000 rw-p 00000000 00:00 0 
+2b9195fff000-2b9196001000 rw-p 00000000 00:00 0 
+2b9196001000-2b9196202000 rw-p 00000000 00:00 0 
+2b9196202000-2b9196204000 rw-p 00000000 00:00 0 
+2b9196204000-2b9196405000 rw-p 00000000 00:00 0 
+2b9196405000-2b9196407000 rw-p 00000000 00:00 0 
+2b9196407000-2b9196608000 rw-p 00000000 00:00 0 
+2b9196608000-2b919660a000 rw-p 00000000 00:00 0 
+2b919660a000-2b919680b000 rw-p 00000000 00:00 0 
+2b919680b000-2b919680d000 rw-p 00000000 00:00 0 
+2b919680d000-2b9196a0e000 rw-p 00000000 00:00 0 
+2b9196a0e000-2b9196a10000 rw-p 00000000 00:00 0 
+2b9196a10000-2b9196c11000 rw-p 00000000 00:00 0 
+2b9196c11000-2b9196c13000 rw-p 00000000 00:00 0 
+2b9196c13000-2b9196e14000 rw-p 00000000 00:00 0 
+2b9196e14000-2b9196e16000 rw-p 00000000 00:00 0 
+2b9196e16000-2b9197017000 rw-p 00000000 00:00 0 
+2b9197017000-2b91b4cef000 rw-p 00000000 00:00 0 
+7fff2e5a6000-7fff2e5c9000 rw-p 00000000 00:00 0                          [stack]
+7fff2e5d9000-7fff2e5db000 r-xp 00000000 00:00 0                          [vdso]
+ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
+[s7:51475] *** Process received signal ***
+[s7:51475] Signal: Aborted (6)
+[s7:51475] Signal code:  (-6)
+[s7:51475] [ 0] /lib64/libpthread.so.0(+0xf630)[0x2b917ff94630]
+[s7:51475] [ 1] /lib64/libc.so.6(gsignal+0x37)[0x2b91801d7387]
+[s7:51475] [ 2] /lib64/libc.so.6(abort+0x148)[0x2b91801d8a78]
+[s7:51475] [ 3] /lib64/libc.so.6(+0x78f67)[0x2b9180219f67]
+[s7:51475] [ 4] /lib64/libc.so.6(+0x7f474)[0x2b9180220474]
+[s7:51475] [ 5] ./main[0x4010e1]
+[s7:51475] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x2b91801c3555]
+[s7:51475] [ 7] ./main[0x40136f]
+[s7:51475] *** End of error message ***
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 0 on node s7 exited on signal 6 (Aborted).
+--------------------------------------------------------------------------
+1 2 250000000
+*** Error in `./main': munmap_chunk(): invalid pointer: 0x0000000000401346 ***
+======= Backtrace: =========
+/lib64/libc.so.6(+0x7f474)[0x2acfcbf1d474]
+./main[0x4010e1]
+/lib64/libc.so.6(__libc_start_main+0xf5)[0x2acfcbec0555]
+./main[0x40136f]
+======= Memory map: ========
+00400000-00403000 r-xp 00000000 00:2b 9246547079325110615                /domus/h1/ebjerned/PDP/A3/main
+00602000-00603000 r--p 00002000 00:2b 9246547079325110615                /domus/h1/ebjerned/PDP/A3/main
+00603000-00604000 rw-p 00003000 00:2b 9246547079325110615                /domus/h1/ebjerned/PDP/A3/main
+02166000-022b5000 rw-p 00000000 00:00 0                                  [heap]
+022b5000-022c5000 rw-p 00000000 00:00 0                                  [heap]
+022c5000-02310000 rw-p 00000000 00:00 0                                  [heap]
+02310000-02311000 rw-p 00000000 00:00 0                                  [heap]
+02311000-02315000 rw-p 00000000 00:00 0                                  [heap]
+02315000-02316000 rw-p 00000000 00:00 0                                  [heap]
+02316000-02318000 rw-p 00000000 00:00 0                                  [heap]
+02318000-02319000 rw-p 00000000 00:00 0                                  [heap]
+02319000-0231b000 rw-p 00000000 00:00 0                                  [heap]
+0231b000-02320000 rw-p 00000000 00:00 0                                  [heap]
+02320000-02321000 rw-p 00000000 00:00 0                                  [heap]
+02321000-02326000 rw-p 00000000 00:00 0                                  [heap]
+02326000-02327000 rw-p 00000000 00:00 0                                  [heap]
+02327000-02340000 rw-p 00000000 00:00 0                                  [heap]
+02340000-02341000 rw-p 00000000 00:00 0                                  [heap]
+02341000-0235a000 rw-p 00000000 00:00 0                                  [heap]
+0235a000-0236d000 rw-p 00000000 00:00 0                                  [heap]
+0236d000-0236f000 rw-p 00000000 00:00 0                                  [heap]
+0236f000-02372000 rw-p 00000000 00:00 0                                  [heap]
+02372000-02374000 rw-p 00000000 00:00 0                                  [heap]
+02374000-02377000 rw-p 00000000 00:00 0                                  [heap]
+02377000-02388000 rw-p 00000000 00:00 0                                  [heap]
+02388000-0238b000 rw-p 00000000 00:00 0                                  [heap]
+0238b000-0239c000 rw-p 00000000 00:00 0                                  [heap]
+0239c000-0239f000 rw-p 00000000 00:00 0                                  [heap]
+0239f000-023b0000 rw-p 00000000 00:00 0                                  [heap]
+023b0000-023b3000 rw-p 00000000 00:00 0                                  [heap]
+023b3000-023c4000 rw-p 00000000 00:00 0                                  [heap]
+023c4000-023c7000 rw-p 00000000 00:00 0                                  [heap]
+023c7000-023d8000 rw-p 00000000 00:00 0                                  [heap]
+023d8000-023db000 rw-p 00000000 00:00 0                                  [heap]
+023db000-023ec000 rw-p 00000000 00:00 0                                  [heap]
+023ec000-023ef000 rw-p 00000000 00:00 0                                  [heap]
+023ef000-02400000 rw-p 00000000 00:00 0                                  [heap]
+02400000-02403000 rw-p 00000000 00:00 0                                  [heap]
+02403000-02414000 rw-p 00000000 00:00 0                                  [heap]
+02414000-02443000 rw-p 00000000 00:00 0                                  [heap]
+2acfcb421000-2acfcb443000 r-xp 00000000 09:01 1574138                    /usr/lib64/ld-2.17.so
+2acfcb443000-2acfcb444000 rw-p 00000000 00:00 0 
+2acfcb444000-2acfcb445000 rw-s 00000000 09:03 156499982                  /scratch/7851191/ompi.s7.4024316/pid.51541/pmix_dstor_ds12_51541/dstore_sm.lock
+2acfcb445000-2acfcb446000 r--s 00000000 09:03 156499981                  /scratch/7851191/ompi.s7.4024316/pid.51541/pmix_dstor_ds12_51541/initial-pmix_shared-segment-0
+2acfcb446000-2acfcb447000 rw-s 00000000 09:03 156499980                  /scratch/7851191/ompi.s7.4024316/pid.51541/pmix_dstor_ds21_51541/smlockseg-3419209729
+2acfcb447000-2acfcb448000 r--s 00000000 09:03 156499979                  /scratch/7851191/ompi.s7.4024316/pid.51541/pmix_dstor_ds21_51541/initial-pmix_shared-segment-0
+2acfcb448000-2acfcb449000 -w-s 00000000 00:05 13606                      /dev/infiniband/uverbs0
+2acfcb449000-2acfcb44a000 -w-s 00001000 00:05 13606                      /dev/infiniband/uverbs0
+2acfcb44a000-2acfcb44b000 r--s 00003000 00:05 13606                      /dev/infiniband/uverbs0
+2acfcb44b000-2acfcb44c000 -w-s 00000000 00:05 13606                      /dev/infiniband/uverbs0
+2acfcb44c000-2acfcb44d000 -w-s 00001000 00:05 13606                      /dev/infiniband/uverbs0
+2acfcb44d000-2acfcb44e000 r--s 00003000 00:05 13606                      /dev/infiniband/uverbs0
+2acfcb44e000-2acfcb45f000 rw-p 00000000 00:00 0 
+2acfcb45f000-2acfcb460000 rw-p 00000000 00:00 0 
+2acfcb460000-2acfcb46a000 rw-p 00000000 00:00 0 
+2acfcb46a000-2acfcb47d000 rw-p 00000000 00:00 0 
+2acfcb47d000-2acfcb621000 rw-p 00000000 00:00 0 
+2acfcb621000-2acfcb641000 rw-p 00000000 00:00 0 
+2acfcb641000-2acfcb642000 rw-p 00000000 00:00 0 
+2acfcb642000-2acfcb643000 r--p 00021000 09:01 1574138                    /usr/lib64/ld-2.17.so
+2acfcb643000-2acfcb644000 rw-p 00022000 09:01 1574138                    /usr/lib64/ld-2.17.so
+2acfcb644000-2acfcb645000 rw-p 00000000 00:00 0 
+2acfcb645000-2acfcb746000 r-xp 00000000 09:01 1574158                    /usr/lib64/libm-2.17.so
+2acfcb746000-2acfcb945000 ---p 00101000 09:01 1574158                    /usr/lib64/libm-2.17.so
+2acfcb945000-2acfcb946000 r--p 00100000 09:01 1574158                    /usr/lib64/libm-2.17.so
+2acfcb946000-2acfcb947000 rw-p 00101000 09:01 1574158                    /usr/lib64/libm-2.17.so
+2acfcb947000-2acfcba5e000 r-xp 00000000 00:2a 9246547088009410382        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libmpi.so.40.30.5
+2acfcba5e000-2acfcbc5d000 ---p 00117000 00:2a 9246547088009410382        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libmpi.so.40.30.5
+2acfcbc5d000-2acfcbc5f000 r--p 00116000 00:2a 9246547088009410382        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libmpi.so.40.30.5
+2acfcbc5f000-2acfcbc70000 rw-p 00118000 00:2a 9246547088009410382        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libmpi.so.40.30.5
+2acfcbc70000-2acfcbc82000 rw-p 00000000 00:00 0 
+2acfcbc82000-2acfcbc99000 r-xp 00000000 09:01 1574180                    /usr/lib64/libpthread-2.17.so
+2acfcbc99000-2acfcbe98000 ---p 00017000 09:01 1574180                    /usr/lib64/libpthread-2.17.so
+2acfcbe98000-2acfcbe99000 r--p 00016000 09:01 1574180                    /usr/lib64/libpthread-2.17.so
+2acfcbe99000-2acfcbe9a000 rw-p 00017000 09:01 1574180                    /usr/lib64/libpthread-2.17.so
+2acfcbe9a000-2acfcbe9e000 rw-p 00000000 00:00 0 
+2acfcbe9e000-2acfcbf93000 r-xp 00000000 09:01 1574148                    /usr/lib64/libc-2.17.so
+2acfcbf93000-2acfcbf94000 r-xp 000f5000 09:01 1574148                    /usr/lib64/libc-2.17.so
+2acfcbf94000-2acfcbf96000 r-xp 000f6000 09:01 1574148                    /usr/lib64/libc-2.17.so
+2acfcbf96000-2acfcbf98000 r-xp 000f8000 09:01 1574148                    /usr/lib64/libc-2.17.so
+2acfcbf98000-2acfcbf9d000 r-xp 000fa000 09:01 1574148                    /usr/lib64/libc-2.17.so
+2acfcbf9d000-2acfcbf9f000 r-xp 000ff000 09:01 1574148                    /usr/lib64/libc-2.17.so
+2acfcbf9f000-2acfcc062000 r-xp 00101000 09:01 1574148                    /usr/lib64/libc-2.17.so
+2acfcc062000-2acfcc261000 ---p 001c4000 09:01 1574148                    /usr/lib64/libc-2.17.so
+2acfcc261000-2acfcc265000 r--p 001c3000 09:01 1574148                    /usr/lib64/libc-2.17.so
+2acfcc265000-2acfcc267000 rw-p 001c7000 09:01 1574148                    /usr/lib64/libc-2.17.so
+2acfcc267000-2acfcc26c000 rw-p 00000000 00:00 0 
+2acfcc26c000-2acfcc31e000 r-xp 00000000 00:2a 9246547088009410184        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libopen-rte.so.40.30.3
+2acfcc31e000-2acfcc51d000 ---p 000b2000 00:2a 9246547088009410184        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libopen-rte.so.40.30.3
+2acfcc51d000-2acfcc51f000 r--p 000b1000 00:2a 9246547088009410184        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libopen-rte.so.40.30.3
+2acfcc51f000-2acfcc523000 rw-p 000b3000 00:2a 9246547088009410184        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libopen-rte.so.40.30.3
+2acfcc523000-2acfcc525000 rw-p 00000000 00:00 0 
+2acfcc525000-2acfcc623000 r-xp 00000000 00:2a 9246547088009410032        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libopen-pal.so.40.30.3
+2acfcc623000-2acfcc822000 ---p 000fe000 00:2a 9246547088009410032        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libopen-pal.so.40.30.3
+2acfcc822000-2acfcc826000 r--p 000fd000 00:2a 9246547088009410032        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libopen-pal.so.40.30.3
+2acfcc826000-2acfcc82c000 rw-p 00101000 00:2a 9246547088009410032        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libopen-pal.so.40.30.3
+2acfcc82c000-2acfcc833000 rw-p 00000000 00:00 0 
+2acfcc833000-2acfcc835000 r-xp 00000000 09:01 1574155                    /usr/lib64/libdl-2.17.so
+2acfcc835000-2acfcca35000 ---p 00002000 09:01 1574155                    /usr/lib64/libdl-2.17.so
+2acfcca35000-2acfcca36000 r--p 00002000 09:01 1574155                    /usr/lib64/libdl-2.17.so
+2acfcca36000-2acfcca37000 rw-p 00003000 09:01 1574155                    /usr/lib64/libdl-2.17.so
+2acfcca37000-2acfcca4b000 r-xp 00000000 09:01 1577830                    /usr/lib64/libudev.so.1.6.2
+2acfcca4b000-2acfccc4b000 ---p 00014000 09:01 1577830                    /usr/lib64/libudev.so.1.6.2
+2acfccc4b000-2acfccc4c000 r--p 00014000 09:01 1577830                    /usr/lib64/libudev.so.1.6.2
+2acfccc4c000-2acfccc4d000 rw-p 00015000 09:01 1577830                    /usr/lib64/libudev.so.1.6.2
+2acfccc4d000-2acfccc54000 r-xp 00000000 09:01 1590744                    /usr/lib64/librt-2.17.so
+2acfccc54000-2acfcce53000 ---p 00007000 09:01 1590744                    /usr/lib64/librt-2.17.so
+2acfcce53000-2acfcce54000 r--p 00006000 09:01 1590744                    /usr/lib64/librt-2.17.so
+2acfcce54000-2acfcce55000 rw-p 00007000 09:01 1590744                    /usr/lib64/librt-2.17.so
+2acfcce55000-2acfcce57000 r-xp 00000000 09:01 1574188                    /usr/lib64/libutil-2.17.so
+2acfcce57000-2acfcd056000 ---p 00002000 09:01 1574188                    /usr/lib64/libutil-2.17.so
+2acfcd056000-2acfcd057000 r--p 00001000 09:01 1574188                    /usr/lib64/libutil-2.17.so
+2acfcd057000-2acfcd058000 rw-p 00002000 09:01 1574188                    /usr/lib64/libutil-2.17.so
+2acfcd058000-2acfcd06d000 r-xp 00000000 09:01 1574198                    /usr/lib64/libz.so.1.2.7
+2acfcd06d000-2acfcd26c000 ---p 00015000 09:01 1574198                    /usr/lib64/libz.so.1.2.7
+2acfcd26c000-2acfcd26d000 r--p 00014000 09:01 1574198                    /usr/lib64/libz.so.1.2.7
+2acfcd26d000-2acfcd26e000 rw-p 00015000 09:01 1574198                    /usr/lib64/libz.so.1.2.7
+2acfcd26e000-2acfcd272000 r-xp 00000000 09:01 1574580                    /usr/lib64/libcap.so.2.22
+2acfcd272000-2acfcd471000 ---p 00004000 09:01 1574580                    /usr/lib64/libcap.so.2.22
+2acfcd471000-2acfcd472000 r--p 00003000 09:01 1574580                    /usr/lib64/libcap.so.2.22
+2acfcd472000-2acfcd473000 rw-p 00004000 09:01 1574580                    /usr/lib64/libcap.so.2.22
+2acfcd473000-2acfcd4c1000 r-xp 00000000 09:01 1577821                    /usr/lib64/libdw-0.176.so
+2acfcd4c1000-2acfcd6c1000 ---p 0004e000 09:01 1577821                    /usr/lib64/libdw-0.176.so
+2acfcd6c1000-2acfcd6c3000 r--p 0004e000 09:01 1577821                    /usr/lib64/libdw-0.176.so
+2acfcd6c3000-2acfcd6c4000 rw-p 00050000 09:01 1577821                    /usr/lib64/libdw-0.176.so
+2acfcd6c4000-2acfcd6e6000 r-xp 00000000 00:2a 9246547087846600187        /sw/comp/gcc/13.1.0_snowy/lib64/libgcc_s.so.1
+2acfcd6e6000-2acfcd8e5000 ---p 00022000 00:2a 9246547087846600187        /sw/comp/gcc/13.1.0_snowy/lib64/libgcc_s.so.1
+2acfcd8e5000-2acfcd8e6000 r--p 00021000 00:2a 9246547087846600187        /sw/comp/gcc/13.1.0_snowy/lib64/libgcc_s.so.1
+2acfcd8e6000-2acfcd8e7000 rw-p 00022000 00:2a 9246547087846600187        /sw/comp/gcc/13.1.0_snowy/lib64/libgcc_s.so.1
+2acfcd8e7000-2acfcd8eb000 r-xp 00000000 09:01 1574578                    /usr/lib64/libattr.so.1.1.0
+2acfcd8eb000-2acfcdaea000 ---p 00004000 09:01 1574578                    /usr/lib64/libattr.so.1.1.0
+2acfcdaea000-2acfcdaeb000 r--p 00003000 09:01 1574578                    /usr/lib64/libattr.so.1.1.0
+2acfcdaeb000-2acfcdaec000 rw-p 00004000 09:01 1574578                    /usr/lib64/libattr.so.1.1.0
+2acfcdaec000-2acfcdb03000 r-xp 00000000 09:01 1574568                    /usr/lib64/libelf-0.176.so
+2acfcdb03000-2acfcdd02000 ---p 00017000 09:01 1574568                    /usr/lib64/libelf-0.176.so
+2acfcdd02000-2acfcdd03000 r--p 00016000 09:01 1574568                    /usr/lib64/libelf-0.176.so
+2acfcdd03000-2acfcdd04000 rw-p 00017000 09:01 1574568                    /usr/lib64/libelf-0.176.so
+2acfcdd04000-2acfcdd29000 r-xp 00000000 09:01 1574360                    /usr/lib64/liblzma.so.5.2.2
+2acfcdd29000-2acfcdf28000 ---p 00025000 09:01 1574360                    /usr/lib64/liblzma.so.5.2.2
+2acfcdf28000-2acfcdf29000 r--p 00024000 09:01 1574360                    /usr/lib64/liblzma.so.5.2.2
+2acfcdf29000-2acfcdf2a000 rw-p 00025000 09:01 1574360                    /usr/lib64/liblzma.so.5.2.2
+2acfcdf2a000-2acfcdf39000 r-xp 00000000 09:01 1574398                    /usr/lib64/libbz2.so.1.0.6
+2acfcdf39000-2acfce138000 ---p 0000f000 09:01 1574398                    /usr/lib64/libbz2.so.1.0.6
+2acfce138000-2acfce139000 r--p 0000e000 09:01 1574398                    /usr/lib64/libbz2.so.1.0.6
+2acfce139000-2acfce13a000 rw-p 0000f000 09:01 1574398                    /usr/lib64/libbz2.so.1.0.6
+2acfce13a000-2acfce13d000 r-xp 00000000 00:2a 9246547088009410157        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_shmem_mmap.so
+2acfce13d000-2acfce33c000 ---p 00003000 00:2a 9246547088009410157        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_shmem_mmap.so
+2acfce33c000-2acfce33d000 r--p 00002000 00:2a 9246547088009410157        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_shmem_mmap.so
+2acfce33d000-2acfce33e000 rw-p 00003000 00:2a 9246547088009410157        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_shmem_mmap.so
+2acfce33e000-2acfce340000 r-xp 00000000 00:2a 9246547088009410154        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_reachable_weighted.so
+2acfce340000-2acfce53f000 ---p 00002000 00:2a 9246547088009410154        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_reachable_weighted.so
+2acfce53f000-2acfce540000 r--p 00001000 00:2a 9246547088009410154        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_reachable_weighted.so
+2acfce540000-2acfce541000 rw-p 00002000 00:2a 9246547088009410154        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_reachable_weighted.so
+2acfce541000-2acfce542000 r-xp 00000000 00:2a 9246547088009410283        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_flux.so
+2acfce542000-2acfce742000 ---p 00001000 00:2a 9246547088009410283        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_flux.so
+2acfce742000-2acfce743000 r--p 00001000 00:2a 9246547088009410283        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_flux.so
+2acfce743000-2acfce744000 rw-p 00002000 00:2a 9246547088009410283        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_flux.so
+2acfce744000-2acfce74c000 r-xp 00000000 00:2a 9246547088009410285        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_ompi.so
+2acfce74c000-2acfce94b000 ---p 00008000 00:2a 9246547088009410285        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_ompi.so
+2acfce94b000-2acfce94c000 r--p 00007000 00:2a 9246547088009410285        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_ompi.so
+2acfce94c000-2acfce94e000 rw-p 00008000 00:2a 9246547088009410285        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_ompi.so
+2acfce94e000-2acfce94f000 r-xp 00000000 00:2a 9246547088009410287        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_orte.so
+2acfce94f000-2acfceb4f000 ---p 00001000 00:2a 9246547088009410287        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_orte.so
+2acfceb4f000-2acfceb50000 r--p 00001000 00:2a 9246547088009410287        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_orte.so
+2acfceb50000-2acfceb51000 rw-p 00002000 00:2a 9246547088009410287        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_orte.so
+2acfceb51000-2acfceb52000 r-xp 00000000 00:2a 9246547088009410289        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_jsm.so
+2acfceb52000-2acfced52000 ---p 00001000 00:2a 9246547088009410289        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_jsm.so
+2acfced52000-2acfced53000 r--p 00001000 00:2a 9246547088009410289        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_jsm.so
+2acfced53000-2acfced54000 rw-p 00002000 00:2a 9246547088009410289        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_jsm.so
+2acfced54000-2acfced55000 r-xp 00000000 00:2a 9246547088009410291        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_singularity.so
+2acfced55000-2acfcef55000 ---p 00001000 00:2a 9246547088009410291        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_singularity.so
+2acfcef55000-2acfcef56000 r--p 00001000 00:2a 9246547088009410291        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_singularity.so
+2acfcef56000-2acfcef57000 rw-p 00002000 00:2a 9246547088009410291        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_singularity.so
+2acfcef57000-2acfcef59000 r-xp 00000000 00:2a 9246547088009410293        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_slurm.so
+2acfcef59000-2acfcf158000 ---p 00002000 00:2a 9246547088009410293        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_slurm.so
+2acfcf158000-2acfcf159000 r--p 00001000 00:2a 9246547088009410293        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_slurm.so
+2acfcf159000-2acfcf15a000 rw-p 00002000 00:2a 9246547088009410293        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_schizo_slurm.so
+2acfcf15a000-2acfcf15f000 r-xp 00000000 00:2a 9246547088009410206        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_ess_pmi.so
+2acfcf15f000-2acfcf35e000 ---p 00005000 00:2a 9246547088009410206        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_ess_pmi.so
+2acfcf35e000-2acfcf35f000 r--p 00004000 00:2a 9246547088009410206        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_ess_pmi.so
+2acfcf35f000-2acfcf360000 rw-p 00005000 00:2a 9246547088009410206        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_ess_pmi.so
+2acfcf360000-2acfcf361000 ---p 00000000 00:00 0 
+2acfcf361000-2acfcf561000 rw-p 00000000 00:00 0 
+2acfcf561000-2acfcf563000 r-xp 00000000 00:2a 9246547088009410136        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_psquash_flex128.so
+2acfcf563000-2acfcf762000 ---p 00002000 00:2a 9246547088009410136        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_psquash_flex128.so
+2acfcf762000-2acfcf763000 r--p 00001000 00:2a 9246547088009410136        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_psquash_flex128.so
+2acfcf763000-2acfcf764000 rw-p 00002000 00:2a 9246547088009410136        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_psquash_flex128.so
+2acfcf767000-2acfcf873000 r-xp 00000000 00:2a 9246547088009410148        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_pmix_pmix3x.so
+2acfcf873000-2acfcfa73000 ---p 0010c000 00:2a 9246547088009410148        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_pmix_pmix3x.so
+2acfcfa73000-2acfcfa74000 r--p 0010c000 00:2a 9246547088009410148        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_pmix_pmix3x.so
+2acfcfa74000-2acfcfa79000 rw-p 0010d000 00:2a 9246547088009410148        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_pmix_pmix3x.so
+2acfcfa79000-2acfcfa7c000 rw-p 00000000 00:00 0 
+2acfcfa7c000-2acfcfa7d000 r-xp 00000000 00:2a 9246547088009410138        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_psquash_native.so
+2acfcfa7d000-2acfcfc7d000 ---p 00001000 00:2a 9246547088009410138        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_psquash_native.so
+2acfcfc7d000-2acfcfc7e000 r--p 00001000 00:2a 9246547088009410138        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_psquash_native.so
+2acfcfc7e000-2acfcfc7f000 rw-p 00002000 00:2a 9246547088009410138        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_psquash_native.so
+2acfcfc7f000-2acfcfc91000 r-xp 00000000 00:2a 9246547088009410098        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_bfrops_v12.so
+2acfcfc91000-2acfcfe90000 ---p 00012000 00:2a 9246547088009410098        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_bfrops_v12.so
+2acfcfe90000-2acfcfe91000 r--p 00011000 00:2a 9246547088009410098        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_bfrops_v12.so
+2acfcfe91000-2acfcfe92000 rw-p 00012000 00:2a 9246547088009410098        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_bfrops_v12.so
+2acfcfe92000-2acfcfe93000 rw-p 00000000 00:00 0 
+2acfcfe93000-2acfcff14000 rw-p 00000000 00:00 0 
+2acfcff14000-2acfcff16000 rw-p 00000000 00:00 0 
+2acfcff16000-2acfcff97000 rw-p 00000000 00:00 0 
+2acfcff97000-2acfcff98000 rw-p 00000000 00:00 0 
+2acfcff98000-2acfcffc8000 rw-p 00000000 00:00 0 
+2acfd0000000-2acfd0021000 rw-p 00000000 00:00 0 
+2acfd0021000-2acfd4000000 ---p 00000000 00:00 0 
+2acfd4000000-2acfd4018000 r-xp 00000000 00:2a 9246547088009410100        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_bfrops_v20.so
+2acfd4018000-2acfd4217000 ---p 00018000 00:2a 9246547088009410100        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_bfrops_v20.so
+2acfd4217000-2acfd4218000 r--p 00017000 00:2a 9246547088009410100        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_bfrops_v20.so
+2acfd4218000-2acfd4219000 rw-p 00018000 00:2a 9246547088009410100        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_bfrops_v20.so
+2acfd4219000-2acfd4221000 r-xp 00000000 00:2a 9246547088009410102        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_bfrops_v21.so
+2acfd4221000-2acfd4420000 ---p 00008000 00:2a 9246547088009410102        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_bfrops_v21.so
+2acfd4420000-2acfd4421000 r--p 00007000 00:2a 9246547088009410102        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_bfrops_v21.so
+2acfd4421000-2acfd4422000 rw-p 00008000 00:2a 9246547088009410102        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_bfrops_v21.so
+2acfd4422000-2acfd442a000 r-xp 00000000 00:2a 9246547088009410104        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_bfrops_v3.so
+2acfd442a000-2acfd4629000 ---p 00008000 00:2a 9246547088009410104        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_bfrops_v3.so
+2acfd4629000-2acfd462a000 r--p 00007000 00:2a 9246547088009410104        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_bfrops_v3.so
+2acfd462a000-2acfd462b000 rw-p 00008000 00:2a 9246547088009410104        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_bfrops_v3.so
+2acfd462b000-2acfd462d000 r-xp 00000000 00:2a 9246547088009410112        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_pcompress_zlib.so
+2acfd462d000-2acfd482c000 ---p 00002000 00:2a 9246547088009410112        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_pcompress_zlib.so
+2acfd482c000-2acfd482d000 r--p 00001000 00:2a 9246547088009410112        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_pcompress_zlib.so
+2acfd482d000-2acfd482e000 rw-p 00002000 00:2a 9246547088009410112        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_pcompress_zlib.so
+2acfd482e000-2acfd4840000 r-xp 00000000 00:2a 9246547088009410140        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_ptl_tcp.so
+2acfd4840000-2acfd4a3f000 ---p 00012000 00:2a 9246547088009410140        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_ptl_tcp.so
+2acfd4a3f000-2acfd4a40000 r--p 00011000 00:2a 9246547088009410140        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_ptl_tcp.so
+2acfd4a40000-2acfd4a41000 rw-p 00012000 00:2a 9246547088009410140        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_ptl_tcp.so
+2acfd4a41000-2acfd4a4a000 r-xp 00000000 00:2a 9246547088009410142        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_ptl_usock.so
+2acfd4a4a000-2acfd4c49000 ---p 00009000 00:2a 9246547088009410142        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_ptl_usock.so
+2acfd4c49000-2acfd4c4a000 r--p 00008000 00:2a 9246547088009410142        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_ptl_usock.so
+2acfd4c4a000-2acfd4c4b000 rw-p 00009000 00:2a 9246547088009410142        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_ptl_usock.so
+2acfd4c4b000-2acfd4c4d000 r-xp 00000000 00:2a 9246547088009410124        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_psec_native.so
+2acfd4c4d000-2acfd4e4c000 ---p 00002000 00:2a 9246547088009410124        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_psec_native.so
+2acfd4e4c000-2acfd4e4d000 r--p 00001000 00:2a 9246547088009410124        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_psec_native.so
+2acfd4e4d000-2acfd4e4e000 rw-p 00002000 00:2a 9246547088009410124        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_psec_native.so
+2acfd4e4e000-2acfd4e62000 r-xp 00000000 00:2a 9246547088009410106        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_gds_hash.so
+2acfd4e62000-2acfd5061000 ---p 00014000 00:2a 9246547088009410106        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_gds_hash.so
+2acfd5061000-2acfd5062000 r--p 00013000 00:2a 9246547088009410106        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_gds_hash.so
+2acfd5062000-2acfd5063000 rw-p 00014000 00:2a 9246547088009410106        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_gds_hash.so
+2acfd5063000-2acfd5067000 r-xp 00000000 00:2a 9246547088009410108        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_gds_ds12.so
+2acfd5067000-2acfd5266000 ---p 00004000 00:2a 9246547088009410108        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_gds_ds12.so
+2acfd5266000-2acfd5267000 r--p 00003000 00:2a 9246547088009410108        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_gds_ds12.so
+2acfd5267000-2acfd5268000 rw-p 00004000 00:2a 9246547088009410108        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_gds_ds12.so
+2acfd5268000-2acfd5276000 r-xp 00000000 00:2a 9246547088009410093        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libmca_common_dstore.so.1.0.2
+2acfd5276000-2acfd5475000 ---p 0000e000 00:2a 9246547088009410093        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libmca_common_dstore.so.1.0.2
+2acfd5475000-2acfd5476000 r--p 0000d000 00:2a 9246547088009410093        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libmca_common_dstore.so.1.0.2
+2acfd5476000-2acfd5477000 rw-p 0000e000 00:2a 9246547088009410093        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libmca_common_dstore.so.1.0.2
+2acfd5477000-2acfd547b000 r-xp 00000000 00:2a 9246547088009410110        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_gds_ds21.so
+2acfd547b000-2acfd567a000 ---p 00004000 00:2a 9246547088009410110        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_gds_ds21.so
+2acfd567a000-2acfd567b000 r--p 00003000 00:2a 9246547088009410110        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_gds_ds21.so
+2acfd567b000-2acfd567c000 rw-p 00004000 00:2a 9246547088009410110        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_gds_ds21.so
+2acfd567c000-2acfd567e000 r-xp 00000000 00:2a 9246547088009410134        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_pshmem_mmap.so
+2acfd567e000-2acfd587d000 ---p 00002000 00:2a 9246547088009410134        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_pshmem_mmap.so
+2acfd587d000-2acfd587e000 r--p 00001000 00:2a 9246547088009410134        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_pshmem_mmap.so
+2acfd587e000-2acfd587f000 rw-p 00002000 00:2a 9246547088009410134        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_pshmem_mmap.so
+2acfd587f000-2acfd5881000 r-xp 00000000 00:2a 9246547088009410120        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_preg_compress.so
+2acfd5881000-2acfd5a80000 ---p 00002000 00:2a 9246547088009410120        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_preg_compress.so
+2acfd5a80000-2acfd5a81000 r--p 00001000 00:2a 9246547088009410120        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_preg_compress.so
+2acfd5a81000-2acfd5a82000 rw-p 00002000 00:2a 9246547088009410120        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_preg_compress.so
+2acfd5a82000-2acfd5a86000 r-xp 00000000 00:2a 9246547088009410122        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_preg_native.so
+2acfd5a86000-2acfd5c85000 ---p 00004000 00:2a 9246547088009410122        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_preg_native.so
+2acfd5c85000-2acfd5c86000 r--p 00003000 00:2a 9246547088009410122        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_preg_native.so
+2acfd5c86000-2acfd5c87000 rw-p 00004000 00:2a 9246547088009410122        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_preg_native.so
+2acfd5c87000-2acfd5c8a000 r-xp 00000000 00:2a 9246547088009410114        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_plog_default.so
+2acfd5c8a000-2acfd5e89000 ---p 00003000 00:2a 9246547088009410114        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_plog_default.so
+2acfd5e89000-2acfd5e8a000 r--p 00002000 00:2a 9246547088009410114        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_plog_default.so
+2acfd5e8a000-2acfd5e8b000 rw-p 00003000 00:2a 9246547088009410114        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_plog_default.so
+2acfd5e8b000-2acfd5e8c000 r-xp 00000000 00:2a 9246547088009410116        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_plog_stdfd.so
+2acfd5e8c000-2acfd608b000 ---p 00001000 00:2a 9246547088009410116        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_plog_stdfd.so
+2acfd608b000-2acfd608c000 r--p 00000000 00:2a 9246547088009410116        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_plog_stdfd.so
+2acfd608c000-2acfd608d000 rw-p 00001000 00:2a 9246547088009410116        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_plog_stdfd.so
+2acfd608d000-2acfd608f000 r-xp 00000000 00:2a 9246547088009410118        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_plog_syslog.so
+2acfd608f000-2acfd628e000 ---p 00002000 00:2a 9246547088009410118        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_plog_syslog.so
+2acfd628e000-2acfd628f000 r--p 00001000 00:2a 9246547088009410118        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_plog_syslog.so
+2acfd628f000-2acfd6290000 rw-p 00002000 00:2a 9246547088009410118        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/pmix/mca_plog_syslog.so
+2acfd6290000-2acfd6291000 ---p 00000000 00:00 0 
+2acfd6291000-2acfd6491000 rw-p 00000000 00:00 0 
+2acfd6491000-2acfd6891000 r--s 00000000 09:03 156499983                  /scratch/7851191/ompi.s7.4024316/pid.51541/pmix_dstor_ds21_51541/smseg-3419209729-0
+2acfd6891000-2acfd6c91000 r--s 00000000 09:03 156499984                  /scratch/7851191/ompi.s7.4024316/pid.51541/pmix_dstor_ds21_51541/smdataseg-3419209729-0
+2acfd6c91000-2acfd6c93000 r-xp 00000000 00:2a 9246547088009410295        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_state_app.so
+2acfd6c93000-2acfd6e92000 ---p 00002000 00:2a 9246547088009410295        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_state_app.so
+2acfd6e92000-2acfd6e93000 r--p 00001000 00:2a 9246547088009410295        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_state_app.so
+2acfd6e93000-2acfd6e94000 rw-p 00002000 00:2a 9246547088009410295        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_state_app.so
+2acfd6e94000-2acfd6e96000 r-xp 00000000 00:2a 9246547088009410194        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_errmgr_default_app.so
+2acfd6e96000-2acfd7095000 ---p 00002000 00:2a 9246547088009410194        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_errmgr_default_app.so
+2acfd7095000-2acfd7096000 r--p 00001000 00:2a 9246547088009410194        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_errmgr_default_app.so
+2acfd7096000-2acfd7097000 rw-p 00002000 00:2a 9246547088009410194        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_errmgr_default_app.so
+2acfd7097000-2acfd70c4000 r-xp 00000000 00:2a 9246547088009410884        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_op_avx.so
+2acfd70c4000-2acfd72c3000 ---p 0002d000 00:2a 9246547088009410884        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_op_avx.so
+2acfd72c3000-2acfd72c4000 r--p 0002c000 00:2a 9246547088009410884        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_op_avx.so
+2acfd72c4000-2acfd72cc000 rw-p 0002d000 00:2a 9246547088009410884        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_op_avx.so
+2acfd72cc000-2acfd72ce000 r-xp 00000000 00:2a 9246547088009410049        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_allocator_basic.so
+2acfd72ce000-2acfd74ce000 ---p 00002000 00:2a 9246547088009410049        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_allocator_basic.so
+2acfd74ce000-2acfd74cf000 r--p 00002000 00:2a 9246547088009410049        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_allocator_basic.so
+2acfd74cf000-2acfd74d0000 rw-p 00003000 00:2a 9246547088009410049        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_allocator_basic.so
+2acfd74d0000-2acfd74d2000 r-xp 00000000 00:2a 9246547088009410051        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_allocator_bucket.so
+2acfd74d2000-2acfd76d1000 ---p 00002000 00:2a 9246547088009410051        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_allocator_bucket.so
+2acfd76d1000-2acfd76d2000 r--p 00001000 00:2a 9246547088009410051        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_allocator_bucket.so
+2acfd76d2000-2acfd76d3000 rw-p 00002000 00:2a 9246547088009410051        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_allocator_bucket.so
+2acfd76d3000-2acfd76d6000 r-xp 00000000 00:2a 9246547088009410152        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_rcache_grdma.so
+2acfd76d6000-2acfd78d6000 ---p 00003000 00:2a 9246547088009410152        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_rcache_grdma.so
+2acfd78d6000-2acfd78d7000 r--p 00003000 00:2a 9246547088009410152        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_rcache_grdma.so
+2acfd78d7000-2acfd78d8000 rw-p 00004000 00:2a 9246547088009410152        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_rcache_grdma.so
+2acfd78d8000-2acfd78db000 r-xp 00000000 00:2a 9246547088009410078        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_mpool_hugepage.so
+2acfd78db000-2acfd7adb000 ---p 00003000 00:2a 9246547088009410078        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_mpool_hugepage.so
+2acfd7adb000-2acfd7adc000 r--p 00003000 00:2a 9246547088009410078        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_mpool_hugepage.so
+2acfd7adc000-2acfd7add000 rw-p 00004000 00:2a 9246547088009410078        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_mpool_hugepage.so
+2acfd7add000-2acfd7ae1000 r-xp 00000000 00:2a 9246547088009410840        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_bml_r2.so
+2acfd7ae1000-2acfd7ce0000 ---p 00004000 00:2a 9246547088009410840        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_bml_r2.so
+2acfd7ce0000-2acfd7ce1000 r--p 00003000 00:2a 9246547088009410840        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_bml_r2.so
+2acfd7ce1000-2acfd7ce2000 rw-p 00004000 00:2a 9246547088009410840        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_bml_r2.so
+2acfd7ce2000-2acfd7ce5000 r-xp 00000000 00:2a 9246547088009410053        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_btl_self.so
+2acfd7ce5000-2acfd7ee4000 ---p 00003000 00:2a 9246547088009410053        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_btl_self.so
+2acfd7ee4000-2acfd7ee5000 r--p 00002000 00:2a 9246547088009410053        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_btl_self.so
+2acfd7ee5000-2acfd7ee6000 rw-p 00003000 00:2a 9246547088009410053        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_btl_self.so
+2acfd7ee6000-2acfd7fe6000 rw-p 00000000 00:00 0 
+2acfd8000000-2acfd8021000 rw-p 00000000 00:00 0 
+2acfd8021000-2acfdc000000 ---p 00000000 00:00 0 
+2acfdc000000-2acfdc035000 r-xp 00000000 00:2a 9246547088009410060        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_btl_openib.so
+2acfdc035000-2acfdc234000 ---p 00035000 00:2a 9246547088009410060        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_btl_openib.so
+2acfdc234000-2acfdc235000 r--p 00034000 00:2a 9246547088009410060        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_btl_openib.so
+2acfdc235000-2acfdc237000 rw-p 00035000 00:2a 9246547088009410060        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_btl_openib.so
+2acfdc237000-2acfdc238000 rw-p 00000000 00:00 0 
+2acfdc238000-2acfdc24d000 r-xp 00000000 09:01 1590724                    /usr/lib64/librdmacm.so.1.1.22.4
+2acfdc24d000-2acfdc44c000 ---p 00015000 09:01 1590724                    /usr/lib64/librdmacm.so.1.1.22.4
+2acfdc44c000-2acfdc44d000 r--p 00014000 09:01 1590724                    /usr/lib64/librdmacm.so.1.1.22.4
+2acfdc44d000-2acfdc44e000 rw-p 00015000 09:01 1590724                    /usr/lib64/librdmacm.so.1.1.22.4
+2acfdc44e000-2acfdc44f000 rw-p 00000000 00:00 0 
+2acfdc44f000-2acfdc453000 r-xp 00000000 00:2a 9246547088009410043        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libmca_common_verbs.so.40.30.0
+2acfdc453000-2acfdc652000 ---p 00004000 00:2a 9246547088009410043        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libmca_common_verbs.so.40.30.0
+2acfdc652000-2acfdc653000 r--p 00003000 00:2a 9246547088009410043        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libmca_common_verbs.so.40.30.0
+2acfdc653000-2acfdc654000 rw-p 00004000 00:2a 9246547088009410043        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libmca_common_verbs.so.40.30.0
+2acfdc654000-2acfdc66c000 r-xp 00000000 09:01 1590587                    /usr/lib64/libibverbs.so.1.5.22.4
+2acfdc66c000-2acfdc86b000 ---p 00018000 09:01 1590587                    /usr/lib64/libibverbs.so.1.5.22.4
+2acfdc86b000-2acfdc86c000 r--p 00017000 09:01 1590587                    /usr/lib64/libibverbs.so.1.5.22.4
+2acfdc86c000-2acfdc86d000 rw-p 00018000 09:01 1590587                    /usr/lib64/libibverbs.so.1.5.22.4
+2acfdc86d000-2acfdc8d1000 r-xp 00000000 09:01 1575419                    /usr/lib64/libnl-route-3.so.200.23.0
+2acfdc8d1000-2acfdcad0000 ---p 00064000 09:01 1575419                    /usr/lib64/libnl-route-3.so.200.23.0
+2acfdcad0000-2acfdcad3000 r--p 00063000 09:01 1575419                    /usr/lib64/libnl-route-3.so.200.23.0
+2acfdcad3000-2acfdcad8000 rw-p 00066000 09:01 1575419                    /usr/lib64/libnl-route-3.so.200.23.0
+2acfdcad8000-2acfdcada000 rw-p 00000000 00:00 0 
+2acfdcada000-2acfdcaf8000 r-xp 00000000 09:01 1575411                    /usr/lib64/libnl-3.so.200.23.0
+2acfdcaf8000-2acfdccf8000 ---p 0001e000 09:01 1575411                    /usr/lib64/libnl-3.so.200.23.0
+2acfdccf8000-2acfdccfa000 r--p 0001e000 09:01 1575411                    /usr/lib64/libnl-3.so.200.23.0
+2acfdccfa000-2acfdccfb000 rw-p 00020000 09:01 1575411                    /usr/lib64/libnl-3.so.200.23.0
+2acfdccfb000-2acfdccfc000 r-xp 00000000 00:2a 9246547088009410063        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_btl_sm.so
+2acfdccfc000-2acfdcefb000 ---p 00001000 00:2a 9246547088009410063        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_btl_sm.so
+2acfdcefb000-2acfdcefc000 r--p 00000000 00:2a 9246547088009410063        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_btl_sm.so
+2acfdcefc000-2acfdcefd000 rw-p 00001000 00:2a 9246547088009410063        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_btl_sm.so
+2acfdcefd000-2acfdcf0d000 r-xp 00000000 00:2a 9246547088009410066        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_btl_tcp.so
+2acfdcf0d000-2acfdd10d000 ---p 00010000 00:2a 9246547088009410066        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_btl_tcp.so
+2acfdd10d000-2acfdd10e000 r--p 00010000 00:2a 9246547088009410066        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_btl_tcp.so
+2acfdd10e000-2acfdd110000 rw-p 00011000 00:2a 9246547088009410066        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_btl_tcp.so
+2acfdd110000-2acfdd11a000 r-xp 00000000 00:2a 9246547088009410069        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_btl_vader.so
+2acfdd11a000-2acfdd319000 ---p 0000a000 00:2a 9246547088009410069        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_btl_vader.so
+2acfdd319000-2acfdd31a000 r--p 00009000 00:2a 9246547088009410069        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_btl_vader.so
+2acfdd31a000-2acfdd31c000 rw-p 0000a000 00:2a 9246547088009410069        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_btl_vader.so
+2acfdd31c000-2acfdd324000 r-xp 00000000 09:01 1711438                    /usr/lib64/libibverbs/libhns-rdmav22.so
+2acfdd324000-2acfdd523000 ---p 00008000 09:01 1711438                    /usr/lib64/libibverbs/libhns-rdmav22.so
+2acfdd523000-2acfdd524000 r--p 00007000 09:01 1711438                    /usr/lib64/libibverbs/libhns-rdmav22.so
+2acfdd524000-2acfdd525000 rw-p 00008000 09:01 1711438                    /usr/lib64/libibverbs/libhns-rdmav22.so
+2acfdd525000-2acfdd54c000 r-xp 00000000 09:01 1590591                    /usr/lib64/libmlx5.so.1.8.22.4
+2acfdd54c000-2acfdd74b000 ---p 00027000 09:01 1590591                    /usr/lib64/libmlx5.so.1.8.22.4
+2acfdd74b000-2acfdd74c000 r--p 00026000 09:01 1590591                    /usr/lib64/libmlx5.so.1.8.22.4
+2acfdd74c000-2acfdd74d000 rw-p 00027000 09:01 1590591                    /usr/lib64/libmlx5.so.1.8.22.4
+2acfdd74d000-2acfdd751000 r-xp 00000000 09:01 1711448                    /usr/lib64/libibverbs/libvmw_pvrdma-rdmav22.so
+2acfdd751000-2acfdd951000 ---p 00004000 09:01 1711448                    /usr/lib64/libibverbs/libvmw_pvrdma-rdmav22.so
+2acfdd951000-2acfdd952000 r--p 00004000 09:01 1711448                    /usr/lib64/libibverbs/libvmw_pvrdma-rdmav22.so
+2acfdd952000-2acfdd953000 rw-p 00005000 09:01 1711448                    /usr/lib64/libibverbs/libvmw_pvrdma-rdmav22.so
+2acfdd953000-2acfdd95c000 r-xp 00000000 09:01 1711436                    /usr/lib64/libibverbs/libcxgb4-rdmav22.so
+2acfdd95c000-2acfddb5c000 ---p 00009000 09:01 1711436                    /usr/lib64/libibverbs/libcxgb4-rdmav22.so
+2acfddb5c000-2acfddb5d000 r--p 00009000 09:01 1711436                    /usr/lib64/libibverbs/libcxgb4-rdmav22.so
+2acfddb5d000-2acfddb5e000 rw-p 0000a000 09:01 1711436                    /usr/lib64/libibverbs/libcxgb4-rdmav22.so
+2acfddb5e000-2acfddb69000 r-xp 00000000 09:01 1590589                    /usr/lib64/libmlx4.so.1.0.22.4
+2acfddb69000-2acfddd68000 ---p 0000b000 09:01 1590589                    /usr/lib64/libmlx4.so.1.0.22.4
+2acfddd68000-2acfddd69000 r--p 0000a000 09:01 1590589                    /usr/lib64/libmlx4.so.1.0.22.4
+2acfddd69000-2acfddd6a000 rw-p 0000b000 09:01 1590589                    /usr/lib64/libmlx4.so.1.0.22.4
+2acfddd6a000-2acfddd6f000 r-xp 00000000 09:01 1711444                    /usr/lib64/libibverbs/libnes-rdmav22.so
+2acfddd6f000-2acfddf6f000 ---p 00005000 09:01 1711444                    /usr/lib64/libibverbs/libnes-rdmav22.so
+2acfddf6f000-2acfddf70000 r--p 00005000 09:01 1711444                    /usr/lib64/libibverbs/libnes-rdmav22.so
+2acfddf70000-2acfddf71000 rw-p 00006000 09:01 1711444                    /usr/lib64/libibverbs/libnes-rdmav22.so
+2acfddf71000-2acfddf79000 r-xp 00000000 09:01 1711443                    /usr/lib64/libibverbs/libmthca-rdmav22.so
+2acfddf79000-2acfde178000 ---p 00008000 09:01 1711443                    /usr/lib64/libibverbs/libmthca-rdmav22.so
+2acfde178000-2acfde179000 r--p 00007000 09:01 1711443                    /usr/lib64/libibverbs/libmthca-rdmav22.so
+2acfde179000-2acfde17a000 rw-p 00008000 09:01 1711443                    /usr/lib64/libibverbs/libmthca-rdmav22.so
+2acfde17a000-2acfde183000 r-xp 00000000 09:01 1711446                    /usr/lib64/libibverbs/libqedr-rdmav22.so
+2acfde183000-2acfde382000 ---p 00009000 09:01 1711446                    /usr/lib64/libibverbs/libqedr-rdmav22.so
+2acfde382000-2acfde383000 r--p 00008000 09:01 1711446                    /usr/lib64/libibverbs/libqedr-rdmav22.so
+2acfde383000-2acfde384000 rw-p 00009000 09:01 1711446                    /usr/lib64/libibverbs/libqedr-rdmav22.so
+2acfde384000-2acfde388000 r-xp 00000000 09:01 1711437                    /usr/lib64/libibverbs/libhfi1verbs-rdmav22.so
+2acfde388000-2acfde587000 ---p 00004000 09:01 1711437                    /usr/lib64/libibverbs/libhfi1verbs-rdmav22.so
+2acfde587000-2acfde588000 r--p 00003000 09:01 1711437                    /usr/lib64/libibverbs/libhfi1verbs-rdmav22.so
+2acfde588000-2acfde589000 rw-p 00004000 09:01 1711437                    /usr/lib64/libibverbs/libhfi1verbs-rdmav22.so
+2acfde589000-2acfde58e000 r-xp 00000000 09:01 1711435                    /usr/lib64/libibverbs/libcxgb3-rdmav22.so
+2acfde58e000-2acfde78e000 ---p 00005000 09:01 1711435                    /usr/lib64/libibverbs/libcxgb3-rdmav22.so
+2acfde78e000-2acfde78f000 r--p 00005000 09:01 1711435                    /usr/lib64/libibverbs/libcxgb3-rdmav22.so
+2acfde78f000-2acfde790000 rw-p 00006000 09:01 1711435                    /usr/lib64/libibverbs/libcxgb3-rdmav22.so
+2acfde790000-2acfde797000 r-xp 00000000 09:01 1711439                    /usr/lib64/libibverbs/libi40iw-rdmav22.so
+2acfde797000-2acfde996000 ---p 00007000 09:01 1711439                    /usr/lib64/libibverbs/libi40iw-rdmav22.so
+2acfde996000-2acfde997000 r--p 00006000 09:01 1711439                    /usr/lib64/libibverbs/libi40iw-rdmav22.so
+2acfde997000-2acfde998000 rw-p 00007000 09:01 1711439                    /usr/lib64/libibverbs/libi40iw-rdmav22.so
+2acfde998000-2acfde99c000 r-xp 00000000 09:01 1711440                    /usr/lib64/libibverbs/libipathverbs-rdmav22.so
+2acfde99c000-2acfdeb9b000 ---p 00004000 09:01 1711440                    /usr/lib64/libibverbs/libipathverbs-rdmav22.so
+2acfdeb9b000-2acfdeb9c000 r--p 00003000 09:01 1711440                    /usr/lib64/libibverbs/libipathverbs-rdmav22.so
+2acfdeb9c000-2acfdeb9d000 rw-p 00004000 09:01 1711440                    /usr/lib64/libibverbs/libipathverbs-rdmav22.so
+2acfdeb9d000-2acfdeba3000 r-xp 00000000 09:01 1711434                    /usr/lib64/libibverbs/libbnxt_re-rdmav22.so
+2acfdeba3000-2acfdeda2000 ---p 00006000 09:01 1711434                    /usr/lib64/libibverbs/libbnxt_re-rdmav22.so
+2acfdeda2000-2acfdeda3000 r--p 00005000 09:01 1711434                    /usr/lib64/libibverbs/libbnxt_re-rdmav22.so
+2acfdeda3000-2acfdeda4000 rw-p 00006000 09:01 1711434                    /usr/lib64/libibverbs/libbnxt_re-rdmav22.so
+2acfdeda4000-2acfdeda8000 r-xp 00000000 09:01 1711447                    /usr/lib64/libibverbs/librxe-rdmav22.so
+2acfdeda8000-2acfdefa7000 ---p 00004000 09:01 1711447                    /usr/lib64/libibverbs/librxe-rdmav22.so
+2acfdefa7000-2acfdefa8000 r--p 00003000 09:01 1711447                    /usr/lib64/libibverbs/librxe-rdmav22.so
+2acfdefa8000-2acfdefa9000 rw-p 00004000 09:01 1711447                    /usr/lib64/libibverbs/librxe-rdmav22.so
+2acfdefa9000-2acfdefaf000 r-xp 00000000 09:01 1711445                    /usr/lib64/libibverbs/libocrdma-rdmav22.so
+2acfdefaf000-2acfdf1ae000 ---p 00006000 09:01 1711445                    /usr/lib64/libibverbs/libocrdma-rdmav22.so
+2acfdf1ae000-2acfdf1af000 r--p 00005000 09:01 1711445                    /usr/lib64/libibverbs/libocrdma-rdmav22.so
+2acfdf1af000-2acfdf1b0000 rw-p 00006000 09:01 1711445                    /usr/lib64/libibverbs/libocrdma-rdmav22.so
+2acfdf1b0000-2acfdf1b1000 r-xp 00000000 00:2a 9246547088009410080        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_patcher_overwrite.so
+2acfdf1b1000-2acfdf3b1000 ---p 00001000 00:2a 9246547088009410080        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_patcher_overwrite.so
+2acfdf3b1000-2acfdf3b2000 r--p 00001000 00:2a 9246547088009410080        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_patcher_overwrite.so
+2acfdf3b2000-2acfdf3b3000 rw-p 00002000 00:2a 9246547088009410080        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_patcher_overwrite.so
+2acfdf3b3000-2acfdf7b4000 rw-s 00000000 00:13 20095399                   /dev/shm/vader_segment.s7.4024316.cbcd0001.1
+2acfdf7b4000-2acfdf7b8000 r-xp 00000000 00:2a 9246547088009410848        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_inter.so
+2acfdf7b8000-2acfdf9b7000 ---p 00004000 00:2a 9246547088009410848        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_inter.so
+2acfdf9b7000-2acfdf9b8000 r--p 00003000 00:2a 9246547088009410848        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_inter.so
+2acfdf9b8000-2acfdf9b9000 rw-p 00004000 00:2a 9246547088009410848        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_inter.so
+2acfdf9b9000-2acfdfdba000 rw-s 00000000 00:13 20102619                   /dev/shm/vader_segment.s7.4024316.cbcd0001.0
+2acfdfdc9000-2acfdfdeb000 r-xp 00000000 00:2a 9246547088009410900        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_pml_ob1.so
+2acfdfdeb000-2acfdffea000 ---p 00022000 00:2a 9246547088009410900        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_pml_ob1.so
+2acfdffea000-2acfdffeb000 r--p 00021000 00:2a 9246547088009410900        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_pml_ob1.so
+2acfdffeb000-2acfdffec000 rw-p 00022000 00:2a 9246547088009410900        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_pml_ob1.so
+2acfdffec000-2acfdfff8000 r-xp 00000000 00:2a 9246547088009410842        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_adapt.so
+2acfdfff8000-2acfe01f7000 ---p 0000c000 00:2a 9246547088009410842        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_adapt.so
+2acfe01f7000-2acfe01f8000 r--p 0000b000 00:2a 9246547088009410842        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_adapt.so
+2acfe01f8000-2acfe01f9000 rw-p 0000c000 00:2a 9246547088009410842        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_adapt.so
+2acfe01f9000-2acfe020b000 r-xp 00000000 00:2a 9246547088009410844        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_basic.so
+2acfe020b000-2acfe040a000 ---p 00012000 00:2a 9246547088009410844        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_basic.so
+2acfe040a000-2acfe040b000 r--p 00011000 00:2a 9246547088009410844        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_basic.so
+2acfe040b000-2acfe040c000 rw-p 00012000 00:2a 9246547088009410844        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_basic.so
+2acfe040c000-2acfe0425000 r-xp 00000000 00:2a 9246547088009410846        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_han.so
+2acfe0425000-2acfe0625000 ---p 00019000 00:2a 9246547088009410846        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_han.so
+2acfe0625000-2acfe0626000 r--p 00019000 00:2a 9246547088009410846        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_han.so
+2acfe0626000-2acfe0627000 rw-p 0001a000 00:2a 9246547088009410846        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_han.so
+2acfe0627000-2acfe0648000 r-xp 00000000 00:2a 9246547088009410850        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_libnbc.so
+2acfe0648000-2acfe0848000 ---p 00021000 00:2a 9246547088009410850        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_libnbc.so
+2acfe0848000-2acfe0849000 r--p 00021000 00:2a 9246547088009410850        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_libnbc.so
+2acfe0849000-2acfe084a000 rw-p 00022000 00:2a 9246547088009410850        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_libnbc.so
+2acfe084a000-2acfe084c000 r-xp 00000000 00:2a 9246547088009410852        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_self.so
+2acfe084c000-2acfe0a4c000 ---p 00002000 00:2a 9246547088009410852        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_self.so
+2acfe0a4c000-2acfe0a4d000 r--p 00002000 00:2a 9246547088009410852        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_self.so
+2acfe0a4d000-2acfe0a4e000 rw-p 00003000 00:2a 9246547088009410852        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_self.so
+2acfe0a4e000-2acfe0a57000 r-xp 00000000 00:2a 9246547088009410855        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_sm.so
+2acfe0a57000-2acfe0c56000 ---p 00009000 00:2a 9246547088009410855        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_sm.so
+2acfe0c56000-2acfe0c57000 r--p 00008000 00:2a 9246547088009410855        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_sm.so
+2acfe0c57000-2acfe0c58000 rw-p 00009000 00:2a 9246547088009410855        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_sm.so
+2acfe0c58000-2acfe0c5a000 r-xp 00000000 00:2a 9246547088009410038        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libmca_common_sm.so.40.30.0
+2acfe0c5a000-2acfe0e59000 ---p 00002000 00:2a 9246547088009410038        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libmca_common_sm.so.40.30.0
+2acfe0e59000-2acfe0e5a000 r--p 00001000 00:2a 9246547088009410038        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libmca_common_sm.so.40.30.0
+2acfe0e5a000-2acfe0e5b000 rw-p 00002000 00:2a 9246547088009410038        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/libmca_common_sm.so.40.30.0
+2acfe0e5b000-2acfe0e5e000 r-xp 00000000 00:2a 9246547088009410858        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_sync.so
+2acfe0e5e000-2acfe105e000 ---p 00003000 00:2a 9246547088009410858        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_sync.so
+2acfe105e000-2acfe105f000 r--p 00003000 00:2a 9246547088009410858        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_sync.so
+2acfe105f000-2acfe1060000 rw-p 00004000 00:2a 9246547088009410858        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_sync.so
+2acfe1060000-2acfe1071000 r-xp 00000000 00:2a 9246547088009410860        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_tuned.so
+2acfe1071000-2acfe1271000 ---p 00011000 00:2a 9246547088009410860        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_tuned.so
+2acfe1271000-2acfe1272000 r--p 00011000 00:2a 9246547088009410860        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_tuned.so
+2acfe1272000-2acfe1273000 rw-p 00012000 00:2a 9246547088009410860        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_coll_tuned.so
+2acfe1273000-2acfe1373000 rw-p 00000000 00:00 0 
+2acfe1373000-2acfe1374000 rw-p 00000000 00:00 0 
+2acfe1374000-2acfe13d5000 rw-p 00000000 00:00 0 
+2acfe13d5000-2acfe13d7000 rw-p 00000000 00:00 0 
+2acfe13d7000-2acfe1438000 rw-p 00000000 00:00 0 
+2acfe1438000-2acfe1439000 rw-p 00000000 00:00 0 
+2acfe1482000-2acfe1488000 r-xp 00000000 00:2a 9246547088009410886        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_osc_sm.so
+2acfe1488000-2acfe1687000 ---p 00006000 00:2a 9246547088009410886        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_osc_sm.so
+2acfe1687000-2acfe1688000 r--p 00005000 00:2a 9246547088009410886        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_osc_sm.so
+2acfe1688000-2acfe168a000 rw-p 00006000 00:2a 9246547088009410886        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_osc_sm.so
+2acfe168a000-2acfe168b000 rw-p 00000000 00:00 0 
+2acfe168b000-2acfe16ec000 rw-p 00000000 00:00 0 
+2acfe16ec000-2acfe16ee000 rw-p 00000000 00:00 0 
+2acfe16ee000-2acfe174f000 rw-p 00000000 00:00 0 
+2acfe174f000-2acfe1751000 rw-p 00000000 00:00 0 
+2acfe1751000-2acfe17b2000 rw-p 00000000 00:00 0 
+2acfe17b2000-2acfe17b4000 rw-p 00000000 00:00 0 
+2acfe17b4000-2acfe1815000 rw-p 00000000 00:00 0 
+2acfe1815000-2acfe1817000 rw-p 00000000 00:00 0 
+2acfe1817000-2acfe1878000 rw-p 00000000 00:00 0 
+2acfe1878000-2acfe1879000 rw-p 00000000 00:00 0 
+2acfe1895000-2acfe18b0000 r-xp 00000000 00:2a 9246547088009410891        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_osc_pt2pt.so
+2acfe18b0000-2acfe1ab0000 ---p 0001b000 00:2a 9246547088009410891        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_osc_pt2pt.so
+2acfe1ab0000-2acfe1ab1000 r--p 0001b000 00:2a 9246547088009410891        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_osc_pt2pt.so
+2acfe1ab1000-2acfe1ab2000 rw-p 0001c000 00:2a 9246547088009410891        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_osc_pt2pt.so
+2acfe1ab2000-2acfe1ad1000 r-xp 00000000 00:2a 9246547088009410893        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_osc_rdma.so
+2acfe1ad1000-2acfe1cd1000 ---p 0001f000 00:2a 9246547088009410893        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_osc_rdma.so
+2acfe1cd1000-2acfe1cd2000 r--p 0001f000 00:2a 9246547088009410893        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_osc_rdma.so
+2acfe1cd2000-2acfe1cd3000 rw-p 00020000 00:2a 9246547088009410893        /sw/parallel/openmpi/snowy-centos7/4.1.5gcc13.1.0/lib/openmpi/mca_osc_rdma.so
+2acfe1cd3000-2acfe1cd4000 rw-p 00000000 00:00 0 
+2acfe1cd4000-2acfe1d35000 rw-p 00000000 00:00 0 
+2acfe1d35000-2acfe1d37000 rw-p 00000000 00:00 0 
+2acfe1d37000-2acfe1f38000 rw-p 00000000 00:00 0 
+2acfe1f38000-2acfe1f3a000 rw-p 00000000 00:00 0 
+2acfe1f3a000-2acfe213b000 rw-p 00000000 00:00 0 
+2acfe213b000-2acfe213d000 rw-p 00000000 00:00 0 
+2acfe213d000-2acfe233e000 rw-p 00000000 00:00 0 
+2acfe233e000-2acfe2340000 rw-p 00000000 00:00 0 
+2acfe2340000-2acfe2541000 rw-p 00000000 00:00 0 
+2acfe2541000-2acfe2543000 rw-p 00000000 00:00 0 
+2acfe2543000-2acfe2744000 rw-p 00000000 00:00 0 
+2acfe2744000-2acfe2746000 rw-p 00000000 00:00 0 
+2acfe2746000-2acfe2947000 rw-p 00000000 00:00 0 
+2acfe2947000-2acfe2949000 rw-p 00000000 00:00 0 
+2acfe2949000-2acfe2b4a000 rw-p 00000000 00:00 0 
+2acfe2b4a000-2acfe2b4c000 rw-p 00000000 00:00 0 
+2acfe2b4c000-2acfe2d4d000 rw-p 00000000 00:00 0 
+2acfe2d4d000-2ad01e6fb000 rw-p 00000000 00:00 0 
+7fffa8d7d000-7fffa8da0000 rw-p 00000000 00:00 0                          [stack]
+7fffa8dad000-7fffa8daf000 r-xp 00000000 00:00 0                          [vdso]
+ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
+[s7:51554] *** Process received signal ***
+[s7:51554] Signal: Aborted (6)
+[s7:51554] Signal code:  (-6)
+[s7:51554] [ 0] /lib64/libpthread.so.0(+0xf630)[0x2acfcbc91630]
+[s7:51554] [ 1] /lib64/libc.so.6(gsignal+0x37)[0x2acfcbed4387]
+[s7:51554] [ 2] /lib64/libc.so.6(abort+0x148)[0x2acfcbed5a78]
+[s7:51554] [ 3] /lib64/libc.so.6(+0x78f67)[0x2acfcbf16f67]
+[s7:51554] [ 4] /lib64/libc.so.6(+0x7f474)[0x2acfcbf1d474]
+[s7:51554] [ 5] ./main[0x4010e1]
+[s7:51554] [ 6] /lib64/libc.so.6(__libc_start_main+0xf5)[0x2acfcbec0555]
+[s7:51554] [ 7] ./main[0x40136f]
+[s7:51554] *** End of error message ***
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 0 on node s7 exited on signal 6 (Aborted).
+--------------------------------------------------------------------------
+1 2 500000000
+slurmstepd: error: *** JOB 7851191 ON s7 CANCELLED AT 2023-05-10T09:21:19 ***
+--------------------------------------------------------------------------
+ORTE has lost communication with a remote daemon.
+
+  HNP daemon   : [[52060,0],0] on node s7
+  Remote daemon: [[52060,0],1] on node s54
+
+This is usually due to either a failure of the TCP network
+connection to the node, or possibly an internal failure of
+the daemon itself. We cannot recover from this failure, and
+therefore will terminate the job.
+--------------------------------------------------------------------------
