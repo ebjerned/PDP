@@ -4,7 +4,7 @@
 #include <math.h>
 #include <string.h>
 //Readwrite
-int read_input(const char *file_name, double **values);
+int read_input(const char *file_name, double **values, int size, int * addage);
 int write_output(char *file_name, const double *output, int num_values);
 
 
@@ -19,12 +19,10 @@ double find_pivot(double* data, int len);
 double* Parallel_Qsort(MPI_Comm curr_group, int rank, int size, double* local_arr, int chunk_size);
 //Merge two arrays
 double* merge(double *list1, int n1, double* list2, int n2 );
-
-double* pad_array(double* arr, int len, int p);
 //Global Vars
 int STRAT;
 MPI_Status status;
-int padding;
+
 int currentsize = 0;
 
 
@@ -39,7 +37,7 @@ int main(int argc, char **argv){
 	char *output_name = argv[2];
   STRAT = atoi(argv[3]);  
 
-  
+
 
   MPI_Init(&argc, &argv);
   int size, rank;
@@ -50,85 +48,92 @@ int main(int argc, char **argv){
   int n;
 
   double *input;
-  double *padded_input;
   if (rank == 0) {
     int addage; 
-	  if (0 > (SIZE = read_input(input_name, &input))) {
+	  if (0 > (SIZE = read_input(input_name, &input, size, &addage))) {
 		  return 2;
 	  }
-    padding = size - (SIZE % size); 
-    SIZE = SIZE + padding;
-    padded_input = (double*) calloc((SIZE) , sizeof(double));
-    // Copy the original array into the padded array to make sure that its length is divisble by size
-    for (int i = 0; i < SIZE-padding; i++) {
-        padded_input[i] = input[i];
-    }
-    
-    n =  SIZE/size;
- 
+
+    n = SIZE /size;
   }
   MPI_Bcast(&SIZE, 1, MPI_INT, 0,MPI_COMM_WORLD);
   n = SIZE /size;
   MPI_Barrier(MPI_COMM_WORLD);  
   double *local_arr = (double *)malloc(n * sizeof(double));
-  MPI_Scatter(padded_input, n, MPI_DOUBLE, local_arr, n, MPI_DOUBLE, 0, MPI_COMM_WORLD);
-  //
-  double start , end;
-  //Sort locally before anything else
+  MPI_Scatter(input, n, MPI_DOUBLE, local_arr, n, MPI_DOUBLE, 0, MPI_COMM_WORLD);
+
+  
   qsort(local_arr, n , sizeof(double), compare );
-  free(padded_input);
+
+
   
-  
-  
-  // Running and then gathering data;
+  local_arr = Parallel_Qsort(MPI_COMM_WORLD,rank, size, local_arr,n);
+  MPI_Barrier(MPI_COMM_WORLD);
   double* finaldata;
-  if (size > 1){
-    start = MPI_Wtime();
-    local_arr = Parallel_Qsort(MPI_COMM_WORLD,rank, size, local_arr,n);
-    end = MPI_Wtime() - start;
-    
-    if( rank != 0 ){
-      MPI_Send( local_arr, currentsize, MPI_DOUBLE, 0, rank, MPI_COMM_WORLD );
-    }
-    else{
-    // Zero process gathers data.
-      int currentlocation = 0;
-      finaldata=(double *)malloc(SIZE*sizeof(double));
-      memcpy(finaldata+currentlocation,local_arr,currentsize*sizeof(double));
-      currentlocation = currentlocation+currentsize;
-      double* tmp;
+    if (size > 1){
+	    
+    	local_arr = Parallel_Qsort(MPI_COMM_WORLD,rank, size, local_arr,n);
 
-      for( int r = 1; r < size; ++r ){
-        
-        int recive_size = 0;
-        
-        MPI_Probe(r, r, MPI_COMM_WORLD, &status);
-        
-        MPI_Get_count(&status, MPI_DOUBLE, &recive_size);
-        
-        tmp = (double*)malloc(recive_size*sizeof(double));
-        
-        MPI_Recv(tmp, recive_size, MPI_DOUBLE, r, r, MPI_COMM_WORLD, NULL );
-        
-        memcpy(finaldata+currentlocation,tmp,recive_size*sizeof(double));
-        
-        currentlocation = currentlocation+recive_size;
-              
-        free(tmp);
-      }
+    	//printf("\ncurrentsize:%d\n",currentsize);
+        if( rank != 0 ){
+            // All processes send to Zero.
+            //MPI_Send( &currentsize, 1, MPI_INT, 0, rank, MPI_COMM_WORLD );
+            MPI_Send( local_arr, currentsize, MPI_DOUBLE, 0, rank, MPI_COMM_WORLD );
+        }else{
+            // Zero process gathers data.
+            int currentlocation = 0;
+            finaldata=(double *)malloc(SIZE*sizeof(double));
+            memcpy(finaldata+currentlocation,local_arr,currentsize*sizeof(double));
+            currentlocation = currentlocation+currentsize;
+            //printf("\n currentlocation:%d \n",currentlocation);
+            double* buffer;
+            //double* temp;
+            for( int r = 1; r < size; ++r )
+            {
+                int bufferSize = 0;
+                MPI_Probe(r, r, MPI_COMM_WORLD, &status);
+                MPI_Get_count(&status, MPI_DOUBLE, &bufferSize);
+                //MPI_Recv( &bufferSize, 1, MPI_INT, r, r, MPI_COMM_WORLD, NULL );
+                //printf("\nbuffersize:%d\n",bufferSize);
+                buffer = (double*)malloc(bufferSize*sizeof(double));
+                MPI_Recv(buffer, bufferSize, MPI_DOUBLE, r, r, MPI_COMM_WORLD, NULL );
+                memcpy(finaldata+currentlocation,buffer,bufferSize*sizeof(double));
+                currentlocation = currentlocation+bufferSize;
+                /*
+    		    printf("\n");
+    		    for (int i=0; i<bufferSize; i++) {
+    		    	printf("buffer[%d] = %f, ", i, buffer[i]);
+   		        }
+    		    printf("\n");
+    		*/   
+                free(buffer);
+            }
+        }
     }
-  }
+
+    if (rank==0){
+        
+    	printf("\n");
+    	for (int i=0; i<SIZE; i++) {
+    		printf("%f ", finaldata[i]);
+    	}
+    	printf("\n");
+        
+        // Check results
+    	int OK=1;
+    	for (int i=0; i<SIZE-1; i++) {
+        	if(finaldata[i] > finaldata[i+1]) {
+            		printf("Wrong:finaldata[%d] = %f, finaldata[%d] = %f\n", i, finaldata[i], i+1, finaldata[i+1]);
+            		OK=0;
+        	}
+    	}
+    	if (OK) printf("Data sorted correctly!\n");
+    }
+    //check_pivot(data,len,l_pivot,rank);
+    if (rank==0) {
+        free(input);
+    }
   
-  if (rank==0){  
-    double *finald = finaldata + padding;
-    write_output(output_name, finald, SIZE-padding);
-    printf("%lf\n", end);
-    free(input);
-    free(finaldata);
-  }
-
-    free(local_arr);
-    
 
   MPI_Finalize();
 }
@@ -139,19 +144,21 @@ double* Parallel_Qsort(MPI_Comm curr_group, int rank, int size, double* local_ar
   MPI_Comm_rank( curr_group, &rank );
 
   //Recursion statement 
-  if(size < 2){ 
+  if(size < 2){
+    for(int i = 0; i< n; i++){
+      printf("rank:%d val %lf \n",rank ,local_arr[i] );  
+    }    
     return(local_arr);
   }
   
   double PivotPoint = pivot(STRAT, n, local_arr, rank, size, curr_group);
-  
   //Find the size of arrays to share according to 
   double *top = (double*)malloc(n*sizeof(double));
   double *bot = (double*)malloc(n*sizeof(double));
   int len_top = 0;
   int len_bot = 0;
-  for(int i = 0 ; i < n;i++){
-    if(local_arr[i] >= PivotPoint){
+  for(int i = 0 ; i<n;i++){
+    if(local_arr[i] > PivotPoint){
       top[len_top++] = local_arr[i];
     }else{
       bot[len_bot++] = local_arr[i];
@@ -189,25 +196,25 @@ double* Parallel_Qsort(MPI_Comm curr_group, int rank, int size, double* local_ar
   MPI_Status status1;
   MPI_Status status2;
   
-  if (rank < group_size) {
-  //low process sends its top to pair in right group and receive pairs bottom
-    MPI_Isend(top, len_top, MPI_DOUBLE, pair_high, tag+1, curr_group, &request1);
-    MPI_Probe(pair_high, tag, curr_group, &status);
-    MPI_Get_count(&status, MPI_DOUBLE, &recv_size_low);
-    recv_low_from_high= (double *)malloc(recv_size_low*sizeof(double));
-    MPI_Irecv(recv_low_from_high, recv_size_low, MPI_DOUBLE, pair_high, tag, curr_group, &request2);
-    MPI_Wait(&request1, &status);
-    MPI_Wait(&request2, &status);
-  } else {
-  //high process sends its bottom to pair in left group and receive pairs top
-    MPI_Isend(bot, len_bot, MPI_DOUBLE, pair_low, tag, curr_group, &request1);
-    MPI_Probe(pair_low, tag+1, curr_group, &status);
-    MPI_Get_count(&status, MPI_DOUBLE, &recv_size_high);
-    recv_high_from_low= (double *)malloc(recv_size_high*sizeof(double));
-    MPI_Irecv(recv_high_from_low, recv_size_high, MPI_DOUBLE, pair_low, tag+1, curr_group, &request2);
-    MPI_Wait(&request1, &status);
-    MPI_Wait(&request2, &status);
-  }
+if (rank < group_size) {
+  //low process sends its highdata to pairhigh and receive pairhigh's lowdata from pairhigh
+  MPI_Isend(top, len_top, MPI_DOUBLE, pair_high, tag+1, curr_group, &request1);
+  MPI_Probe(pair_high, tag, curr_group, &status);
+  MPI_Get_count(&status, MPI_DOUBLE, &recv_size_low);
+  recv_low_from_high= (double *)malloc(recv_size_low*sizeof(double));
+  MPI_Irecv(recv_low_from_high, recv_size_low, MPI_DOUBLE, pair_high, tag, curr_group, &request2);
+  MPI_Wait(&request1, &status);
+  MPI_Wait(&request2, &status);
+} else {
+  //high process sends its lowdata to pairlow and receive pairlow's highdata from pairlow
+  MPI_Isend(bot, len_bot, MPI_DOUBLE, pair_low, tag, curr_group, &request1);
+  MPI_Probe(pair_low, tag+1, curr_group, &status);
+  MPI_Get_count(&status, MPI_DOUBLE, &recv_size_high);
+  recv_high_from_low= (double *)malloc(recv_size_high*sizeof(double));
+  MPI_Irecv(recv_high_from_low, recv_size_high, MPI_DOUBLE, pair_low, tag+1, curr_group, &request2);
+  MPI_Wait(&request1, &status);
+  MPI_Wait(&request2, &status);
+}
   MPI_Barrier(curr_group);
   
   double *merged_arr;
@@ -222,12 +229,16 @@ double* Parallel_Qsort(MPI_Comm curr_group, int rank, int size, double* local_ar
     newlen = len_bot + recv_size_low;
     currentsize = newlen;
 
-    //qsort(merged_arr, newlen, sizeof(double), compare);
+    qsort(merged_arr, newlen, sizeof(double), compare);
+    
     
     free(bot);
     free(recv_low_from_high);
     
-
+    
+    for(int i = 0; i< newlen; i++){
+      printf("rank:%d val[%d] %lf \n", rank, i, merged_arr[i]);
+    }
     
     	// Split group
     MPI_Comm_split( curr_group,0, 1, &nextgroup );
@@ -248,11 +259,14 @@ double* Parallel_Qsort(MPI_Comm curr_group, int rank, int size, double* local_ar
    	newlen = len_top + recv_size_high;
    	currentsize = newlen;
     
-   	//qsort(merged_arr, newlen, sizeof(double), compare);
+   	qsort(merged_arr, newlen, sizeof(double), compare);
 
     free(top);
     free(recv_high_from_low);
-
+    
+    for(int i = 0; i< newlen; i++){
+      printf("rank:%d val[%d] %lf \n", rank, i, merged_arr[i]);
+    }
    // printf("rank:%d \n")
     
     // Split group
@@ -263,7 +277,7 @@ double* Parallel_Qsort(MPI_Comm curr_group, int rank, int size, double* local_ar
 
     //Recursive call
     return (Parallel_Qsort(nextgroup, newrank, newsize, merged_arr, newlen));
-
+    printf("hej");
     }
 
   return(local_arr);
@@ -279,10 +293,10 @@ double pivot(int pivot_strat,int len, double *local_arr, int rank, int size, MPI
             /* ROOT find the Global PIVOT and broadcast it to all other PROCS */
             if (rank==0){
                 l_pivot = find_pivot(local_arr, len);
-            }
-       
-            MPI_Bcast ( &l_pivot, 1, MPI_DOUBLE, 0, group);
-            
+            }       
+//            MPI_Bcast ( &l_pivot, 1, MPI_DOUBLE, 0, group);
+            l_pivot = local_arr[len/2];
+	    printf("\t %lf\n", l_pivot);
 	    return l_pivot;
         }
         break;
@@ -306,6 +320,8 @@ double pivot(int pivot_strat,int len, double *local_arr, int rank, int size, MPI
 	    return l_pivot;
         }
         break;
+	default:
+		MPI_Abort(MPI_COMM_WORLD, 1);
     }
     return 0;
 }
@@ -328,7 +344,7 @@ double find_mean(double *data, int len){
 double find_pivot(double* data, int len){
     /* If the number of elements is zero the pivot is data[0] */
     if (len==0)
-        return 0;
+        return 8;
     double pivot = 0;
     /* If number of elements is odd, pivot is the middle element */
     if (len % 2 != 0)
@@ -371,7 +387,7 @@ double* merge(double *v1, int n1, double *v2, int n2 ){
         }
     return result;
 }
-int read_input(const char *file_name, double **values) {
+int read_input(const char *file_name, double **values, int size, int *addage) {
 	FILE *file;
 	if (NULL == (file = fopen(file_name, "r"))) {
 		perror("Couldn't open input file");
@@ -383,8 +399,8 @@ int read_input(const char *file_name, double **values) {
 		return -1;
 	}
   
-
-
+  *addage = num_values%size;
+  ;
 	if (NULL == (*values = malloc((num_values) * sizeof(double)))) {
 		perror("Couldn't allocate memory for input");
 		return -1;
@@ -401,6 +417,7 @@ int read_input(const char *file_name, double **values) {
 	}
 	return num_values;
 }
+
 
 int write_output(char *file_name, const double *output, int num_values) {
 	FILE *file;
@@ -421,3 +438,4 @@ int write_output(char *file_name, const double *output, int num_values) {
 	}
 	return 0;
 }
+
