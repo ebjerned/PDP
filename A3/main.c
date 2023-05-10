@@ -83,8 +83,8 @@ int main(int argc, char **argv) {
 
 
 double* Parallel_Qsort(MPI_Comm curr_group, int rank, int size, double* local_arr, int chunk_size){
-  MPI_Comm_size( curr_group, &size);
-  MPI_Comm_rank( curr_group, &rank );
+  //MPI_Comm_size( curr_group, &size);
+  //MPI_Comm_rank( curr_group, &rank );
   //recursion
   if (size < 2){
   	return (local_arr);
@@ -148,7 +148,7 @@ double* Parallel_Qsort(MPI_Comm curr_group, int rank, int size, double* local_ar
    	MPI_Irecv(otherlow, recv_size_low, MPI_DOUBLE, pair_high, tag, curr_group, &request2);
     
     printf("Recv_done\n"); 
-    printf("recv_size_low = %d \n" , recv_size_low);
+    printf("rank %i recv_size_low = %d \n" ,rank, recv_size_low);
     
    	MPI_Wait(&request1, &status1);
     
@@ -156,7 +156,7 @@ double* Parallel_Qsort(MPI_Comm curr_group, int rank, int size, double* local_ar
 
   }else{
    	//high process sends its lowdata to pairlow and receive pairlow's highdata from pairlow
-   	MPI_Isend(low, l_low, MPI_DOUBLE, pair_low, tag, curr_group,&request1);
+   	MPI_Isend(low, l_low, MPI_DOUBLE, pair_low, tag, curr_group,&request2);
     
    	MPI_Probe(pair_low, tag+1, curr_group, &status2);
     
@@ -164,7 +164,7 @@ double* Parallel_Qsort(MPI_Comm curr_group, int rank, int size, double* local_ar
     //allocate for recv
    	otherhigh=(double *)malloc(recv_size_high*sizeof(double));
 
-   	MPI_Irecv(otherhigh, recv_size_high, MPI_DOUBLE, pair_low, tag+1, curr_group, &request2);
+   	MPI_Irecv(otherhigh, recv_size_high, MPI_DOUBLE, pair_low, tag+1, curr_group, &request1);
     printf("Recv_done\n"); 
     
     
@@ -388,8 +388,3 @@ int write_output(char *file_name, const double *output, int num_values) {
 	}
 	return 0;
 }
-<<<<<<< HEAD
-
-
-=======
->>>>>>> bbdd66e820adb5123fb263cc3c41225ba2c77cfe
