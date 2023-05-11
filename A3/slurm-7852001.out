@@ -1,0 +1,19 @@
+1 1 125000000
+29.302206
+1 1 250000000
+60.763827
+1 1 500000000
+126.702834
+1 1 1000000000
+slurmstepd: error: *** JOB 7852001 ON s7 CANCELLED AT 2023-05-10T11:35:53 DUE TO TIME LIMIT ***
+--------------------------------------------------------------------------
+ORTE has lost communication with a remote daemon.
+
+  HNP daemon   : [[11138,0],0] on node s7
+  Remote daemon: [[11138,0],1] on node s99
+
+This is usually due to either a failure of the TCP network
+connection to the node, or possibly an internal failure of
+the daemon itself. We cannot recover from this failure, and
+therefore will terminate the job.
+--------------------------------------------------------------------------

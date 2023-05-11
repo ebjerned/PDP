@@ -3,7 +3,7 @@
 #SBATCH -p node -n 2
 #SBATCH -A uppmax2023-2-13
 #SBATCH -n 32
-#SBATCH -t 15:00 --qos=short
+#SBATCH -t 30:00 
 module unload intel
 module unload intelmpi
 
@@ -13,9 +13,9 @@ export OMPI_MCA_btl_openib_allow_ib=1
 
 for k in 1 2 3
 do
-	for j in 2 4 8 16 32
+	for j in 1 2 
 	do
-		for i in 125000000 250000000 500000000 1000000000 2000000000
+		for i in 125000000 250000000 500000000 1000000000
 		do
 			echo $k $j $i
 			mpirun -np $j ./main /proj/uppmax2023-2-13/nobackup/qsort_indata/input$i.txt test.txt $k

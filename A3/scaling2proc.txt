@@ -1,0 +1,21 @@
+1 2 125000000
+1.138860
+1 2 250000000
+2.303027
+1 2 500000000
+4.527800
+1 2 1000000000
+9.597658
+1 2 2000000000
+slurmstepd: error: *** JOB 7852041 ON s7 CANCELLED AT 2023-05-10T11:49:54 ***
+--------------------------------------------------------------------------
+ORTE has lost communication with a remote daemon.
+
+  HNP daemon   : [[12524,0],0] on node s7
+  Remote daemon: [[12524,0],1] on node s54
+
+This is usually due to either a failure of the TCP network
+connection to the node, or possibly an internal failure of
+the daemon itself. We cannot recover from this failure, and
+therefore will terminate the job.
+--------------------------------------------------------------------------

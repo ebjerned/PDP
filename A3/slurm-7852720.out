@@ -1,0 +1,33 @@
+1 1 125000000
+29.058770
+1 1 250000000
+60.213487
+1 1 500000000
+125.658091
+1 1 1000000000
+271.476852
+1 2 125000000
+1.179004
+1 2 250000000
+2.277123
+1 2 500000000
+4.607861
+1 2 1000000000
+9.243501
+2 1 125000000
+29.201150
+2 1 250000000
+60.466830
+2 1 500000000
+slurmstepd: error: *** JOB 7852720 ON s22 CANCELLED AT 2023-05-10T16:39:23 DUE TO TIME LIMIT ***
+--------------------------------------------------------------------------
+ORTE has lost communication with a remote daemon.
+
+  HNP daemon   : [[14419,0],0] on node s22
+  Remote daemon: [[14419,0],1] on node s101
+
+This is usually due to either a failure of the TCP network
+connection to the node, or possibly an internal failure of
+the daemon itself. We cannot recover from this failure, and
+therefore will terminate the job.
+--------------------------------------------------------------------------

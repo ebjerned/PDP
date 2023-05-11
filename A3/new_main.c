@@ -3,9 +3,6 @@
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
-
-//#define PRODUCE_OUTPUT
-
 //Readwrite
 int read_input(const char *file_name, double **values);
 int write_output(char *file_name, const double *output, int num_values);
@@ -78,7 +75,9 @@ int main(int argc, char **argv){
   //
   double start , end;
   //Sort locally before anything else
+  if(size==1) start = MPI_Wtime();
   qsort(local_arr, n , sizeof(double), compare );
+  if(size==1) end = MPI_Wtime()-start;
   free(padded_input);
   
   
@@ -88,7 +87,9 @@ int main(int argc, char **argv){
   if (size > 1){
     start = MPI_Wtime();
     local_arr = Parallel_Qsort(MPI_COMM_WORLD,rank, size, local_arr,n);
+    MPI_Barrier(MPI_COMM_WORLD);
     end = MPI_Wtime() - start;
+
     
     if( rank != 0 ){
       MPI_Send( local_arr, currentsize, MPI_DOUBLE, 0, rank, MPI_COMM_WORLD );
@@ -124,9 +125,7 @@ int main(int argc, char **argv){
   
   if (rank==0){  
     double *finald = finaldata + padding;
-    #ifdef PRODUCE_OUTPUT
-    	write_output(output_name, finald, SIZE-padding);
-    #endif
+    write_output(output_name, finald, SIZE-padding);
     printf("%lf\n", end);
     free(input);
     free(finaldata);
@@ -387,8 +386,6 @@ int read_input(const char *file_name, double **values) {
 		perror("Couldn't read element count from input file");
 		return -1;
 	}
-  
-
 
 	if (NULL == (*values = malloc((num_values) * sizeof(double)))) {
 		perror("Couldn't allocate memory for input");
@@ -413,16 +410,17 @@ int write_output(char *file_name, const double *output, int num_values) {
 		perror("Couldn't open output file");
 		return -1;
 	}
-	for (int i = 0; i < num_values; i++) {
+	/*for (int i = 0; i < num_values; i++) {
 		if (0 > fprintf(file, "%lf ", output[i])) {
 			perror("Couldn't write to output file");
 		}
-	}
-	if (0 > fprintf(file, "\n")) {
+	}*/
+	/*if (0 > fprintf(file, "\n")) {
 		perror("Couldn't write to output file");
-	}
+	}*/
 	if (0 != fclose(file)) {
 		perror("Warning: couldn't close output file");
 	}
 	return 0;
 }
+
