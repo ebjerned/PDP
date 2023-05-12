@@ -11,7 +11,7 @@ module load gcc openmpi
 export OMPI_MCA_btl_openib_allow_ib=1
 
 
-for k in 1 2 3
+for k in 3
 do
 	for j in 2 32
 	do
