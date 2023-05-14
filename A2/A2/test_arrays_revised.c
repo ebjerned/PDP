@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <string.h>
 
 int read_input(const char *file_name, double **values, double **values2);
 int write_output(char *file_name, const double *output, int num_values);
@@ -117,18 +118,26 @@ int main(int argc, char **argv) {
 	int* BLOCKSIZE_ARR;
 	// L1 cache 32kB -> 4000 doubles -> ~60 a side
 	int suitable_block = (BLOCKROWS/NPROWS) % 60;
+	int n_blocks = BLOCKROWS/60;
 	if(BLOCKROWS % 60 != 0){
 		
+		BLOCKSIZE_ARR = (int*)malloc((n_blocks+1)*sizeof(int));
+		for(int i = 0; i < n_blocks; i++)
+			BLOCKSIZE_ARR[i] = 60;
+		BLOCKSIZE_ARR[n_blocks] = BLOCKROWS % 60;
+		n_blocks++;
 
 	} else{
-		BLOCKSIZE_ARR = calloc(BLOCKROWS/60, sizeof(int));
+		BLOCKSIZE_ARR = (int*)malloc((n_blocks)*sizeof(int));
+		for(int i = 0; i < n_blocks; i++)
+			BLOCKSIZE_ARR[i] = 60;
 						
 	}
-	CACHEBLOCKSIZE = suitable_block == 0 ? 60 : suitable_block;
+	/*CACHEBLOCKSIZE = suitable_block == 0 ? 60 : suitable_block;
 	if(BLOCKROWS % CACHEBLOCKSIZE != 0){
 		MPI_Abort(MPI_COMM_WORLD, 1);
 		return -1;
-	}
+	}*/
 	for(shift=0;shift<dims[0];shift++) {
 
 		/* Sub-matrix multiplication*/
@@ -149,7 +158,7 @@ int main(int argc, char **argv) {
 			}
 		}*/
 		
-		int bi, bj, bk, i, j, k;
+		/*int bi, bj, bk, i, j, k;
 		for(bi=0; bi < BLOCKROWS; bi += CACHEBLOCKSIZE)	
 			for(bk=0; bk < BLOCKROWS; bk += CACHEBLOCKSIZE)
 				for(bj=0; bj < BLOCKROWS; bj += CACHEBLOCKSIZE)	
@@ -158,7 +167,30 @@ int main(int argc, char **argv) {
 						int a = A[i*BLOCKROWS+k];
 							for(j=bj; j < bj+CACHEBLOCKSIZE; j++)						
 								local_result[i*BLOCKROWS +j] += a*B[k*BLOCKROWS+j];
+						}*/
+		int bi, bj, bk, i, j, k;
+		int culmi = 0;
+		int culmj, culmk;
+		for(bi=0; bi < n_blocks; bi++){
+			culmk = 0;	
+			for(bk=0; bk < n_blocks; bk++){
+				culmj = 0;
+				for(bj=0; bj < n_blocks; bj++){
+					for(i=culmi; i < culmi+BLOCKSIZE_ARR[bi]; i++){
+						for(k=culmk; k < culmk+BLOCKSIZE_ARR[bk]; k++){
+						int a = A[i*BLOCKROWS+k];
+							for(j=culmj; j < culmj+BLOCKSIZE_ARR[bj]; j++){						
+								local_result[i*BLOCKROWS +j] += a*B[k*BLOCKROWS+j];
+							}
 						}
+					}
+					culmj += BLOCKSIZE_ARR[bj];
+				}
+				culmk += BLOCKSIZE_ARR[bk];
+			}
+			culmi += BLOCKSIZE_ARR[bi];
+		}
+		
 		/* Send new matricies to neighbourgs, shifting in Cannon's algorithm */
 		MPI_Sendrecv_replace(A, BLOCKROWS*BLOCKCOLS, MPI_DOUBLE, left, 1, right, 1, Cycle_Communication, &status);
 		MPI_Sendrecv_replace(B, BLOCKROWS*BLOCKCOLS, MPI_DOUBLE, up, 1, down, 1, Cycle_Communication, &status); 
