@@ -1,5 +1,0 @@
-Extracting and entering A2 directory
-Building
-rm -f matrix
-mpicc -std=c99 -g -O3 -o matrix test_arrays.c -lm
-matmul not built by 'make all'!

@@ -12,13 +12,15 @@ export OMPI_MCA_btl_openib_allow_ib=1
 
 for i in 1 4 9 16 25
 do
-    mpirun -np $i ./matrix /proj/uppmax2023-2-13/nobackup/matmul_indata/input3600.txt test.txt
+    mpirun -np $i ./matmul /proj/uppmax2023-2-13/nobackup/matmul_indata/input3600.txt test.txt
+    echo $i
 done
 for i in 1 4 16
 do
+    echo $i
     for j in input3600.txt input5716.txt input7488.txt input9072.txt
     do
-        mpirun -np $i ./matrix /proj/uppmax2023-2-13/nobackup/matmul_indata/$j text.txt
+        mpirun -np $i ./matmul /proj/uppmax2023-2-13/nobackup/matmul_indata/$j text.txt
     done
 done
 

@@ -1,6 +1,0 @@
-Extracting and entering A2 directory
-Building
-rm -f matmul
-mpicc -std=c99 -g -O3 -o matmul test_arrays.c -lm
-make: mpicc: Command not found
-make: *** [matmul] Error 127
