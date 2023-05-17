@@ -125,7 +125,11 @@ int main(int argc, char **argv){
   
   if (rank==0){  
     double *finald = finaldata + padding;
-    write_output(output_name, finald, SIZE-padding);
+    if(size != 1){
+	write_output(output_name, finald, SIZE-padding);
+    } else {
+	write_output(output_name, &local_arr[1], SIZE-1);
+    }
     printf("%lf\n", end);
     free(input);
     free(finaldata);
@@ -410,14 +414,14 @@ int write_output(char *file_name, const double *output, int num_values) {
 		perror("Couldn't open output file");
 		return -1;
 	}
-	/*for (int i = 0; i < num_values; i++) {
-		if (0 > fprintf(file, "%lf ", output[i])) {
+	for (int i = 0; i < num_values; i++) {
+		if (0 > fprintf(file, "%.0lf ", output[i])) {
 			perror("Couldn't write to output file");
 		}
-	}*/
-	/*if (0 > fprintf(file, "\n")) {
+	}
+	if (0 > fprintf(file, "\n")) {
 		perror("Couldn't write to output file");
-	}*/
+	}
 	if (0 != fclose(file)) {
 		perror("Warning: couldn't close output file");
 	}

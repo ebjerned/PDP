@@ -1,6 +1,7 @@
 #!/bin/bash
 
 #SBATCH -A uppmax2023-2-13
+#SBATCH -M snowy
 #SBATCH -p core -n 4
 #SBATCH -t 5:00
 #SBATCH -J A3-check
