@@ -3,13 +3,11 @@ CFLAGS = -std=c99 -g -O3
 LIBS = -lm
 
 
-BIN = sort main
+BIN = quicksort
 
 all: $(BIN)
 
-sort: sort.c
-	$(CC) $(CFLAGS) -o $@ $< $(LIBS)
-main: new_main.c	
+quicksort: new_main.c	
 	$(CC) $(CFLAGS) -o $@ $< $(LIBS)
 clean:
 	$(RM) $(BIN)
