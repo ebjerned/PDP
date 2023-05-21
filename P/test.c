@@ -55,8 +55,8 @@ int main(int argc, char* argv[]){
 	MPI_Cart_create(MPI_COMM_WORLD,2,dims,periods,1,&Cycle_Communication);
 	MPI_Comm_rank(Cycle_Communication, &rank); 
 	MPI_Cart_coords(Cycle_Communication, rank, 2, mycoords); 
-	MPI_Cart_shift(Cycle_Communication,1, 1,&left,&right);
-	MPI_Cart_shift(Cycle_Communication,0, 1,&down,&up);
+	MPI_Cart_shift(Cycle_Communication,0, 1,&left,&right);
+	MPI_Cart_shift(Cycle_Communication,1, 1,&down,&up);
 	//printf("PE %i has coordinate [%i, %i]\n", rank, mycoords[0], mycoords[1]);
 	double q0;
 	double DQ;
@@ -66,7 +66,7 @@ int main(int argc, char* argv[]){
 	for(int i = 0; i < elementsPerProc; i++){
 		double x_i = mycoords[1]*sideElementsPerProc+i%sideElementsPerProc;
 		double y_i = mycoords[0]*sideElementsPerProc+i/sideElementsPerProc;
-		if(x_i != 0 && x_i != n-1 && y_i != 0 && y_i != n-1){	
+		if(x_i != 0 && x_i != 1 && y_i != 0 && y_i != 1){	
 			local_d[i] =  2*h*h*h*(x_i*(1-h*x_i)+y_i*(1-h*y_i));
 		} else {
 			local_d[i] = 0;
