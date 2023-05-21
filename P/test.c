@@ -125,24 +125,26 @@ int main(int argc, char* argv[]){
 
 
 		// Inner under
-		/*if(mycoords[0] != n_p-1)*/ //MPI_Recv(bottomDest, sideElementsPerProc, MPI_DOUBLE, up, 1, Cycle_Communication, &status);
-		/*if(mycoords[0] == n_p-1){
+		/*if(mycoords[0] != n_p-1)*/ 
+		if(mycoords[0] == n_p-1){
 			for(int i = elementsPerProc-sideElementsPerProc+1; i < elementsPerProc-1; i++)
 				local_q[i] = 0;
 		} else {
+			MPI_Recv(bottomDest, sideElementsPerProc, MPI_DOUBLE, up, 1, Cycle_Communication, &status);
 			for(int i = elementsPerProc-sideElementsPerProc+1; i < elementsPerProc-1; i++){
-				local_q[i] = -local_d[i+1] - local_d[i-1] + 4*local_d[i] - local_d[i-sideElementsPerProc] -bottomDest[i-(elementsPerProc-sideElementsPerProc)];
+				local_q[i] = local_d[i];
+				//local_q[i] = -local_d[i+1] - local_d[i-1] + 4*local_d[i] - local_d[i-sideElementsPerProc] -bottomDest[i-(elementsPerProc-sideElementsPerProc)];
 				//res = höger vänster center uppe nere
 			}
 		}
-		*/
+		
 
 		
 
 
 		// Vänster
 		/*if(mycoords[1] != 0)*/ MPI_Recv(&leftDest[0], sideElementsPerProc, MPI_DOUBLE, right, 2, Cycle_Communication, &status);
-		/* (mycoords[1]== 0){
+		/*if (mycoords[1]== 0){
 				local_q[index] = 0;
 				continue;
 			}
