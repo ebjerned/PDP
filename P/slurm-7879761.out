@@ -1,0 +1,28 @@
+Lmod has detected the following error: Unfortunately, OpenMPI 4.1.5 isn't
+available for gcc version 8.2.0 
+While processing the following module(s):
+    Module fullname  Module Filename
+    ---------------  ---------------
+    openmpi/4.1.5    /sw/mf/snowy/parallel/openmpi/4.1.5.lua
+
+7.103536
+2.014360
+2.014360
+2.014363
+2.014360
+0.517299
+0.517301
+0.517320
+0.517309
+0.517296
+0.517312
+0.517301
+0.517297
+0.517322
+0.517302
+0.517322
+0.517307
+0.517304
+0.517296
+0.517303
+0.517298
