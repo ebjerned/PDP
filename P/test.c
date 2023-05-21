@@ -125,7 +125,7 @@ int main(int argc, char* argv[]){
 		}
 
 		// Inner över
-		if(mycoords[0] == 0){
+		if(mycoords[0] == n_p-1){
 			for(int i = 1; i < sideElementsPerProc-1; i++)
 				local_q[i] = 0;
 		}else{
@@ -142,7 +142,7 @@ int main(int argc, char* argv[]){
 
 		// Inner under
 		
-		if(mycoords[0] == n_p-1){
+		if(mycoords[0] == 0){
 			for(int i = elementsPerProc-sideElementsPerProc+1; i < elementsPerProc-1; i++)
 				local_q[i] = 0;
 		} else {
@@ -179,14 +179,14 @@ int main(int argc, char* argv[]){
 					local_q[index] -= local_d[index-sideElementsPerProc];
 				} else {
 				
-					local_q[index] -= topDest[0];
+					local_q[index] -= topDest[i];
 					continue;
 				}
 
 				if(i != sideElementsPerProc-1){
 					local_q[index] -= local_d[index+sideElementsPerProc];
 				} else {
-					local_q[index] -= bottomDest[0];
+					local_q[index] -= bottomDest[i];
 					continue;
 				}
 			}
@@ -209,14 +209,14 @@ int main(int argc, char* argv[]){
 					local_q[index] -= local_d[index-sideElementsPerProc];
 				} else {
 				
-					local_q[index] -= topDest[sideElementsPerProc-1];
+					local_q[index] -= topDest[i];
 					continue;
 				}
 
 				if(i != sideElementsPerProc-1){
 					local_q[index] -= local_d[index+sideElementsPerProc];
 				} else {
-					local_q[index] -= bottomDest[sideElementsPerProc-1];
+					local_q[index] -= bottomDest[i];
 					continue;
 
 				}
