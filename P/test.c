@@ -81,7 +81,9 @@ int main(int argc, char* argv[]){
 	printf("First q0 %lf\n", q0);
 	
 	MPI_Datatype sideValues_t;
-	MPI_Type_vector(sideElementsPerProc, 1, sideElementsPerProc, MPI_DOUBLE, &sideValues_t);
+	MPI_Datatype sideValues;
+	MPI_Type_vector(sideElementsPerProc, 1, sideElementsPerProc, MPI_DOUBLE, &sideValues);
+	MPI_Type_create_resized(sideValues, 0, sizeof(double), &sideValues_t);
 	MPI_Type_commit(&sideValues_t);
 	
 	// Iteratation start here
@@ -109,8 +111,8 @@ int main(int argc, char* argv[]){
 
 		// Inner över
 		if(mycoords[0] == 0){
-//			for(int i = 1; i < sideElementsPerProc-1; i++)
-				//local_q[i] = 0;
+			for(int i = 1; i < sideElementsPerProc-1; i++)
+				local_q[i] = 0;
 		}else{
 			MPI_Recv(topDest, sideElementsPerProc, MPI_DOUBLE, down, 0, Cycle_Communication, &status);
 			for(int i = 1; i < sideElementsPerProc-1; i++)
