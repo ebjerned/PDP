@@ -215,7 +215,7 @@ int main(int argc, char* argv[]){
 		MPI_Allreduce(&q1_sub, &q1, 1, MPI_DOUBLE, MPI_SUM, MPI_COMM_WORLD);
 		double beta = q1/q0;
 		for(int i = 0; i < elementsPerProc; i++){
-			local_d[i] = -local_g[i]+beta*local_d[i];
+			//local_d[i] = -local_g[i]+beta*local_d[i];
 		}
 		q0 = q1;
 
