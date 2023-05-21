@@ -99,17 +99,17 @@ int main(int argc, char* argv[]){
 		
 		// Alla center element
 		
-		for(int i = 1; i < sideElementsPerProc-1; i++){
+		/*for(int i = 1; i < sideElementsPerProc-1; i++){
 			for(int j = 1; j < sideElementsPerProc-1;j++){
 				int index = i*sideElementsPerProc + j;
 				
 				local_q[index] = -local_d[index+1] - local_d[index-1] + 4*local_d[index]-local_d[index+sideElementsPerProc] -local_d[index-sideElementsPerProc];
 			}
-		}
+		}*/
 
 		// Inner över
 		/*if(mycoords[0] != 0)*/ MPI_Recv(topDest, sideElementsPerProc, MPI_DOUBLE, down, 0, Cycle_Communication, &status);
-		if(mycoords[0] == 0){
+		/*if(mycoords[0] == 0){
 			for(int i = 1; i < sideElementsPerProc-1; i++)
 				local_q[i] = 0;
 		}else{
@@ -117,12 +117,12 @@ int main(int argc, char* argv[]){
 				local_q[i] = -local_d[i+1] - local_d[i-1] + 4*local_d[i] - local_d[i+sideElementsPerProc] -topDest[i];
 				// res = höger vänster center nere uppe
 			
-		}
+		}*/
 
 
 		// Inner under
 		/*if(mycoords[0] != n_p-1)*/ MPI_Recv(bottomDest, sideElementsPerProc, MPI_DOUBLE, up, 1, Cycle_Communication, &status);
-		if(mycoords[0] == n_p-1){
+		/*if(mycoords[0] == n_p-1){
 			for(int i = elementsPerProc-sideElementsPerProc+1; i < elementsPerProc-1; i++)
 				local_q[i] = 0;
 		} else {
@@ -131,17 +131,14 @@ int main(int argc, char* argv[]){
 				//res = höger vänster center uppe nere
 			}
 		}
-		
+		*/
 
 		
 
 
 		// Vänster
 		/*if(mycoords[1] != 0)*/ MPI_Recv(&leftDest[0], sideElementsPerProc, MPI_DOUBLE, right, 2, Cycle_Communication, &status);
-		for(int i = 0; i < sideElementsPerProc; i++){
-			//res = höger vänster center
-			int index = i*sideElementsPerProc;
-			if (mycoords[1]== 0){
+		/* (mycoords[1]== 0){
 				local_q[index] = 0;
 				continue;
 			}
@@ -162,11 +159,11 @@ int main(int argc, char* argv[]){
 				local_q[index] -= bottomDest[0];
 				continue;
 			}
-		}
+		}*/
 
 		// Höger i
 		/*if(mycoords[1] != n_p-1)*/ MPI_Recv(&rightDest[0], sideElementsPerProc, MPI_DOUBLE, left, 3, Cycle_Communication, &status);
-		for(int i = 0; i < sideElementsPerProc; i++){
+		/*for(int i = 0; i < sideElementsPerProc; i++){
 			int index = (i+1)*sideElementsPerProc-1;
 			if (mycoords[1]== n_p-1){
 				local_q[index] = 0;
@@ -191,7 +188,7 @@ int main(int argc, char* argv[]){
 
 			}
 
-		}
+		}*/
 		for(int i = 0; i < elementsPerProc; i++){
 			DQ_sub += local_q[i]*local_d[i];
 			//printf("q %i %i %lf\n",rank, i, local_q[i]);
