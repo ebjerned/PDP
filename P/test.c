@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <mpi.h>
 #include <math.h>
-
+#include <assert.h>
 
 int main(int argc, char* argv[]){
 	
@@ -16,7 +16,10 @@ int main(int argc, char* argv[]){
 	MPI_Init(&argc, &argv);
 	MPI_Comm Cycle_Communication;
 	MPI_Status status;
-	MPI_Request request;
+	MPI_Request request1;
+	MPI_Request request2;
+	MPI_Request request3;
+	MPI_Request request4;
 
 	int shift;
 	int dims[2];
@@ -55,9 +58,9 @@ int main(int argc, char* argv[]){
 	MPI_Cart_create(MPI_COMM_WORLD,2,dims,periods,1,&Cycle_Communication);
 	MPI_Comm_rank(Cycle_Communication, &rank); 
 	MPI_Cart_coords(Cycle_Communication, rank, 2, mycoords); 
-	MPI_Cart_shift(Cycle_Communication,0, 1,&left,&right);
-	MPI_Cart_shift(Cycle_Communication,1, 1,&down,&up);
-	//printf("PE %i has coordinate [%i, %i]\n", rank, mycoords[0], mycoords[1]);
+	MPI_Cart_shift(Cycle_Communication,1, -1,&left,&right);
+	MPI_Cart_shift(Cycle_Communication,0, -1,&down,&up);
+	printf("PE %i has coordinate [%i, %i]\n", rank, mycoords[0], mycoords[1]);
 	double q0;
 	double DQ;
 	double q1;
@@ -93,12 +96,23 @@ int main(int argc, char* argv[]){
 		double q1_sub = 0;
 		double DQ_sub = 0;
 
-		/*if(mycoords[0] != 0)*/ MPI_Isend(&local_d[0], sideElementsPerProc, MPI_DOUBLE, up, 0, Cycle_Communication, &request);
-		/*if(mycoords[0] != n_p-1)*/ MPI_Isend(&local_d[elementsPerProc-sideElementsPerProc], sideElementsPerProc, MPI_DOUBLE, down, 1, Cycle_Communication, &request);
-		/*if(mycoords[1] != 0)*/ MPI_Isend(&local_d[0], 1, sideValues_t, left, 2, Cycle_Communication, &request);
-		/*if(mycoords[1] != n_p-1)*/MPI_Isend(&local_d[sideElementsPerProc-1], 1, sideValues_t, right, 3, Cycle_Communication, &request);
-
 		
+		
+
+		//if(mycoords[0] != 0){
+			MPI_Isend(&local_d[0], sideElementsPerProc, MPI_DOUBLE, up, 0, Cycle_Communication, &request1);
+			printf("Rank %i sends data uppwards to %i \n", rank, up);		
+		//}
+		
+
+		//if(mycoords[0] != n_p-1){
+			MPI_Isend(&local_d[elementsPerProc-sideElementsPerProc], sideElementsPerProc, MPI_DOUBLE, down, 1, Cycle_Communication, &request2);
+			printf("Rank %i sends data downwards to %i \n", rank, down);			
+		/*if(mycoords[1] != 0)*/ MPI_Isend(&local_d[0], 1, sideValues_t, left, 2, Cycle_Communication, &request3);
+			printf("Rank %i sends data left to %i \n", rank, down);
+		/*if(mycoords[1] != n_p-1)*/ MPI_Isend(&local_d[sideElementsPerProc-1], 1, sideValues_t, right, 3, Cycle_Communication, &request4);
+			printf("Rank %i sends data right to %i \n", rank, down);
+		//}
 		// Alla center element
 		
 		for(int i = 1; i < sideElementsPerProc-1; i++){
@@ -111,29 +125,32 @@ int main(int argc, char* argv[]){
 		}
 
 		// Inner över
-		if(mycoords[0] == 0){
+		if(mycoords[0] == n_p-1){
 			for(int i = 1; i < sideElementsPerProc-1; i++)
 				local_q[i] = 0;
 		}else{
 			MPI_Recv(topDest, sideElementsPerProc, MPI_DOUBLE, down, 0, Cycle_Communication, &status);
-			for(int i = 1; i < sideElementsPerProc-1; i++)
+			for(int i = 1; i < sideElementsPerProc-1; i++){
 				//local_q[i] = local_d[i];
-				local_q[i] = -local_d[i+1] - local_d[i-1] + 4*local_d[i] - local_d[i+sideElementsPerProc] -topDest[i];
+				//printf("%i received from below:%lf\n",rank, topDest[i]);
+				local_q[i] = -local_d[i +1] - local_d[i-1] + 4*local_d[i] - local_d[i+sideElementsPerProc] -topDest[i];
 				// res = höger vänster center nere uppe
+			}
 			
 		}
 
 
 		// Inner under
-		/*if(mycoords[0] != n_p-1)*/ 
-		if(mycoords[0] == n_p-1){
+		
+		if(mycoords[0] == 0){
 			for(int i = elementsPerProc-sideElementsPerProc+1; i < elementsPerProc-1; i++)
 				local_q[i] = 0;
 		} else {
 			MPI_Recv(bottomDest, sideElementsPerProc, MPI_DOUBLE, up, 1, Cycle_Communication, &status);
 			for(int i = elementsPerProc-sideElementsPerProc+1; i < elementsPerProc-1; i++){
 				//local_q[i] = local_d[i];
-				//local_q[i] = -local_d[i+1] - local_d[i-1] + 4*local_d[i] - local_d[i-sideElementsPerProc] -bottomDest[i-(elementsPerProc-sideElementsPerProc)];
+				//printf("\t%i received from above:%lf\n",rank, bottomDest[i-(elementsPerProc-sideElementsPerProc)]);
+				local_q[i] = -local_d[i+1] - local_d[i-1] + 4*local_d[i] - local_d[i+sideElementsPerProc] -bottomDest[i-(elementsPerProc-sideElementsPerProc)];
 				//res = höger vänster center uppe nere
 			}
 		}
@@ -143,58 +160,69 @@ int main(int argc, char* argv[]){
 
 
 		// Vänster
-		/*if(mycoords[1] != 0)*/ MPI_Recv(&leftDest[0], sideElementsPerProc, MPI_DOUBLE, right, 2, Cycle_Communication, &status);
-		/*if (mycoords[1]== 0){
+
+
+		if(mycoords[1] == 0){
+			for(int i = 0; i < sideElementsPerProc; i++){
+				int index = i*sideElementsPerProc;		
 				local_q[index] = 0;
-				continue;
 			}
+		} else {
+			MPI_Recv(&leftDest[0], sideElementsPerProc, MPI_DOUBLE, right, 2, Cycle_Communication, &status);
+			for(int i = 0; i < sideElementsPerProc; i++){
+				int index = i*sideElementsPerProc;			
 
-			local_q[index] = -local_d[index+1] - leftDest[i] + 4*local_d[index];
+				//printf("\t%i received from right:%lf\n",rank, leftDest[i]);
+				local_q[index] = -local_d[index+1] - leftDest[i] + 4*local_d[index];
 
-			if(i != 0){
-				local_q[index] -= local_d[index-sideElementsPerProc];
-			} else {
-			
-				local_q[index] -= topDest[0];
-				continue;
+				if(i != 0){
+					local_q[index] -= local_d[index-sideElementsPerProc];
+				} else {
+				
+					local_q[index] -= topDest[0];
+					continue;
+				}
+
+				if(i != sideElementsPerProc-1){
+					local_q[index] -= local_d[index+sideElementsPerProc];
+				} else {
+					local_q[index] -= bottomDest[0];
+					continue;
+				}
 			}
-
-			if(i != sideElementsPerProc-1){
-				local_q[index] -= local_d[index+sideElementsPerProc];
-			} else {
-				local_q[index] -= bottomDest[0];
-				continue;
-			}
-		}*/
-
+		}
 		// Höger i
-		/*if(mycoords[1] != n_p-1)*/ MPI_Recv(&rightDest[0], sideElementsPerProc, MPI_DOUBLE, left, 3, Cycle_Communication, &status);
-		/*for(int i = 0; i < sideElementsPerProc; i++){
-			int index = (i+1)*sideElementsPerProc-1;
-			if (mycoords[1]== n_p-1){
+		if(mycoords[1] == n_p-1){
+			for(int i = 0; i < sideElementsPerProc; i++){
+				int index = (i+1)*sideElementsPerProc-1;
 				local_q[index] = 0;
-				continue;
 			}
-			local_q[index] = -local_d[index-1] - rightDest[i] + 4*local_d[index];	
+		}else{
+			MPI_Recv(&rightDest[0], sideElementsPerProc, MPI_DOUBLE, left, 3, Cycle_Communication, &status);
+			for(int i = 0; i < sideElementsPerProc; i++){
+				int index = (i+1)*sideElementsPerProc-1;
 
+				local_q[index] = -local_d[index-1] - rightDest[i] + 4*local_d[index];	
 
-			if(i != 0){
-				local_q[index] -= local_d[index-sideElementsPerProc];
-			} else {
-			
-				local_q[index] -= topDest[sideElementsPerProc-1];
-				continue;
+				//printf("\t%i received from left:%lf\n",rank, rightDest[i]);
+				if(i != 0){
+					local_q[index] -= local_d[index-sideElementsPerProc];
+				} else {
+				
+					local_q[index] -= topDest[sideElementsPerProc-1];
+					continue;
+				}
+
+				if(i != sideElementsPerProc-1){
+					local_q[index] -= local_d[index+sideElementsPerProc];
+				} else {
+					local_q[index] -= bottomDest[sideElementsPerProc-1];
+					continue;
+
+				}
+
 			}
-
-			if(i != sideElementsPerProc-1){
-				local_q[index] -= local_d[index+sideElementsPerProc];
-			} else {
-				local_q[index] -= bottomDest[sideElementsPerProc-1];
-				continue;
-
-			}
-
-		}*/
+		}
 		for(int i = 0; i < elementsPerProc; i++){
 			DQ_sub += local_q[i]*local_d[i];
 			//printf("q %i %i %lf\n",rank, i, local_q[i]);
@@ -242,8 +270,6 @@ int main(int argc, char* argv[]){
 	for(int i = 0; i < p;i++){
 		count[i] = 1;
 		displ[i] = (i/n_p)*elementsPerProc*n_p + (i%n_p)*sideElementsPerProc;
-		printf("%i\n", displ[i]);	
-
 
 	}
 	MPI_Gatherv(local_q, elementsPerProc, MPI_DOUBLE, res, count, displ, blocktype, 0, MPI_COMM_WORLD);
