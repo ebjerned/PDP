@@ -108,11 +108,11 @@ int main(int argc, char* argv[]){
 		}
 
 		// Inner över
-		/*if(mycoords[0] != 0)*/ MPI_Recv(topDest, sideElementsPerProc, MPI_DOUBLE, up, 1, Cycle_Communication, &status);
 		if(mycoords[0] == 0){
 			for(int i = 1; i < sideElementsPerProc-1; i++)
 				local_q[i] = 0;
 		}else{
+			MPI_Recv(topDest, sideElementsPerProc, MPI_DOUBLE, down, 0, Cycle_Communication, &status);
 			for(int i = 1; i < sideElementsPerProc-1; i++)
 				local_q[i] = -local_d[i+1] - local_d[i-1] + 4*local_d[i] - local_d[i+sideElementsPerProc] -topDest[i];
 				// res = höger vänster center nere uppe
