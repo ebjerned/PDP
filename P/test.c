@@ -55,8 +55,8 @@ int main(int argc, char* argv[]){
 	MPI_Cart_create(MPI_COMM_WORLD,2,dims,periods,1,&Cycle_Communication);
 	MPI_Comm_rank(Cycle_Communication, &rank); 
 	MPI_Cart_coords(Cycle_Communication, rank, 2, mycoords); 
-	MPI_Cart_shift(Cycle_Communication,0, 1,&left,&right);
-	MPI_Cart_shift(Cycle_Communication,1, 1,&down,&up);
+	MPI_Cart_shift(Cycle_Communication,1, 1,&left,&right);
+	MPI_Cart_shift(Cycle_Communication,0, 1,&down,&up);
 	//printf("PE %i has coordinate [%i, %i]\n", rank, mycoords[0], mycoords[1]);
 	double q0;
 	double DQ;
