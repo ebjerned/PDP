@@ -99,13 +99,13 @@ int main(int argc, char* argv[]){
 		
 		// Alla center element
 		
-		/*for(int i = 1; i < sideElementsPerProc-1; i++){
+		for(int i = 1; i < sideElementsPerProc-1; i++){
 			for(int j = 1; j < sideElementsPerProc-1;j++){
 				int index = i*sideElementsPerProc + j;
 				
 				local_q[index] = -local_d[index+1] - local_d[index-1] + 4*local_d[index]-local_d[index+sideElementsPerProc] -local_d[index-sideElementsPerProc];
 			}
-		}*/
+		}
 
 		// Inner över
 		/*if(mycoords[0] != 0)*/ MPI_Recv(topDest, sideElementsPerProc, MPI_DOUBLE, down, 0, Cycle_Communication, &status);
