@@ -108,7 +108,7 @@ int main(int argc, char* argv[]){
 		}
 
 		// Inner över
-		/*if(mycoords[0] != 0)*/ MPI_Recv(topDest, sideElementsPerProc, MPI_DOUBLE, down, 0, Cycle_Communication, &status);
+		/*if(mycoords[0] != 0)*/ MPI_Recv(topDest, sideElementsPerProc, MPI_DOUBLE, up, 1, Cycle_Communication, &status);
 		if(mycoords[0] == 0){
 			for(int i = 1; i < sideElementsPerProc-1; i++)
 				local_q[i] = 0;
@@ -121,7 +121,7 @@ int main(int argc, char* argv[]){
 
 
 		// Inner under
-		/*if(mycoords[0] != n_p-1)*/ MPI_Recv(bottomDest, sideElementsPerProc, MPI_DOUBLE, up, 1, Cycle_Communication, &status);
+		/*if(mycoords[0] != n_p-1)*/ //MPI_Recv(bottomDest, sideElementsPerProc, MPI_DOUBLE, up, 1, Cycle_Communication, &status);
 		/*if(mycoords[0] == n_p-1){
 			for(int i = elementsPerProc-sideElementsPerProc+1; i < elementsPerProc-1; i++)
 				local_q[i] = 0;
