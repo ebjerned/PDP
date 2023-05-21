@@ -105,8 +105,8 @@ int main(int argc, char* argv[]){
 			for(int j = 1; j < sideElementsPerProc-1;j++){
 				int index = i*sideElementsPerProc + j;
 				
-				//local_q[index] = -local_d[index+1] - local_d[index-1] + 4*local_d[index]-local_d[index+sideElementsPerProc] -local_d[index-sideElementsPerProc];
-				local_q[index] = local_d[index];
+				local_q[index] = -local_d[index+1] - local_d[index-1] + 4*local_d[index]-local_d[index+sideElementsPerProc] -local_d[index-sideElementsPerProc];
+				//local_q[index] = local_d[index];
 			}
 		}
 
@@ -117,8 +117,8 @@ int main(int argc, char* argv[]){
 		}else{
 			MPI_Recv(topDest, sideElementsPerProc, MPI_DOUBLE, down, 0, Cycle_Communication, &status);
 			for(int i = 1; i < sideElementsPerProc-1; i++)
-				local_q[i] = local_d[i];
-				//local_q[i] = -local_d[i+1] - local_d[i-1] + 4*local_d[i] - local_d[i+sideElementsPerProc] -topDest[i];
+				//local_q[i] = local_d[i];
+				local_q[i] = -local_d[i+1] - local_d[i-1] + 4*local_d[i] - local_d[i+sideElementsPerProc] -topDest[i];
 				// res = höger vänster center nere uppe
 			
 		}
@@ -132,7 +132,7 @@ int main(int argc, char* argv[]){
 		} else {
 			MPI_Recv(bottomDest, sideElementsPerProc, MPI_DOUBLE, up, 1, Cycle_Communication, &status);
 			for(int i = elementsPerProc-sideElementsPerProc+1; i < elementsPerProc-1; i++){
-				local_q[i] = local_d[i];
+				//local_q[i] = local_d[i];
 				//local_q[i] = -local_d[i+1] - local_d[i-1] + 4*local_d[i] - local_d[i-sideElementsPerProc] -bottomDest[i-(elementsPerProc-sideElementsPerProc)];
 				//res = höger vänster center uppe nere
 			}
