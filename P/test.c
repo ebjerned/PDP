@@ -165,7 +165,7 @@ int main(int argc, char* argv[]){
 				} else {
 					if(mycoords[0]==0){
 						local_q[index] = 0;
-						continue;
+						//continue;
 					} else {
 						local_q[index] -= topDest[0];
 					}
@@ -201,7 +201,7 @@ int main(int argc, char* argv[]){
 				} else {
 					if(mycoords[0]==0){
 						local_q[index] = 0;
-						continue;
+						//continue;
 					} else {
 						local_q[index] -= topDest[sideElementsPerProc-1];
 					}
