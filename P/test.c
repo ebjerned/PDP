@@ -171,10 +171,10 @@ int main(int argc, char* argv[]){
 			MPI_Recv(&leftDest[0], sideElementsPerProc, MPI_DOUBLE, right, 2, Cycle_Communication, &status);
 			for(int i = 0; i < sideElementsPerProc; i++){
 				int index = i*sideElementsPerProc;			
-
+				local_q[index] = rank;
 				//printf("\t%i received from right:%lf\n",rank, leftDest[i]);
-				local_q[index] = -local_d[index+1] - leftDest[i] + 4*local_d[index];
-
+				/*local_q[index] = -local_d[index+1] - leftDest[i] + 4*local_d[index];
+				
 				if(i != 0){
 					local_q[index] -= local_d[index-sideElementsPerProc];
 				} else {
@@ -188,7 +188,7 @@ int main(int argc, char* argv[]){
 				} else {
 					local_q[index] -= topDest[i];
 					continue;
-				}
+				}*/
 			}
 		}
 		// Höger i
@@ -201,8 +201,8 @@ int main(int argc, char* argv[]){
 			MPI_Recv(&rightDest[0], sideElementsPerProc, MPI_DOUBLE, left, 3, Cycle_Communication, &status);
 			for(int i = 0; i < sideElementsPerProc; i++){
 				int index = (i+1)*sideElementsPerProc-1;
-
-				local_q[index] = -local_d[index-1] - rightDest[i] + 4*local_d[index];	
+				local_q[index] = rank;
+				/*local_q[index] = -local_d[index-1] - rightDest[i] + 4*local_d[index];	
 
 				//printf("\t%i received from left:%lf\n",rank, rightDest[i]);
 				if(i != 0){
@@ -219,7 +219,7 @@ int main(int argc, char* argv[]){
 					local_q[index] -= topDest[i];
 					continue;
 
-				}
+				}*/
 
 			}
 		}
