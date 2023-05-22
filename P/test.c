@@ -185,13 +185,13 @@ int main(int argc, char* argv[]){
 					local_q[index] -= local_d[index-sideElementsPerProc];
 				} else {
 				
-					local_q[index] -= topDest[i];
+					local_q[index] -= topDest[0];
 				}
 
 				if(i != sideElementsPerProc-1){
 					local_q[index] -= local_d[index+sideElementsPerProc];
 				} else {
-					local_q[index] -= bottomDest[i];
+					local_q[index] -= bottomDest[0];
 				}
 			}
 		}
@@ -213,13 +213,13 @@ int main(int argc, char* argv[]){
 					local_q[index] -= local_d[index-sideElementsPerProc];
 				} else {
 				
-					local_q[index] -= topDest[i];
+					local_q[index] -= topDest[sideElementsPerProc-1];
 				}
 
 				if(i != sideElementsPerProc-1){
 					local_q[index] -= local_d[index+sideElementsPerProc];
 				} else {
-					local_q[index] -= bottomDest[i];
+					local_q[index] -= bottomDest[sideElementsPerProc-1];
 
 				}
 
