@@ -21,21 +21,20 @@ int main(int argc, char* argv[]){
 	MPI_Request request3;
 	MPI_Request request4;
 
-	int shift;
 	int dims[2];
 	int periods[2];
 	int left,right,up,down;
-	double start,end;
+	double start,end_time;
 	int n = atoi(argv[1]);
-	double h = 1.0/(n+1);
+	const double h = 1.0/(n+1);
 	int p, rank;
 
 	MPI_Comm_size(MPI_COMM_WORLD, &p);
 	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-	int n_p = (int)sqrt(p);
-	int sideElementsPerProc = n/n_p;
+	const int n_p = (int)sqrt(p);
+	const int sideElementsPerProc = n/n_p;
 	
-	int elementsPerProc = sideElementsPerProc*sideElementsPerProc;
+	const int elementsPerProc = sideElementsPerProc*sideElementsPerProc;
 	MPI_Barrier(MPI_COMM_WORLD);
 	double* local_d = (double*)calloc(elementsPerProc, sizeof(double));
 	double* local_q = (double*)calloc(elementsPerProc,sizeof(double));
@@ -60,7 +59,7 @@ int main(int argc, char* argv[]){
 	MPI_Cart_coords(Cycle_Communication, rank, 2, mycoords); 
 	MPI_Cart_shift(Cycle_Communication,1, 1,&left,&right);
 	MPI_Cart_shift(Cycle_Communication,0, -1,&down,&up);
-	printf("PE %i has coordinate [%i, %i]\n", rank, mycoords[0], mycoords[1]);
+	//printf("PE %i has coordinate [%i, %i]\n", rank, mycoords[0], mycoords[1]);
 	double q0;
 	double DQ;
 	double q1;
@@ -69,11 +68,11 @@ int main(int argc, char* argv[]){
 	for(int i = 0; i < elementsPerProc; i++){
 		double x_i = mycoords[1]*sideElementsPerProc+i%sideElementsPerProc;
 		double y_i = mycoords[0]*sideElementsPerProc+i/sideElementsPerProc;
-		//if(x_i != 0 && x_i != n-1 && y_i != 0 && y_i != n-1){	
-			local_d[i] =  2*h*h*h*(x_i*(1-h*x_i)+y_i*(1-h*y_i));
-		//} else {
-		//	local_d[i] = 0;
-		//}
+		local_d[i] =  2*h*h*h*(x_i*(1-h*x_i)+y_i*(1-h*y_i));
+		if(mycoords[0] == 0 && i < sideElementsPerProc) local_d[i] = 0;
+		if(mycoords[0] == n_p-1 && i > elementsPerProc-sideElementsPerProc) local_d[i] = 0;
+		if(mycoords[1] == 0 && i % sideElementsPerProc == 0) local_d[i] = 0;
+		if(mycoords[1] == n_p-1 && i % sideElementsPerProc == sideElementsPerProc-1) local_d[i] = 0;
 		q0_sub += local_d[i]*local_d[i];
 		local_g[i] = -local_d[i];
 		//if(rank==8) printf("\tPE %i contains (%lf, %lf, %lf)\n",rank, x_i, y_i, local_d[i]);
@@ -81,7 +80,7 @@ int main(int argc, char* argv[]){
 	
 
 	MPI_Allreduce(&q0_sub, &q0, 1, MPI_DOUBLE, MPI_SUM, MPI_COMM_WORLD);
-	printf("First q0 %lf\n", q0);
+	//printf("First q0 %lf\n", q0);
 	
 	MPI_Datatype sideValues_t;
 	MPI_Datatype sideValues;
@@ -90,32 +89,33 @@ int main(int argc, char* argv[]){
 	MPI_Type_commit(&sideValues_t);
 	
 	// Iteratation start here
-	for(int t = 0; t < 1; t++){
+	for(int t = 0; t < 200; t++){
 
 		double g_norm = 0;
 		double q1_sub = 0;
 		double DQ_sub = 0;
 
 		
-		
-
-		if(mycoords[0] != 0){
-			MPI_Isend(&local_d[0], sideElementsPerProc, MPI_DOUBLE, up, 0, Cycle_Communication, &request1);
-			printf("Rank %i sends data uppwards to %i \n", rank, up);		
-		}
-		
 		if(mycoords[0] != n_p-1){
 			MPI_Isend(&local_d[elementsPerProc-sideElementsPerProc], sideElementsPerProc, MPI_DOUBLE, down, 1, Cycle_Communication, &request2);
-			printf("Rank %i sends data downwards to %i \n", rank, down);	
-		}		
-		if(mycoords[1] != 0){
-			MPI_Isend(&local_d[0], 1, sideValues_t, left, 2, Cycle_Communication, &request3);
-			printf("Rank %i sends data left to %i \n", rank, left);
+			//printf("Rank %i sends data downwards to %i \n", rank, down);	
 		}
+		
+		if(mycoords[0] != 0){
+			MPI_Isend(&local_d[0], sideElementsPerProc, MPI_DOUBLE, up, 0, Cycle_Communication, &request1);
+			//printf("Rank %i sends data uppwards to %i \n", rank, up);		
+		}
+		
 		if(mycoords[1] != n_p-1){
 			MPI_Isend(&local_d[sideElementsPerProc-1], 1, sideValues_t, right, 3, Cycle_Communication, &request4);
-			printf("Rank %i sends data right to %i \n", rank, right);
+			//printf("Rank %i sends data right to %i \n", rank, right);
 		}
+				
+		if(mycoords[1] != 0){
+			MPI_Isend(&local_d[0], 1, sideValues_t, left, 2, Cycle_Communication, &request3);
+			//printf("Rank %i sends data left to %i \n", rank, left);
+		}
+		
 		// Alla center element
 		
 		for(int i = 1; i < sideElementsPerProc-1; i++){
@@ -134,10 +134,7 @@ int main(int argc, char* argv[]){
 		}else{
 			MPI_Recv(topDest, sideElementsPerProc, MPI_DOUBLE, up, 1, Cycle_Communication, &status);
 			for(int i = 1; i < sideElementsPerProc-1; i++){
-				//local_q[i] = local_d[i];
-				//printf("%i received from below:%lf\n",rank, topDest[i]);
 				local_q[i] = -local_d[i +1] - local_d[i-1] + 4*local_d[i] - local_d[i+sideElementsPerProc] -topDest[i];
-				// res = höger vänster center nere uppe
 			}
 			
 		}
@@ -151,11 +148,9 @@ int main(int argc, char* argv[]){
 		} else {
 			MPI_Recv(bottomDest, sideElementsPerProc, MPI_DOUBLE, down, 0, Cycle_Communication, &status);
 			for(int i = elementsPerProc-sideElementsPerProc+1; i < elementsPerProc-1; i++){
-				//local_q[i] = local_d[i];
-				//printf("\t%i received from %i :%lf\n",rank,down, bottomDest[i-(elementsPerProc-sideElementsPerProc)]);
-				//printf("\t\t %i %lf %lf %lf %lf %lf \n",rank,-local_d[i+1],- local_d[i-1],  4*local_d[i], -local_d[i-sideElementsPerProc], -bottomDest[i-(elementsPerProc-sideElementsPerProc)]);
+
 				local_q[i] = -local_d[i+1] - local_d[i-1] + 4*local_d[i] - local_d[i-sideElementsPerProc] -bottomDest[i-(elementsPerProc-sideElementsPerProc)];
-				//res = höger vänster center uppe nere
+
 			}
 		}
 		
@@ -175,16 +170,13 @@ int main(int argc, char* argv[]){
 			MPI_Recv(&leftDest[0], sideElementsPerProc, MPI_DOUBLE, left, 3, Cycle_Communication, &status);
 			for(int i = 0; i < sideElementsPerProc; i++){
 				int index = i*sideElementsPerProc;			
-				//local_q[index] = rank;
-				//printf("\t%i received from right:%lf\n",rank, leftDest[i]);
 				local_q[index] = -local_d[index+1] - leftDest[i] + 4*local_d[index];
 
 				
 				if(i != 0){
 					local_q[index] -= local_d[index-sideElementsPerProc];
 				} else {
-					//printf("\t%i received from %i :%lf\n",rank,left, leftDest[i]);
-					//printf("\t\t %i %lf %lf %lf %lf \n",rank,-local_d[index+1],  4*local_d[index], -leftDest[i], -topDest[0]);
+
 					if (mycoords[0]==0){
 						local_q[index] = 0;
 						continue;
@@ -215,10 +207,8 @@ int main(int argc, char* argv[]){
 			MPI_Recv(&rightDest[0], sideElementsPerProc, MPI_DOUBLE, right, 2, Cycle_Communication, &status);
 			for(int i = 0; i < sideElementsPerProc; i++){
 				int index = (i+1)*sideElementsPerProc-1;
-				//local_q[index] = rank;
 				local_q[index] = -local_d[index-1] - rightDest[i] + 4*local_d[index];	
-
-				//printf("\t%i received from left:%lf\n",rank, rightDest[i]);
+				
 				if(i != 0){
 					local_q[index] -= local_d[index-sideElementsPerProc];
 				} else {
@@ -243,20 +233,21 @@ int main(int argc, char* argv[]){
 
 
 			}
+
 		}
 		for(int i = 0; i < elementsPerProc; i++){
 			DQ_sub += local_q[i]*local_d[i];
 			//printf("q %i %i %lf\n",rank, i, local_q[i]);
 			//printf("d %lf\n", local_d[i]);
 		}
-		printf("DQ_sub %.10lf\n", DQ_sub);
+		//printf("DQ_sub %.10lf\n", DQ_sub);
 
 		
 		MPI_Allreduce(&DQ_sub, &DQ, 1, MPI_DOUBLE, MPI_SUM, MPI_COMM_WORLD);
-		printf("DQ %.10lf\n", DQ);
-		printf("q0 %lf\n", q0);
+		//printf("DQ %.10lf\n", DQ);
+		//printf("q0 %lf\n", q0);
 		double tau = q0/DQ;
-		printf("Tau %lf\n", tau);
+		//printf("Tau %lf\n", tau);
 		
 		
 		for(int i = 0; i < elementsPerProc; i++){
@@ -275,16 +266,14 @@ int main(int argc, char* argv[]){
 		q0 = q1;
 
 		g_norm = sqrt(q1);
-		if(rank==0)printf(" %lf\n", g_norm);
+		if(rank==0)printf("g_norm %lf\n", g_norm);
 	}
-	end = MPI_Wtime();
-	printf("%lf\n", end-start);
 
-	double* res = (double*) malloc(n*n*sizeof(double));
-	MPI_Datatype blocktype;
-	MPI_Datatype blocktype2;
-	MPI_Type_vector(sideElementsPerProc, sideElementsPerProc, sideElementsPerProc*n_p, MPI_DOUBLE, &blocktype2);
-	MPI_Type_create_resized(blocktype2, 0, sizeof(double), &blocktype);
+	end_time = MPI_Wtime()-start;
+	double max_time;
+	MPI_Reduce(&end_time, &max_time,1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
+	if(rank==0) printf("%lf\n", end_time);
+	/*create_resized(blocktype2, 0, sizeof(double), &blocktype);
 	MPI_Type_commit(&blocktype);
 	int count[p];
 	int displ[p];
@@ -297,7 +286,7 @@ int main(int argc, char* argv[]){
 	if(rank==0)
 		for(int i = 0; i < n*n; i++)
 			printf("%.10lf\n", res[i]);
-
+	*/
 	MPI_Barrier(MPI_COMM_WORLD);
 	MPI_Type_free(&sideValues_t);
 	free(topDest);
