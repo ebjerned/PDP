@@ -152,8 +152,8 @@ int main(int argc, char* argv[]){
 			MPI_Recv(bottomDest, sideElementsPerProc, MPI_DOUBLE, down, 0, Cycle_Communication, &status);
 			for(int i = elementsPerProc-sideElementsPerProc+1; i < elementsPerProc-1; i++){
 				//local_q[i] = local_d[i];
-				printf("\t%i received from %i :%lf\n",rank,down, bottomDest[i-(elementsPerProc-sideElementsPerProc)]);
-				printf("\t\t %i %lf %lf %lf %lf %lf \n",rank,-local_d[i+1],- local_d[i-1],  4*local_d[i], -local_d[i-sideElementsPerProc], -bottomDest[i-(elementsPerProc-sideElementsPerProc)]);
+				//printf("\t%i received from %i :%lf\n",rank,down, bottomDest[i-(elementsPerProc-sideElementsPerProc)]);
+				//printf("\t\t %i %lf %lf %lf %lf %lf \n",rank,-local_d[i+1],- local_d[i-1],  4*local_d[i], -local_d[i-sideElementsPerProc], -bottomDest[i-(elementsPerProc-sideElementsPerProc)]);
 				local_q[i] = -local_d[i+1] - local_d[i-1] + 4*local_d[i] - local_d[i-sideElementsPerProc] -bottomDest[i-(elementsPerProc-sideElementsPerProc)];
 				//res = höger vänster center uppe nere
 			}
@@ -172,13 +172,15 @@ int main(int argc, char* argv[]){
 				local_q[index] = 0;
 			}
 		} else {
-			MPI_Recv(&leftDest[0], sideElementsPerProc, MPI_DOUBLE, right, 2, Cycle_Communication, &status);
+			MPI_Recv(&leftDest[0], sideElementsPerProc, MPI_DOUBLE, left, 3, Cycle_Communication, &status);
 			for(int i = 0; i < sideElementsPerProc; i++){
 				int index = i*sideElementsPerProc;			
 				//local_q[index] = rank;
 				//printf("\t%i received from right:%lf\n",rank, leftDest[i]);
 				local_q[index] = -local_d[index+1] - leftDest[i] + 4*local_d[index];
-				
+
+				//printf("\t%i received from %i :%lf\n",rank,left, leftDest[i]);
+				//printf("\t\t %i %lf %lf %lf %lf %lf \n",rank,-local_d[index+1],- local_d[index-1],  4*local_d[index], -local_d[index-sideElementsPerProc], -leftDest[i]);
 				if(i != 0){
 					local_q[index] -= local_d[index-sideElementsPerProc];
 				} else {
@@ -202,7 +204,7 @@ int main(int argc, char* argv[]){
 				local_q[index] = 0;
 			}
 		}else{
-			MPI_Recv(&rightDest[0], sideElementsPerProc, MPI_DOUBLE, left, 3, Cycle_Communication, &status);
+			MPI_Recv(&rightDest[0], sideElementsPerProc, MPI_DOUBLE, right, 2, Cycle_Communication, &status);
 			for(int i = 0; i < sideElementsPerProc; i++){
 				int index = (i+1)*sideElementsPerProc-1;
 				//local_q[index] = rank;
