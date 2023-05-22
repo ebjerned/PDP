@@ -70,7 +70,7 @@ int main(int argc, char* argv[]){
 		double x_i = mycoords[1]*sideElementsPerProc+i%sideElementsPerProc;
 		double y_i = mycoords[0]*sideElementsPerProc+i/sideElementsPerProc;
 		//if(x_i != 0 && x_i != n-1 && y_i != 0 && y_i != n-1){	
-			local_d[i] =  y_i;//2*h*h*h*(x_i*(1-h*x_i)+y_i*(1-h*y_i));
+			local_d[i] =  2*h*h*h*(x_i*(1-h*x_i)+y_i*(1-h*y_i));
 		//} else {
 		//	local_d[i] = 0;
 		//}
