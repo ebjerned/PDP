@@ -179,21 +179,19 @@ int main(int argc, char* argv[]){
 				//printf("\t%i received from right:%lf\n",rank, leftDest[i]);
 				local_q[index] = -local_d[index+1] - leftDest[i] + 4*local_d[index];
 
-				//printf("\t%i received from %i :%lf\n",rank,left, leftDest[i]);
-				//printf("\t\t %i %lf %lf %lf %lf %lf \n",rank,-local_d[index+1],- local_d[index-1],  4*local_d[index], -local_d[index-sideElementsPerProc], -leftDest[i]);
+				printf("\t%i received from %i :%lf\n",rank,left, leftDest[i]);
+				printf("\t\t %i %lf %lf %lf %lf %lf \n",rank,-local_d[index+1],- local_d[index-1],  4*local_d[index], -local_d[index-sideElementsPerProc], -leftDest[i]);
 				if(i != 0){
 					local_q[index] -= local_d[index-sideElementsPerProc];
 				} else {
 				
 					local_q[index] -= topDest[i];
-					continue;
 				}
 
 				if(i != sideElementsPerProc-1){
 					local_q[index] -= local_d[index+sideElementsPerProc];
 				} else {
 					local_q[index] -= bottomDest[i];
-					continue;
 				}
 			}
 		}
@@ -216,14 +214,12 @@ int main(int argc, char* argv[]){
 				} else {
 				
 					local_q[index] -= topDest[i];
-					continue;
 				}
 
 				if(i != sideElementsPerProc-1){
 					local_q[index] -= local_d[index+sideElementsPerProc];
 				} else {
 					local_q[index] -= bottomDest[i];
-					continue;
 
 				}
 
