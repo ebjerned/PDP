@@ -1,11 +1,188 @@
+PE 2 has coordinate [0, 2]
+PE 4 has coordinate [1, 0]
+PE 6 has coordinate [1, 2]
+PE 7 has coordinate [1, 3]
+PE 9 has coordinate [2, 1]
+PE 10 has coordinate [2, 2]
+PE 11 has coordinate [2, 3]
+PE 12 has coordinate [3, 0]
+PE 13 has coordinate [3, 1]
+PE 14 has coordinate [3, 2]
+PE 15 has coordinate [3, 3]
 PE 0 has coordinate [0, 0]
+PE 1 has coordinate [0, 1]
+PE 3 has coordinate [0, 3]
+PE 5 has coordinate [1, 1]
+PE 8 has coordinate [2, 0]
 First q0 5462016.000000
+Rank 15 sends data uppwards to 11 
+First q0 5462016.000000
+Rank 5 sends data uppwards to 1 
+Rank 5 sends data downwards to 9 
+First q0 5462016.000000
+Rank 9 sends data uppwards to 5 
+Rank 9 sends data downwards to 13 
+Rank 9 sends data left to 8 
+Rank 9 sends data right to 10 
+First q0 5462016.000000
+Rank 10 sends data uppwards to 6 
+First q0 5462016.000000
+Rank 11 sends data uppwards to 7 
+Rank 11 sends data downwards to 15 
+Rank 11 sends data left to 10 
+First q0 5462016.000000
+Rank 12 sends data uppwards to 8 
+Rank 12 sends data right to 13 
+First q0 5462016.000000
+Rank 13 sends data uppwards to 9 
+Rank 13 sends data left to 12 
+Rank 13 sends data right to 14 
+First q0 5462016.000000
+Rank 14 sends data uppwards to 10 
+Rank 14 sends data left to 13 
+First q0 5462016.000000
+Rank 0 sends data downwards to 4 
+Rank 0 sends data right to 1 
+DQ_sub 0.0000000000
+First q0 5462016.000000
+Rank 1 sends data downwards to 5 
+Rank 1 sends data left to 0 
+Rank 1 sends data right to 2 
+	1 received from 0 :0.000000
+First q0 5462016.000000
+Rank 2 sends data downwards to 6 
+Rank 2 sends data left to 1 
+Rank 2 sends data right to 3 
+	2 received from 1 :0.000000
+	First q0 5462016.000000
+Rank 3 sends data downwards to 7 
+Rank 3 sends data left to 2 
+	3 received from 2 :0.000000
+		 3 -0.000000 0.000000 -0.000000 -0.000000 
+DQ_sub 0.0000000000
+First q0 5462016.000000
+Rank 4 sends data uppwards to 0 
+Rank 4 sends data downwards to 8 
+Rank 4 sends data right to 5 
+First q0 5462016.000000
+Rank 6 sends data uppwards to 2 
+Rank 6 sends data downwards to 10 
+Rank 6 sends data left to 5 
+Rank 6 sends data right to 7 
+Rank 15 sends data left to 14 
+	15 received from 14 :48.000000
+		 15 -48.000000 192.000000 -48.000000 -47.000000 
+DQ_sub 0.0000000000
+First q0 5462016.000000
+Rank 7 sends data uppwards to 3 
+Rank 7 sends data downwards to 11 
+Rank 7 sends data left to 6 
+	7 received from 6 :16.000000
+		 7 -16.000000 64.000000 -16.000000 -15.000000 
+DQ_sub 0.0000000000
+Rank 5 sends data left to 4 
+Rank 5 sends data right to 6 
+	5 received from 4 :16.000000
+		 5 -16.000000 64.000000 -16.000000 -15.000000 
+DQ_sub 0.0000000000
+Rank 10 sends data downwards to 14 
+Rank 10 sends data left to 9 
+Rank 10 sends data right to 11 
+	10 received from 9 :32.000000
+		 10 -32.000000 128.000000 -32.000000 -31.000000 
+DQ_sub 0.0000000000
+	11 received from 10 :32.000000
+		 11 -32.000000 128.000000 -32.000000 -31.000000 
+DQ_sub 0.0000000000
+	13 received from 12 :48.000000
+		 13 -48.000000 192.000000 -48.000000 -47.000000 
+DQ_sub 0.0000000000
+Rank 14 sends data right to 15 
+	14 received from 13 :48.000000
+		 14 -48.000000 192.000000 -48.000000 -47.000000 
+DQ_sub 0.0000000000
+		 1 -0.000000 0.000000 -0.000000 -0.000000 
+DQ_sub 0.0000000000
+	 2 -0.000000 0.000000 -0.000000 -0.000000 
+DQ_sub 0.0000000000
+	6 received from 5 :16.000000
+		 6 -16.000000 64.000000 -16.000000 -15.000000 
+DQ_sub 0.0000000000
+First q0 5462016.000000
+DQ_sub 0.0000000000
+Rank 8 sends data uppwards to 4 
+DQ_sub 0.0000000000
+Rank 8 sends data downwards to 12 
+	9 received from 8 :32.000000
+		 9 -32.000000 128.000000 -32.000000 -31.000000 
+DQ_sub 0.0000000000
+Rank 8 sends data right to 9 
 DQ_sub 0.0000000000
 DQ 0.0000000000
 q0 5462016.000000
 Tau inf
+DQ 0.0000000000
+q0 5462016.000000
+Tau inf
+DQ 0.0000000000
+q0 5462016.000000
+Tau inf
+DQ 0.0000000000
+q0 5462016.000000
+Tau inf
+DQ 0.0000000000
+q0 5462016.000000
+Tau inf
+DQ 0.0000000000
+q0 5462016.000000
+Tau inf
+DQ 0.0000000000
+q0 5462016.000000
+Tau inf
+DQ 0.0000000000
+q0 5462016.000000
+Tau inf
+DQ 0.0000000000
+q0 5462016.000000
+Tau inf
+DQ 0.0000000000
+q0 5462016.000000
+Tau inf
+DQ 0.0000000000
+q0 5462016.000000
+Tau inf
+DQ 0.0000000000
+q0 5462016.000000
+Tau inf
+DQ 0.0000000000
+q0 5462016.000000
+Tau inf
+DQ 0.0000000000
+q0 5462016.000000
+Tau inf
+DQ 0.0000000000
+q0 5462016.000000
+Tau inf
+DQ 0.0000000000
+q0 5462016.000000
+Tau inf
+0.001681
+0.001675
+0.001659
  -nan
-0.000143
+0.001670
+0.001669
+0.001659
+0.001663
+0.001703
+0.001701
+0.001707
+0.001707
+0.001709
+0.001669
+0.001705
+0.001667
+0.001290
 0.0000000000
 0.0000000000
 0.0000000000
