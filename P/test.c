@@ -185,13 +185,22 @@ int main(int argc, char* argv[]){
 				} else {
 					printf("\t%i received from %i :%lf\n",rank,left, leftDest[i]);
 					printf("\t\t %i %lf %lf %lf %lf \n",rank,-local_d[index+1],  4*local_d[index], -leftDest[i], -topDest[0]);
-					local_q[index] -= topDest[0];
+					if (mycoords[0]==0){
+						local_q[index] = 0;
+					} else{
+						local_q[index] -= topDest[0];
+					}
 				}
 
 				if(i != sideElementsPerProc-1){
 					local_q[index] -= local_d[index+sideElementsPerProc];
 				} else {
-					local_q[index] -= bottomDest[0];
+
+					if (mycoords[0]==n_p-1){
+						local_q[index] = 0;
+					} else{
+						local_q[index] -= bottomDest[0];
+					}
 				}
 			}
 		}
@@ -212,14 +221,21 @@ int main(int argc, char* argv[]){
 				if(i != 0){
 					local_q[index] -= local_d[index-sideElementsPerProc];
 				} else {
-				
-					local_q[index] -= topDest[sideElementsPerProc-1];
+					if (mycoords[0]==0){
+						local_q[index] = 0;
+					} else{
+						local_q[index] -= topDest[sideElementsPerProc-1];
+					}
 				}
 
 				if(i != sideElementsPerProc-1){
 					local_q[index] -= local_d[index+sideElementsPerProc];
 				} else {
-					local_q[index] -= bottomDest[sideElementsPerProc-1];
+					if (mycoords[0]==n_p-1){
+						local_q[index] = 0;
+					} else{
+						local_q[index] -= bottomDest[sideElementsPerProc-1];
+					}
 
 				}
 
