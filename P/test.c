@@ -183,8 +183,8 @@ int main(int argc, char* argv[]){
 				if(i != 0){
 					local_q[index] -= local_d[index-sideElementsPerProc];
 				} else {
-					printf("\t%i received from %i :%lf\n",rank,left, leftDest[i]);
-					printf("\t\t %i %lf %lf %lf %lf \n",rank,-local_d[index+1],  4*local_d[index], -leftDest[i], -topDest[0]);
+					//printf("\t%i received from %i :%lf\n",rank,left, leftDest[i]);
+					//printf("\t\t %i %lf %lf %lf %lf \n",rank,-local_d[index+1],  4*local_d[index], -leftDest[i], -topDest[0]);
 					if (mycoords[0]==0){
 						local_q[index] = 0;
 						continue;
@@ -270,7 +270,7 @@ int main(int argc, char* argv[]){
 		MPI_Allreduce(&q1_sub, &q1, 1, MPI_DOUBLE, MPI_SUM, MPI_COMM_WORLD);
 		double beta = q1/q0;
 		for(int i = 0; i < elementsPerProc; i++){
-			//local_d[i] = -local_g[i]+beta*local_d[i];
+			local_d[i] = -local_g[i]+beta*local_d[i];
 		}
 		q0 = q1;
 
@@ -293,7 +293,7 @@ int main(int argc, char* argv[]){
 		displ[i] = (i/n_p)*elementsPerProc*n_p + (i%n_p)*sideElementsPerProc;
 
 	}
-	MPI_Gatherv(local_q, elementsPerProc, MPI_DOUBLE, res, count, displ, blocktype, 0, MPI_COMM_WORLD);
+	MPI_Gatherv(local_u, elementsPerProc, MPI_DOUBLE, res, count, displ, blocktype, 0, MPI_COMM_WORLD);
 	if(rank==0)
 		for(int i = 0; i < n*n; i++)
 			printf("%.10lf\n", res[i]);
