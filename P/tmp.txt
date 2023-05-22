@@ -1,28 +1,26 @@
 PE 0 has coordinate [0, 0]
 PE 1 has coordinate [0, 1]
 PE 2 has coordinate [1, 0]
-First q0 5462016.000000
 PE 3 has coordinate [1, 1]
 First q0 5462016.000000
 First q0 5462016.000000
 First q0 5462016.000000
+First q0 5462016.000000
+Rank 0 sends data downwards to 2 
+Rank 1 sends data downwards to 3 
 Rank 3 sends data uppwards to 1 
 Rank 3 sends data left to 2 
-Rank 0 sends data downwards to 2 
-Rank 0 sends data right to 1 
 Rank 2 sends data uppwards to 0 
 Rank 2 sends data right to 3 
-Rank 1 sends data downwards to 3 
 Rank 1 sends data left to 0 
-DQ_sub 0.0000000000
-DQ_sub 0.0000000000
+Rank 0 sends data right to 1 
 	3 received from 2 :32.000000
 		 3 -32.000000 128.000000 -32.000000 -31.000000 
+DQ_sub 0.0000000000
 	1 received from 0 :0.000000
 		 1 -0.000000 0.000000 -0.000000 -0.000000 
 DQ_sub 0.0000000000
-DQ 0.0000000000
-q0 5462016.000000
+DQ_sub 0.0000000000
 DQ_sub 0.0000000000
 DQ 0.0000000000
 q0 5462016.000000
@@ -31,14 +29,16 @@ DQ 0.0000000000
 q0 5462016.000000
 Tau inf
  -nan
-0.000217
 DQ 0.0000000000
 q0 5462016.000000
 Tau inf
-0.000212
+0.000344
+DQ 0.0000000000
+q0 5462016.000000
 Tau inf
-0.000212
-0.000212
+0.000349
+0.057933
+0.057942
 0.0000000000
 0.0000000000
 0.0000000000
@@ -70,8 +70,8 @@ Tau inf
 0.0000000000
 0.0000000000
 0.0000000000
--1.0000000000
--1.0000000000
+0.0000000000
+0.0000000000
 0.0000000000
 0.0000000000
 0.0000000000

@@ -187,6 +187,7 @@ int main(int argc, char* argv[]){
 					printf("\t\t %i %lf %lf %lf %lf \n",rank,-local_d[index+1],  4*local_d[index], -leftDest[i], -topDest[0]);
 					if (mycoords[0]==0){
 						local_q[index] = 0;
+						continue;
 					} else{
 						local_q[index] -= topDest[0];
 					}
@@ -223,6 +224,7 @@ int main(int argc, char* argv[]){
 				} else {
 					if (mycoords[0]==0){
 						local_q[index] = 0;
+						continue;
 					} else{
 						local_q[index] -= topDest[sideElementsPerProc-1];
 					}
@@ -238,6 +240,7 @@ int main(int argc, char* argv[]){
 					}
 
 				}
+
 
 			}
 		}
