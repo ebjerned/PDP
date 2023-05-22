@@ -58,7 +58,7 @@ int main(int argc, char* argv[]){
 	MPI_Cart_create(MPI_COMM_WORLD,2,dims,periods,1,&Cycle_Communication);
 	MPI_Comm_rank(Cycle_Communication, &rank); 
 	MPI_Cart_coords(Cycle_Communication, rank, 2, mycoords); 
-	MPI_Cart_shift(Cycle_Communication,1, -1,&left,&right);
+	MPI_Cart_shift(Cycle_Communication,1, 1,&left,&right);
 	MPI_Cart_shift(Cycle_Communication,0, -1,&down,&up);
 	printf("PE %i has coordinate [%i, %i]\n", rank, mycoords[0], mycoords[1]);
 	double q0;
@@ -99,20 +99,23 @@ int main(int argc, char* argv[]){
 		
 		
 
-		//if(mycoords[0] != 0){
+		if(mycoords[0] != 0){
 			MPI_Isend(&local_d[0], sideElementsPerProc, MPI_DOUBLE, up, 0, Cycle_Communication, &request1);
 			printf("Rank %i sends data uppwards to %i \n", rank, up);		
-		//}
+		}
 		
-
-		//if(mycoords[0] != n_p-1){
+		if(mycoords[0] != n_p-1){
 			MPI_Isend(&local_d[elementsPerProc-sideElementsPerProc], sideElementsPerProc, MPI_DOUBLE, down, 1, Cycle_Communication, &request2);
-			printf("Rank %i sends data downwards to %i \n", rank, down);			
-		/*if(mycoords[1] != 0)*/ MPI_Isend(&local_d[0], 1, sideValues_t, left, 2, Cycle_Communication, &request3);
-			printf("Rank %i sends data left to %i \n", rank, down);
-		/*if(mycoords[1] != n_p-1)*/ MPI_Isend(&local_d[sideElementsPerProc-1], 1, sideValues_t, right, 3, Cycle_Communication, &request4);
-			printf("Rank %i sends data right to %i \n", rank, down);
-		//}
+			printf("Rank %i sends data downwards to %i \n", rank, down);	
+		}		
+		if(mycoords[1] != 0){
+			MPI_Isend(&local_d[0], 1, sideValues_t, left, 2, Cycle_Communication, &request3);
+			printf("Rank %i sends data left to %i \n", rank, left);
+		}
+		if(mycoords[1] != n_p-1){
+			MPI_Isend(&local_d[sideElementsPerProc-1], 1, sideValues_t, right, 3, Cycle_Communication, &request4);
+			printf("Rank %i sends data right to %i \n", rank, right);
+		}
 		// Alla center element
 		
 		for(int i = 1; i < sideElementsPerProc-1; i++){
@@ -129,7 +132,7 @@ int main(int argc, char* argv[]){
 			for(int i = 1; i < sideElementsPerProc-1; i++)
 				local_q[i] = 0;
 		}else{
-			MPI_Recv(topDest, sideElementsPerProc, MPI_DOUBLE, down, 0, Cycle_Communication, &status);
+			MPI_Recv(topDest, sideElementsPerProc, MPI_DOUBLE, up, 1, Cycle_Communication, &status);
 			for(int i = 1; i < sideElementsPerProc-1; i++){
 				//local_q[i] = local_d[i];
 				//printf("%i received from below:%lf\n",rank, topDest[i]);
@@ -146,11 +149,12 @@ int main(int argc, char* argv[]){
 			for(int i = elementsPerProc-sideElementsPerProc+1; i < elementsPerProc-1; i++)
 				local_q[i] = 0;
 		} else {
-			MPI_Recv(bottomDest, sideElementsPerProc, MPI_DOUBLE, up, 1, Cycle_Communication, &status);
+			MPI_Recv(bottomDest, sideElementsPerProc, MPI_DOUBLE, down, 0, Cycle_Communication, &status);
 			for(int i = elementsPerProc-sideElementsPerProc+1; i < elementsPerProc-1; i++){
 				//local_q[i] = local_d[i];
-				//printf("\t%i received from above:%lf\n",rank, bottomDest[i-(elementsPerProc-sideElementsPerProc)]);
-				local_q[i] = -local_d[i+1] - local_d[i-1] + 4*local_d[i] - local_d[i+sideElementsPerProc] -bottomDest[i-(elementsPerProc-sideElementsPerProc)];
+				printf("\t%i received from %i :%lf\n",rank,down, bottomDest[i-(elementsPerProc-sideElementsPerProc)]);
+				printf("\t\t %i %lf %lf %lf %lf %lf \n",rank,-local_d[i+1],- local_d[i-1],  4*local_d[i], -local_d[i-sideElementsPerProc], -bottomDest[i-(elementsPerProc-sideElementsPerProc)]);
+				local_q[i] = -local_d[i+1] - local_d[i-1] + 4*local_d[i] - local_d[i-sideElementsPerProc] -bottomDest[i-(elementsPerProc-sideElementsPerProc)];
 				//res = höger vänster center uppe nere
 			}
 		}
