@@ -129,7 +129,7 @@ int main(int argc, char* argv[]){
 
 		// Inner över
 		if(mycoords[0] == 0){
-			for(int i = 1; i < sideElementsPerProc-1; i++)
+			for(int i = 0; i < sideElementsPerProc; i++)
 				local_q[i] = 0;
 		}else{
 			MPI_Recv(topDest, sideElementsPerProc, MPI_DOUBLE, up, 1, Cycle_Communication, &status);
@@ -146,7 +146,7 @@ int main(int argc, char* argv[]){
 		// Inner under
 		
 		if(mycoords[0] == n_p-1){
-			for(int i = elementsPerProc-sideElementsPerProc+1; i < elementsPerProc-1; i++)
+			for(int i = elementsPerProc-sideElementsPerProc; i < elementsPerProc; i++)
 				local_q[i] = 0;
 		} else {
 			MPI_Recv(bottomDest, sideElementsPerProc, MPI_DOUBLE, down, 0, Cycle_Communication, &status);
@@ -179,12 +179,12 @@ int main(int argc, char* argv[]){
 				//printf("\t%i received from right:%lf\n",rank, leftDest[i]);
 				local_q[index] = -local_d[index+1] - leftDest[i] + 4*local_d[index];
 
-				printf("\t%i received from %i :%lf\n",rank,left, leftDest[i]);
-				printf("\t\t %i %lf %lf %lf %lf %lf \n",rank,-local_d[index+1],- local_d[index-1],  4*local_d[index], -local_d[index-sideElementsPerProc], -leftDest[i]);
+				
 				if(i != 0){
 					local_q[index] -= local_d[index-sideElementsPerProc];
 				} else {
-				
+					printf("\t%i received from %i :%lf\n",rank,left, leftDest[i]);
+					printf("\t\t %i %lf %lf %lf %lf \n",rank,-local_d[index+1],  4*local_d[index], -leftDest[i], -topDest[0]);
 					local_q[index] -= topDest[0];
 				}
 
