@@ -357,7 +357,7 @@ int main(int argc, char* argv[]){
 		displ[i] = (i/n_p)*elementsPerProc*n_p + (i%n_p)*sideElementsPerProc;
 
 	}
-	MPI_Gatherv(local_u, elementsPerProc, MPI_DOUBLE, res, count, displ, blocktype, 0, MPI_COMM_WORLD);
+	MPI_Gatherv(local_q, elementsPerProc, MPI_DOUBLE, res, count, displ, blocktype, 0, MPI_COMM_WORLD);
 	if(rank==0)
 		for(int i = 0; i < n*n; i++)
 			printf("%.10lf\n", res[i]);
