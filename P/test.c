@@ -216,6 +216,7 @@ int main(int argc, char* argv[]){
 			for(int i = 1; i < sideElementsPerProc-1; i++){
 				int index = i*sideElementsPerProc;			
 				local_q[index] = -local_d[index+1] - leftDest[i] + 4*local_d[index]-local_d[index-sideElementsPerProc]- local_d[index+sideElementsPerProc];
+				if(i == sideElementsPerProc-2) printf("%.10lf\n", local_q[index]);
 				//if(i != sideElementsPerProc-2 && mycoords[0] == n_p-1) local_q[index] -= local_d[index+sideElementsPerProc];
 				/* TOP AND BOTTOM, EDGE CASES*/
 				/*if(i != 0){
@@ -389,7 +390,7 @@ int main(int argc, char* argv[]){
 		beta = q1/q0;
 		
 		for(int i = 0; i < elementsPerProc; i++){
-			local_d[i] = -local_g[i]+beta*local_d[i];
+			//local_d[i] = -local_g[i]+beta*local_d[i];
 		}
 		
 		q0 = q1;
