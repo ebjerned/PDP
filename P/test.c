@@ -95,7 +95,7 @@ int main(int argc, char* argv[]){
 
 	
 	// Iteratation start here
-	for(int t = 0; t < 200; t++){
+	for(int t = 0; t < 1; t++){
 
 
 		q1_sub = 0;
