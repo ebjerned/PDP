@@ -78,7 +78,7 @@ int main(int argc, char* argv[]){
 		double x_i = h*(mycoords[1]*sideElementsPerProc+i%sideElementsPerProc);
 		double y_i = h*(mycoords[0]*sideElementsPerProc+i/sideElementsPerProc);
 		
-		if((mycoords[0] == 0 && i < sideElementsPerProc) ||  (mycoords[0] == n_p-1 && i > elementsPerProc-sideElementsPerProc) || 
+		if((mycoords[0] == 0 && i < sideElementsPerProc) ||  (mycoords[0] == n_p-1 && i > elementsPerProc-sideElementsPerProc-1) || 
 					(mycoords[1] == 0 && i % sideElementsPerProc == 0) || (mycoords[1] == n_p-1 && i % sideElementsPerProc == sideElementsPerProc-1)){
 			local_d[i] = 0;
 		}else{
