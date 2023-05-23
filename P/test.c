@@ -95,7 +95,7 @@ int main(int argc, char* argv[]){
 
 	
 	// Iteratation start here
-	for(int t = 0; t < 200; t++){
+	for(int t = 0; t < 1; t++){
 
 
 		q1_sub = 0;
@@ -155,17 +155,17 @@ int main(int argc, char* argv[]){
 			}
 		} else {
 			MPI_Recv(&leftDest[0], sideElementsPerProc, MPI_DOUBLE, left, 3, Cycle_Communication, &status);
-			for(int i = 0; i < sideElementsPerProc; i++){
+			for(int i = 1; i < sideElementsPerProc-1; i++){
 				int index = i*sideElementsPerProc;			
-				local_q[index] = -local_d[index+1] - leftDest[i] + 4*local_d[index];
+				local_q[index] = -local_d[index+1] - leftDest[i] + 4*local_d[index]-local_d[index-sideElementsPerProc]-local_d[index+sideElementsPerProc];
 				
 				/* TOP AND BOTTOM, EDGE CASES*/
-				if(i != 0){
+				/*if(i != 0){
 					local_q[index] -= local_d[index-sideElementsPerProc];
 				} else {
 					if(mycoords[0]==0){
 						local_q[index] = 0;
-						//continue;
+						continue;
 					} else {
 						local_q[index] -= topDest[0];
 					}
@@ -179,7 +179,7 @@ int main(int argc, char* argv[]){
 					} else {
 						local_q[index] -= bottomDest[0];
 					}
-				}
+				}*/
 			}
 		}
 
@@ -191,17 +191,17 @@ int main(int argc, char* argv[]){
 			}
 		}else{
 			MPI_Recv(&rightDest[0], sideElementsPerProc, MPI_DOUBLE, right, 2, Cycle_Communication, &status);
-			for(int i = 0; i < sideElementsPerProc; i++){
+			for(int i = 1; i < sideElementsPerProc-1; i++){
 				int index = (i+1)*sideElementsPerProc-1;
-				local_q[index] = -local_d[index-1] - rightDest[i] + 4*local_d[index];	
+				local_q[index] = -local_d[index-1] - rightDest[i] + 4*local_d[index]-local_d[index-sideElementsPerProc]-local_d[index+sideElementsPerProc];	
 				
 				/* TOP AND BOTTOM, EDGE CASES*/
-				if(i != 0){
+				/*if(i != 0){
 					local_q[index] -= local_d[index-sideElementsPerProc];
 				} else {
 					if(mycoords[0]==0){
 						local_q[index] = 0;
-						//continue;
+						continue;
 					} else {
 						local_q[index] -= topDest[sideElementsPerProc-1];
 					}
@@ -215,9 +215,102 @@ int main(int argc, char* argv[]){
 					} else {
 						local_q[index] -= bottomDest[sideElementsPerProc-1];
 					}
-				}
+				}*/
 			}
 		}
+		if(p == 1){
+			printf("All corners PE %i\n", rank);
+			local_q[0] = 0;			
+			local_q[sideElementsPerProc-1] = 0;
+			local_q[elementsPerProc-sideElementsPerProc] = 0;
+			local_q[elementsPerProc-1] = 0;
+		
+		}else if(mycoords[0] == 0){
+			// TOP LEFT CORNER
+			if(mycoords[1] == 0){
+				printf("Top left corner PE %i\n", rank);
+				local_q[0] = 0;			
+				local_q[sideElementsPerProc-1] = 0;
+				local_q[elementsPerProc-sideElementsPerProc] = 0;
+				local_q[elementsPerProc-1] = -rightDest[sideElementsPerProc-1]+4*local_q[elementsPerProc-1]-bottomDest[sideElementsPerProc-1]-local_q[elementsPerProc-1-sideElementsPerProc]-local_q[elementsPerProc-2];
+				
+			}
+
+			// TOP RIGHT CORNER 
+			else if (mycoords[1] == n_p-1){
+				printf("Top right corner PE %i\n", rank);
+				local_q[0] = 0;
+				local_q[sideElementsPerProc-1] = 0;
+				local_q[elementsPerProc-sideElementsPerProc] = -local_q[elementsPerProc-2*sideElementsPerProc]+4*local_q[elementsPerProc-sideElementsPerProc]-local_q[elementsPerProc-sideElementsPerProc+1]-leftDest[sideElementsPerProc-1]-bottomDest[0];
+				local_q[elementsPerProc-1] = 0;
+
+			} else {
+				// TOP SIDE 
+				printf("Top side PE %i\n", rank);
+				local_q[0] = 0;
+				local_q[sideElementsPerProc-1] = 0;
+				local_q[elementsPerProc-sideElementsPerProc] = -local_q[elementsPerProc-2*sideElementsPerProc]+4*local_q[elementsPerProc-sideElementsPerProc]-local_q[elementsPerProc-sideElementsPerProc+1]-leftDest[sideElementsPerProc-1]-bottomDest[0];
+				local_q[elementsPerProc-1] = -rightDest[sideElementsPerProc-1]+4*local_q[elementsPerProc-1]-bottomDest[sideElementsPerProc-1]-local_q[elementsPerProc-1-sideElementsPerProc]-local_q[elementsPerProc-2];
+			}
+		} else if (mycoords[0] == n_p-1){
+			// BOTTOM LEFT CORNER
+
+			if(mycoords[1]==0){
+				printf("Bottom left corner PE %i\n", rank);
+				local_q[0] = 0;
+				local_q[sideElementsPerProc-1] = -rightDest[0]+4*local_q[sideElementsPerProc-1]-topDest[sideElementsPerProc-1]-local_q[2*sideElementsPerProc-1]-local_q[sideElementsPerProc-2];
+				local_q[elementsPerProc-sideElementsPerProc] = 0;
+				local_q[elementsPerProc-1] = 0;
+			}
+			// BOTTOM RIGHT CORNER
+			else if (mycoords[1] == n_p-1){
+				printf("Bottom right corner PE %i\n", rank);
+				local_q[0] = -local_q[sideElementsPerProc]+4*local_q[0]-local_q[1]-leftDest[0]-topDest[0];
+				local_q[sideElementsPerProc-1] = 0;
+				local_q[elementsPerProc-sideElementsPerProc] = 0;
+				local_q[elementsPerProc-1] = 0;
+			} else {
+				// BOTTOM SIDE
+				printf("Bottom side PE %i\n", rank);
+				local_q[0] = -local_q[sideElementsPerProc]+4*local_q[0]-local_q[1]-leftDest[0]-topDest[0];
+				local_q[sideElementsPerProc-1] = -rightDest[0]+4*local_q[sideElementsPerProc-1]-topDest[sideElementsPerProc-1]-local_q[2*sideElementsPerProc-1]-local_q[sideElementsPerProc-2];
+				local_q[elementsPerProc-sideElementsPerProc] = 0;
+				local_q[elementsPerProc-1] = 0;
+			}
+		} else if (mycoords[1] == 0){
+			// LEFT SIDE
+			printf("Left side PE %i\n", rank);
+			local_q[0] = 0;
+			local_q[sideElementsPerProc-1] = -rightDest[0]+4*local_q[sideElementsPerProc-1]-topDest[sideElementsPerProc-1]-local_q[2*sideElementsPerProc-1]-local_q[sideElementsPerProc-2];
+			local_q[elementsPerProc-sideElementsPerProc] = 0;
+			local_q[elementsPerProc-1] = -rightDest[sideElementsPerProc-1]+4*local_q[elementsPerProc-1]-bottomDest[sideElementsPerProc-1]-local_q[elementsPerProc-1-sideElementsPerProc]-local_q[elementsPerProc-2];
+		} else if (mycoords[1] == n_p-1){
+			// RIGHT SIDE
+			printf("Right side PE %i\n", rank);
+			local_q[0] = -local_q[sideElementsPerProc]+4*local_q[0]-local_q[1]-leftDest[0]-topDest[0];
+			local_q[sideElementsPerProc-1] = 0;
+			local_q[elementsPerProc-sideElementsPerProc] = -local_q[elementsPerProc-2*sideElementsPerProc]+4*local_q[elementsPerProc-sideElementsPerProc]-local_q[elementsPerProc-sideElementsPerProc+1]-leftDest[sideElementsPerProc-1]-bottomDest[0];
+			local_q[elementsPerProc-1] = 0;
+
+		}else {
+			// NO EDGES
+			printf("No edges PE %i\n", rank);
+
+
+			// res = under + center - höger - vänster - toppen
+			local_q[0] = -local_q[sideElementsPerProc]+4*local_q[0]-local_q[1]-leftDest[0]-topDest[0];
+			//res = - Höger+ center - toppen - under - vänster
+			local_q[sideElementsPerProc-1] = -rightDest[0]+4*local_q[sideElementsPerProc-1]-topDest[sideElementsPerProc-1]-local_q[2*sideElementsPerProc-1]-local_q[sideElementsPerProc-2];
+			
+			//res = -Toppen + center - höger - vänster -botten
+			local_q[elementsPerProc-sideElementsPerProc] = -local_q[elementsPerProc-2*sideElementsPerProc]+4*local_q[elementsPerProc-sideElementsPerProc]-local_q[elementsPerProc-sideElementsPerProc+1]-leftDest[sideElementsPerProc-1]-bottomDest[0];
+			
+
+			// res = höger + Center - botten - Toppen - vänster
+			local_q[elementsPerProc-1] = -rightDest[sideElementsPerProc-1]+4*local_q[elementsPerProc-1]-bottomDest[sideElementsPerProc-1]-local_q[elementsPerProc-1-sideElementsPerProc]-local_q[elementsPerProc-2];
+		}
+
+		
 		for(int i = 0; i < elementsPerProc; i++){
 			DQ_sub += local_q[i]*local_d[i];
 
