@@ -232,7 +232,7 @@ int main(int argc, char* argv[]){
 				local_q[0] = 0;			
 				local_q[sideElementsPerProc-1] = 0;
 				local_q[elementsPerProc-sideElementsPerProc] = 0;
-				local_q[elementsPerProc-1] = -rightDest[sideElementsPerProc-1]+4*local_q[elementsPerProc-1]-bottomDest[sideElementsPerProc-1]-local_q[elementsPerProc-1-sideElementsPerProc]-local_q[elementsPerProc-2];
+				local_q[elementsPerProc-1] = -rightDest[sideElementsPerProc-1]+4*local_d[elementsPerProc-1]-bottomDest[sideElementsPerProc-1]-local_d[elementsPerProc-1-sideElementsPerProc]-local_d[elementsPerProc-2];
 				
 			}
 
@@ -241,7 +241,7 @@ int main(int argc, char* argv[]){
 				printf("Top right corner PE %i\n", rank);
 				local_q[0] = 0;
 				local_q[sideElementsPerProc-1] = 0;
-				local_q[elementsPerProc-sideElementsPerProc] = -local_q[elementsPerProc-2*sideElementsPerProc]+4*local_q[elementsPerProc-sideElementsPerProc]-local_q[elementsPerProc-sideElementsPerProc+1]-leftDest[sideElementsPerProc-1]-bottomDest[0];
+				local_q[elementsPerProc-sideElementsPerProc] = -local_d[elementsPerProc-2*sideElementsPerProc]+4*local_d[elementsPerProc-sideElementsPerProc]-local_d[elementsPerProc-sideElementsPerProc+1]-leftDest[sideElementsPerProc-1]-bottomDest[0];
 				local_q[elementsPerProc-1] = 0;
 
 			} else {
@@ -249,8 +249,8 @@ int main(int argc, char* argv[]){
 				printf("Top side PE %i\n", rank);
 				local_q[0] = 0;
 				local_q[sideElementsPerProc-1] = 0;
-				local_q[elementsPerProc-sideElementsPerProc] = -local_q[elementsPerProc-2*sideElementsPerProc]+4*local_q[elementsPerProc-sideElementsPerProc]-local_q[elementsPerProc-sideElementsPerProc+1]-leftDest[sideElementsPerProc-1]-bottomDest[0];
-				local_q[elementsPerProc-1] = -rightDest[sideElementsPerProc-1]+4*local_q[elementsPerProc-1]-bottomDest[sideElementsPerProc-1]-local_q[elementsPerProc-1-sideElementsPerProc]-local_q[elementsPerProc-2];
+				local_q[elementsPerProc-sideElementsPerProc] = -local_d[elementsPerProc-2*sideElementsPerProc]+4*local_d[elementsPerProc-sideElementsPerProc]-local_d[elementsPerProc-sideElementsPerProc+1]-leftDest[sideElementsPerProc-1]-bottomDest[0];
+				local_q[elementsPerProc-1] = -rightDest[sideElementsPerProc-1]+4*local_d[elementsPerProc-1]-bottomDest[sideElementsPerProc-1]-local_d[elementsPerProc-1-sideElementsPerProc]-local_d[elementsPerProc-2];
 			}
 		} else if (mycoords[0] == n_p-1){
 			// BOTTOM LEFT CORNER
@@ -258,22 +258,22 @@ int main(int argc, char* argv[]){
 			if(mycoords[1]==0){
 				printf("Bottom left corner PE %i\n", rank);
 				local_q[0] = 0;
-				local_q[sideElementsPerProc-1] = -rightDest[0]+4*local_q[sideElementsPerProc-1]-topDest[sideElementsPerProc-1]-local_q[2*sideElementsPerProc-1]-local_q[sideElementsPerProc-2];
+				local_q[sideElementsPerProc-1] = -rightDest[0]+4*local_d[sideElementsPerProc-1]-topDest[sideElementsPerProc-1]-local_d[2*sideElementsPerProc-1]-local_d[sideElementsPerProc-2];
 				local_q[elementsPerProc-sideElementsPerProc] = 0;
 				local_q[elementsPerProc-1] = 0;
 			}
 			// BOTTOM RIGHT CORNER
 			else if (mycoords[1] == n_p-1){
 				printf("Bottom right corner PE %i\n", rank);
-				local_q[0] = -local_q[sideElementsPerProc]+4*local_q[0]-local_q[1]-leftDest[0]-topDest[0];
+				local_q[0] = -local_d[sideElementsPerProc]+4*local_d[0]-local_d[1]-leftDest[0]-topDest[0];
 				local_q[sideElementsPerProc-1] = 0;
 				local_q[elementsPerProc-sideElementsPerProc] = 0;
 				local_q[elementsPerProc-1] = 0;
 			} else {
 				// BOTTOM SIDE
 				printf("Bottom side PE %i\n", rank);
-				local_q[0] = -local_q[sideElementsPerProc]+4*local_q[0]-local_q[1]-leftDest[0]-topDest[0];
-				local_q[sideElementsPerProc-1] = -rightDest[0]+4*local_q[sideElementsPerProc-1]-topDest[sideElementsPerProc-1]-local_q[2*sideElementsPerProc-1]-local_q[sideElementsPerProc-2];
+				local_q[0] = -local_d[sideElementsPerProc]+4*local_d[0]-local_d[1]-leftDest[0]-topDest[0];
+				local_q[sideElementsPerProc-1] = -rightDest[0]+4*local_d[sideElementsPerProc-1]-topDest[sideElementsPerProc-1]-local_d[2*sideElementsPerProc-1]-local_d[sideElementsPerProc-2];
 				local_q[elementsPerProc-sideElementsPerProc] = 0;
 				local_q[elementsPerProc-1] = 0;
 			}
@@ -281,15 +281,15 @@ int main(int argc, char* argv[]){
 			// LEFT SIDE
 			printf("Left side PE %i\n", rank);
 			local_q[0] = 0;
-			local_q[sideElementsPerProc-1] = -rightDest[0]+4*local_q[sideElementsPerProc-1]-topDest[sideElementsPerProc-1]-local_q[2*sideElementsPerProc-1]-local_q[sideElementsPerProc-2];
+			local_q[sideElementsPerProc-1] = -rightDest[0]+4*local_d[sideElementsPerProc-1]-topDest[sideElementsPerProc-1]-local_d[2*sideElementsPerProc-1]-local_d[sideElementsPerProc-2];
 			local_q[elementsPerProc-sideElementsPerProc] = 0;
-			local_q[elementsPerProc-1] = -rightDest[sideElementsPerProc-1]+4*local_q[elementsPerProc-1]-bottomDest[sideElementsPerProc-1]-local_q[elementsPerProc-1-sideElementsPerProc]-local_q[elementsPerProc-2];
+			local_q[elementsPerProc-1] = -rightDest[sideElementsPerProc-1]+4*local_d[elementsPerProc-1]-bottomDest[sideElementsPerProc-1]-local_d[elementsPerProc-1-sideElementsPerProc]-local_d[elementsPerProc-2];
 		} else if (mycoords[1] == n_p-1){
 			// RIGHT SIDE
 			printf("Right side PE %i\n", rank);
-			local_q[0] = -local_q[sideElementsPerProc]+4*local_q[0]-local_q[1]-leftDest[0]-topDest[0];
+			local_q[0] = -local_d[sideElementsPerProc]+4*local_d[0]-local_d[1]-leftDest[0]-topDest[0];
 			local_q[sideElementsPerProc-1] = 0;
-			local_q[elementsPerProc-sideElementsPerProc] = -local_q[elementsPerProc-2*sideElementsPerProc]+4*local_q[elementsPerProc-sideElementsPerProc]-local_q[elementsPerProc-sideElementsPerProc+1]-leftDest[sideElementsPerProc-1]-bottomDest[0];
+			local_q[elementsPerProc-sideElementsPerProc] = -local_d[elementsPerProc-2*sideElementsPerProc]+4*local_d[elementsPerProc-sideElementsPerProc]-local_d[elementsPerProc-sideElementsPerProc+1]-leftDest[sideElementsPerProc-1]-bottomDest[0];
 			local_q[elementsPerProc-1] = 0;
 
 		}else {
@@ -298,16 +298,16 @@ int main(int argc, char* argv[]){
 
 
 			// res = under + center - höger - vänster - toppen
-			local_q[0] = -local_q[sideElementsPerProc]+4*local_q[0]-local_q[1]-leftDest[0]-topDest[0];
+			local_q[0] = -local_d[sideElementsPerProc]+4*local_d[0]-local_d[1]-leftDest[0]-topDest[0];
 			//res = - Höger+ center - toppen - under - vänster
-			local_q[sideElementsPerProc-1] = -rightDest[0]+4*local_q[sideElementsPerProc-1]-topDest[sideElementsPerProc-1]-local_q[2*sideElementsPerProc-1]-local_q[sideElementsPerProc-2];
+			local_q[sideElementsPerProc-1] = -rightDest[0]+4*local_d[sideElementsPerProc-1]-topDest[sideElementsPerProc-1]-local_d[2*sideElementsPerProc-1]-local_d[sideElementsPerProc-2];
 			
 			//res = -Toppen + center - höger - vänster -botten
-			local_q[elementsPerProc-sideElementsPerProc] = -local_q[elementsPerProc-2*sideElementsPerProc]+4*local_q[elementsPerProc-sideElementsPerProc]-local_q[elementsPerProc-sideElementsPerProc+1]-leftDest[sideElementsPerProc-1]-bottomDest[0];
+			local_q[elementsPerProc-sideElementsPerProc] = -local_d[elementsPerProc-2*sideElementsPerProc]+4*local_d[elementsPerProc-sideElementsPerProc]-local_d[elementsPerProc-sideElementsPerProc+1]-leftDest[sideElementsPerProc-1]-bottomDest[0];
 			
 
 			// res = höger + Center - botten - Toppen - vänster
-			local_q[elementsPerProc-1] = -rightDest[sideElementsPerProc-1]+4*local_q[elementsPerProc-1]-bottomDest[sideElementsPerProc-1]-local_q[elementsPerProc-1-sideElementsPerProc]-local_q[elementsPerProc-2];
+			local_q[elementsPerProc-1] = -rightDest[sideElementsPerProc-1]+4*local_d[elementsPerProc-1]-bottomDest[sideElementsPerProc-1]-local_d[elementsPerProc-1-sideElementsPerProc]-local_d[elementsPerProc-2];
 		}
 
 		
