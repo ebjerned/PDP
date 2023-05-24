@@ -222,7 +222,7 @@ int main(int argc, char* argv[]){
 		tau = q0/DQ;		
 		
 		for(int i = 0; i < elementsPerProc; i++){
-			local_u[i] += tau*local_d[i];
+
 			local_g[i] += tau*local_q[i];
 			q1_sub += local_g[i]*local_g[i];
 			
@@ -233,6 +233,7 @@ int main(int argc, char* argv[]){
 		beta = q1/q0;
 		
 		for(int i = 0; i < elementsPerProc; i++){
+			local_u[i] += tau*local_d[i];
 			local_d[i] = -local_g[i]+beta*local_d[i];
 		}
 		
@@ -263,11 +264,11 @@ int main(int argc, char* argv[]){
 	MPI_Gatherv(local_d, elementsPerProc, MPI_DOUBLE, res, count, displ, blocktype, 0, MPI_COMM_WORLD);
 	if(rank==0)
 		for(int i = 0; i < n*n; i++)
-			printf("%.10lf\n", res[i]);*/
+			printf("%.10lf\n", res[i]);
+
+	free(res)*/
 	
 
-
-	MPI_Barrier(MPI_COMM_WORLD);
 	MPI_Type_free(&sideValues_t);
 	free(topDest);
 	free(bottomDest);
