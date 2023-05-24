@@ -126,6 +126,8 @@ int main(int argc, char* argv[]){
 			}
 		}
 
+
+
 		/* INNER TOP ELEMENTS*/
 		if(mycoords[0] != 0){
 			MPI_Recv(topDest, sideElementsPerProc, MPI_DOUBLE, up, 1, Cycle_Communication, &status);
