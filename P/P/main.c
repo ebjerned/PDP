@@ -112,7 +112,7 @@ int main(int argc, char* argv[]){
 	MPI_Allreduce(&q0_sub, &q0, 1, MPI_DOUBLE, MPI_SUM, MPI_COMM_WORLD);
 
 	
-	int n_iterations = 200
+	int n_iterations = 200;
 	for(int t = 0; t < n_iterations; t++){
 
 
