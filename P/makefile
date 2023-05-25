@@ -1,5 +1,5 @@
 CC = mpicc
-CFLAGS = -std=c99 -g -Wall -O3 -fopt-info-vec -fopt-info-vec-missed -ffast-math
+CFLAGS = -std=c99 -g -Wall -O3 -fopt-info-vec -ffast-math
 LIBS = -lm
 
 BIN = cg
