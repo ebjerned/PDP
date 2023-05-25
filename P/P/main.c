@@ -1,9 +1,18 @@
+/*
+ *	CONJUGATE GRADIENT METHOD
+ *	Author: Erik Bjerned, 2023-05-25
+ *	Parallel and Distributed Programming 1TD070
+ */
+
+
 
 #include <stdlib.h>
 #include <stdio.h>
 #include <mpi.h>
 #include <math.h>
 #include <assert.h>
+
+//#PRODUCE_OUTPUT
 
 int main(int argc, char* argv[]){
 	
@@ -103,8 +112,8 @@ int main(int argc, char* argv[]){
 	MPI_Allreduce(&q0_sub, &q0, 1, MPI_DOUBLE, MPI_SUM, MPI_COMM_WORLD);
 
 	
-	// Iteratation start here
-	for(int t = 0; t < 200; t++){
+	int n_iterations = 200
+	for(int t = 0; t < n_iterations; t++){
 
 
 		q1_sub = 0;
@@ -241,7 +250,7 @@ int main(int argc, char* argv[]){
 
 	double max_time;
 	MPI_Reduce(&end_time, &max_time,1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
-	if(rank==0) printf("%lf %lf\n",sqrt(q1), end_time);
+	if(rank==0) printf("%lf\n",sqrt(q1));
 	
 	// OUTPUT TO STDOUT
 	#ifdef PRODUCE_OUTPUT

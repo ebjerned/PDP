@@ -6,7 +6,7 @@ BIN = cg
 
 all: $(BIN)
 
-cg: test.c
+cg: main.c
 	$(CC) $(CFLAGS) -o $@ $< $(LIBS)
 	
 clean:
