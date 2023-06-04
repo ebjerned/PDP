@@ -18,7 +18,7 @@ double find_pivot(double* data, int len);
 //Recusive funciton
 double* Parallel_Qsort(MPI_Comm curr_group, int rank, int size, double* local_arr, int chunk_size);
 //Merge two arrays
-double* merge(double *list1, int n1, double* list2, int n2 );
+double* merge(double *list1, int n1, double* list2, int n2, int rank);
 
 double* pad_array(double* arr, int len, int p);
 //Global Vars
@@ -57,10 +57,10 @@ int main(int argc, char **argv){
 		  return 2;
 	  }
     padding = size - (SIZE % size); 
-    SIZE = SIZE + padding;
+    SIZE = SIZE + (SIZE%padding);
     padded_input = (double*) calloc((SIZE) , sizeof(double));
     // Copy the original array into the padded array to make sure that its length is divisble by size
-    for (int i = 0; i < SIZE-padding; i++) {
+    for (int i = 0; i < SIZE; i++) {
         padded_input[i] = input[i];
     }
     
@@ -101,7 +101,7 @@ int main(int argc, char **argv){
       memcpy(finaldata+currentlocation,local_arr,currentsize*sizeof(double));
       currentlocation = currentlocation+currentsize;
       double* tmp;
-
+	printf("%p\n", finaldata);
       for( int r = 1; r < size; ++r ){
         
         int recive_size = 0;
@@ -113,7 +113,7 @@ int main(int argc, char **argv){
         tmp = (double*)malloc(recive_size*sizeof(double));
         
         MPI_Recv(tmp, recive_size, MPI_DOUBLE, r, r, MPI_COMM_WORLD, NULL );
-        
+	printf("%p\n", finaldata+currentlocation);
         memcpy(finaldata+currentlocation,tmp,recive_size*sizeof(double));
         
         currentlocation = currentlocation+recive_size;
@@ -124,9 +124,9 @@ int main(int argc, char **argv){
   }
   
   if (rank==0){  
-    double *finald = finaldata + padding;
+    double *finald = finaldata;
     if(size != 1){
-	write_output(output_name, finald, SIZE-padding);
+	write_output(output_name, finald, SIZE);
     } else {
 	write_output(output_name, &local_arr[1], SIZE-1);
     }
@@ -226,7 +226,7 @@ double* Parallel_Qsort(MPI_Comm curr_group, int rank, int size, double* local_ar
   
   if (rank < group_size){
   
-    merged_arr = merge(bot,len_bot,recv_low_from_high,recv_size_low);
+    merged_arr = merge(bot,len_bot,recv_low_from_high,recv_size_low, rank);
     newlen = len_bot + recv_size_low;
     currentsize = newlen;
 
@@ -250,7 +250,7 @@ double* Parallel_Qsort(MPI_Comm curr_group, int rank, int size, double* local_ar
       
    }else{
    
-  	merged_arr = merge(top,len_top,recv_high_from_low,recv_size_high);
+  	merged_arr = merge(top,len_top,recv_high_from_low,recv_size_high, rank);
 
     
    	newlen = len_top + recv_size_high;
@@ -348,12 +348,12 @@ double find_pivot(double* data, int len){
 }
 
 
-double* merge(double *v1, int n1, double *v2, int n2 ){
+double* merge(double *v1, int n1, double *v2, int n2 , int rank){
     int i = 0;
     int j = 0;
     int k = 0;
     double *result = (double*)malloc((n1+n2)*sizeof(double));
-
+	/*
     while(i<n1 && j<n2)
         if(v1[i]<v2[j])
         {
@@ -378,6 +378,42 @@ double* merge(double *v1, int n1, double *v2, int n2 ){
             i++; k++;
         }
     return result;
+	*/
+	printf("Rank %i %i %i\n", rank, n1, n2);
+	printf("%i Vector 1\n", rank);
+	for(i = 0; i < n1; i++)
+		printf("%i %lf\n", rank, v1[i]);
+	printf("%i Vector 2\n", rank);
+	for(i = 0; i < n2; i++)
+		printf("%i %lf\n",rank, v2[i]);
+
+	for (int k = 0; k < n1+n2;k++) {
+		if(i > n1-1){ 
+			result[k] = v2[j++];
+		}else if(j > n2-1){
+			 result[k] = v1[i++];
+		}else{
+		        if (v1[i] < v2[j]){
+		                result[k] = v1[i++];
+		        }else{
+		                result[k] = v2[j++];
+			}
+		}
+
+        }
+	/*for(int i = 0; i < n1; i++)
+		result[i] = v1[i];
+	for(int i = n1; i < n1+n2; i++){
+		result[i] = v2[i-n1];
+	}	*/	
+	
+
+	printf("%i Result\n", rank);
+	for(i = 0; i < n1+n2; i++)
+		printf("%i %lf\n", rank, result[i]);
+        return result;
+
+
 }
 int read_input(const char *file_name, double **values) {
 	FILE *file;
@@ -414,14 +450,14 @@ int write_output(char *file_name, const double *output, int num_values) {
 		perror("Couldn't open output file");
 		return -1;
 	}
-	/*for (int i = 0; i < num_values; i++) {
+	for (int i = 0; i < num_values; i++) {
 		if (0 > fprintf(file, "%.0lf ", output[i])) {
 			perror("Couldn't write to output file");
 		}
 	}
 	if (0 > fprintf(file, "\n")) {
 		perror("Couldn't write to output file");
-	}*/
+	}
 	if (0 != fclose(file)) {
 		perror("Warning: couldn't close output file");
 	}

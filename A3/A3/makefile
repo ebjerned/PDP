@@ -7,7 +7,7 @@ BIN = quicksort
 
 all: $(BIN)
 
-quicksort: new_main.c	
+quicksort: revised2_main.c	
 	$(CC) $(CFLAGS) -o $@ $< $(LIBS)
 clean:
 	$(RM) $(BIN)
