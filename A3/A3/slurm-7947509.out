@@ -1,5 +1,10 @@
+8.792893
+4.883279
+2.905360
+2.104752
+1.821707
 --------------------------------------------------------------------------
-There are not enough slots available in the system to satisfy the 4
+There are not enough slots available in the system to satisfy the 32
 slots that were requested by the application:
 
   ./quicksort

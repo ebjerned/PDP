@@ -73,9 +73,9 @@ int main(int argc, char **argv){
 	if(rank==0) free(padded_input);
 	double start, end;
 	//Sort locally before anything else
-	if(size==1) start = MPI_Wtime();
+	start = MPI_Wtime();
 	qsort(local_arr, n , sizeof(int), compare);
-	if(size==1) end = MPI_Wtime()-start;
+	//if(size==1) end = MPI_Wtime()-start;
     
     	MPI_Comm groups[(int)log2(size)];
 	splitGroup(MPI_COMM_WORLD, rank, size, 0, &groups);
@@ -83,7 +83,7 @@ int main(int argc, char **argv){
 	// Running and then gathering data;
 	int* finaldata;
 	if (size > 1){
-		start = MPI_Wtime();
+		//start = MPI_Wtime();
 		local_arr = Parallel_Qsort(groups,rank, size, local_arr,n, 0);
 
 		//MPI_Barrier(MPI_COMM_WORLD);
@@ -116,6 +116,8 @@ int main(int argc, char **argv){
 				free(tmp);
 			}
 		}
+	} else{
+		end = MPI_Wtime()-start;	
 	}
 
 	if (rank==0){    
