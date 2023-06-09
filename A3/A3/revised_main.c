@@ -4,7 +4,7 @@
 #include <math.h>
 #include <string.h>
 //Readwrite
-int read_input(const char *file_name,/*int rank, int size, int* num_values,*/ double **values);
+int read_input(const char *file_name,int rank, int size, int* num_values, int **values);
 int write_output(char *file_name, const double *output, int num_values);
 
 
@@ -49,11 +49,11 @@ int main(int argc, char **argv){
         int SIZE;
         int n;
 
-        double *input;
+        int *input;
         double *padded_input;
-
+	read_input(input_name, rank, size, &SIZE, &input);
 	
-        if (rank == 0) {
+        /*if (rank == 0) {
                 int addage; 
 	        if (0 > (SIZE = read_input(input_name, &input))) {
 		        return 2;
@@ -70,7 +70,7 @@ int main(int argc, char **argv){
                 //memcpy(padded_input, input, (SIZE)*sizeof(double));
                 n = SIZE/size;
  
-        }
+        }*/
         MPI_Bcast(&SIZE, 1, MPI_INT, 0,MPI_COMM_WORLD);
         n = SIZE /size;
         MPI_Barrier(MPI_COMM_WORLD);        
@@ -422,29 +422,38 @@ double* merge(double *v1, int n1, double *v2, int n2, double** mergeTo){
 
         return result;*/
 }
-int read_input(const char *file_name,/* int rank, int size, int* num_value,*/ double **values) {
-	
-	/*MPI_File file;
+int read_input(const char *file_name, int rank, int size, int* num_values, int **values) {
+	MPI_File file;
 	MPI_Status status;
-	MPI_File_open(MPI_COMM_WORLD, file_name,MPI_MODE_RDONLY, MPI_INFO_NULL, &file);
-	
+	int r = MPI_File_open(MPI_COMM_WORLD, file_name, MPI_MODE_RDONLY, MPI_INFO_NULL, &file);	
 	if(rank==0){
+	
+// Anledningen till att detta inte funkar är att man behöver läsa in varje char i text filen
+ 	MPI_File_set_view(file, MPI_DISPLACEMENT_CURRENT, MPI_INT, MPI_INT,  "native", MPI_INFO_NULL);
+	
+	
 		int temp;
-		MPI_File_read_at(file,4, &temp, 1, MPI_INT, &status);
 		printf("num vals = %i\n", temp);
-	}*/
-	/*MPI_Bcast(num_values, 1, MPI_INT, 0, MPI_COMM_WORLD);
-	printf("recived num vals = %i\n", num_values);
-	int offset = sizeof(double)*rank*(*num_values)/size+sizeof(int);
-	MPI_File_read_at(file, offset, values, (*num_values)/size, MPI_DOUBLE, &status);*/
-	//MPI_File_close(&file);
+		MPI_File_seek(file, 0, MPI_SEEK_SET);
+		MPI_File_read(file, &temp, 1, MPI_INT, &status);
+		printf("num vals = %i\n", temp);*/
+		*num_values = 10;
+		
+	}
+	MPI_Barrier(MPI_COMM_WORLD);
+	MPI_Bcast(num_values, 1, MPI_INT, 0, MPI_COMM_WORLD);
+	printf("recived num vals = %i\n", *num_values);
+	int offset = rank*(*num_values)/size;
+	printf("Offset %i %i\n", rank, offset);
+	MPI_File_read_at(file, offset, values, (*num_values)/size, MPI_INT, &status);
+	MPI_File_close(&file);
 
-	//for(int i = 0; i < (*num_values)/size; i++){
-		//printf("Rank %i %lf\n", rank, values[i]);
-	//}
-	//return (*num_values);
+	for(int i = 0; i < (*num_values)/size; i++){
+		printf("Rank %i %i\n", rank, values[i]);
+	}
+	return (*num_values);
 
-
+	/*
 	FILE *file;
 	if (NULL == (file = fopen(file_name, "r"))) {
 		perror("Couldn't open input file");
@@ -470,7 +479,7 @@ int read_input(const char *file_name,/* int rank, int size, int* num_value,*/ do
 	if (0 != fclose(file)){
 		perror("Warning: couldn't close input file");
 	}
-	return num_values;
+	return num_values;*/
 }
 
 int write_output(char *file_name, const double *output, int num_values) {

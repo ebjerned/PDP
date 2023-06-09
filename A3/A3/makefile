@@ -1,5 +1,5 @@
 CC = mpicc
-CFLAGS = -std=c99 -g -O3
+CFLAGS = -std=c99 -g -O3 -Wall
 LIBS = -lm
 
 
@@ -7,7 +7,7 @@ BIN = quicksort
 
 all: $(BIN)
 
-quicksort: revised2_main.c	
+quicksort: revised3_main.c	
 	$(CC) $(CFLAGS) -o $@ $< $(LIBS)
 clean:
 	$(RM) $(BIN)

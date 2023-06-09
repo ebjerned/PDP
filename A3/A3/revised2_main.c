@@ -16,9 +16,9 @@ double find_mean(double *data, int len);
 double pivot(int pivot_strat,int len, double *rcv_buffer, int rank, int size, MPI_Comm group);
 double find_pivot(double* data, int len);
 //Recusive funciton
-double* Parallel_Qsort(MPI_Comm curr_group, int rank, int size, double* local_arr, int chunk_size);
+double* Parallel_Qsort(MPI_Comm curr_group, int rank, int size,  double* local_arr, int chunk_size);
 //Merge two arrays
-double* merge(double *list1, int n1, double* list2, int n2, int rank);
+double* merge( double *list1, int n1,  double* list2, int n2, int rank);
 
 double* pad_array(double* arr, int len, int p);
 //Global Vars
@@ -141,7 +141,7 @@ int main(int argc, char **argv){
   MPI_Finalize();
 }
 
-double* Parallel_Qsort(MPI_Comm curr_group, int rank, int size, double* local_arr, int n){
+double* Parallel_Qsort(MPI_Comm curr_group, int rank, int size,  double* local_arr, int n){
 
   MPI_Comm_size( curr_group, &size);
   MPI_Comm_rank( curr_group, &rank );
@@ -154,17 +154,22 @@ double* Parallel_Qsort(MPI_Comm curr_group, int rank, int size, double* local_ar
   double PivotPoint = pivot(STRAT, n, local_arr, rank, size, curr_group);
   
   //Find the size of arrays to share according to 
-  double *top = (double*)malloc(n*sizeof(double));
-  double *bot = (double*)malloc(n*sizeof(double));
-  int len_top = 0;
-  int len_bot = 0;
-  for(int i = 0 ; i < n;i++){
-    if(local_arr[i] >= PivotPoint){
-      top[len_top++] = local_arr[i];
-    }else{
-      bot[len_bot++] = local_arr[i];
-    }
-  }
+  
+int len_top = 0;
+int len_bot = 0;
+for(int i = 0 ; i < n;i++){
+	if(local_arr[i] >= PivotPoint){
+		len_top = n-len_bot;
+		break;
+	}else{
+		len_bot++;
+	}
+}
+
+  double *top = (double*)malloc(len_top*sizeof(double));
+  double *bot = (double*)malloc(len_bot*sizeof(double));
+  memcpy(bot, local_arr, len_bot*sizeof(double));
+  memcpy(top, &local_arr[len_bot], len_top*sizeof(double));
   
   free(local_arr);
   
@@ -348,7 +353,7 @@ double find_pivot(double* data, int len){
 }
 
 
-double* merge(double *v1, int n1, double *v2, int n2 , int rank){
+double* merge( double *v1, int n1,  double *v2, int n2 , int rank){
     int i = 0;
     int j = 0;
     int k = 0;
@@ -379,15 +384,15 @@ double* merge(double *v1, int n1, double *v2, int n2 , int rank){
         }
     return result;
 	*/
-	printf("Rank %i %i %i\n", rank, n1, n2);
+	/*printf("Rank %i %i %i\n", rank, n1, n2);
 	printf("%i Vector 1\n", rank);
 	for(i = 0; i < n1; i++)
 		printf("%i %lf\n", rank, v1[i]);
 	printf("%i Vector 2\n", rank);
 	for(i = 0; i < n2; i++)
 		printf("%i %lf\n",rank, v2[i]);
-
-	for (int k = 0; k < n1+n2;k++) {
+	*/
+	for (int k = 0, i=0, j=0; k < n1+n2;k++) {
 		if(i > n1-1){ 
 			result[k] = v2[j++];
 		}else if(j > n2-1){
@@ -408,9 +413,9 @@ double* merge(double *v1, int n1, double *v2, int n2 , int rank){
 	}	*/	
 	
 
-	printf("%i Result\n", rank);
+	/*printf("%i Result\n", rank);
 	for(i = 0; i < n1+n2; i++)
-		printf("%i %lf\n", rank, result[i]);
+		printf("%i %lf\n", rank, result[i]);*/
         return result;
 
 
@@ -450,14 +455,14 @@ int write_output(char *file_name, const double *output, int num_values) {
 		perror("Couldn't open output file");
 		return -1;
 	}
-	for (int i = 0; i < num_values; i++) {
+	/*for (int i = 0; i < num_values; i++) {
 		if (0 > fprintf(file, "%.0lf ", output[i])) {
 			perror("Couldn't write to output file");
 		}
 	}
 	if (0 > fprintf(file, "\n")) {
 		perror("Couldn't write to output file");
-	}
+	}*/
 	if (0 != fclose(file)) {
 		perror("Warning: couldn't close output file");
 	}
