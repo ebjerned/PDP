@@ -1,0 +1,57 @@
+1.140079
+[s19:17581] *** An error occurred in MPI_Comm_size
+[s19:17581] *** reported by process [967573505,2]
+[s19:17581] *** on communicator MPI_COMM_WORLD
+[s19:17581] *** MPI_ERR_COMM: invalid communicator
+[s19:17581] *** MPI_ERRORS_ARE_FATAL (processes in this communicator will now abort,
+[s19:17581] ***    and potentially your MPI job)
+[s19.uppmax.uu.se:17567] PMIX ERROR: UNREACHABLE in file server/pmix_server.c at line 2198
+[s19.uppmax.uu.se:17567] 1 more process has sent help message help-mpi-errors.txt / mpi_errors_are_fatal
+[s19.uppmax.uu.se:17567] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+0.468698
+[s19:17857] *** Process received signal ***
+[s19:17857] Signal: Segmentation fault (11)
+[s19:17857] Signal code: Address not mapped (1)
+[s19:17857] Failing at address: 0x435a0000423f
+[s19:17857] [ 0] /lib64/libpthread.so.0(+0xf630)[0x2b9cdbb5b630]
+[s19:17857] [ 1] /opt/openmpi/4.1.5gcc13.1.0/lib/libmpi.so.40(MPI_Comm_size+0x7c)[0x2b9cdb881edc]
+[s19:17857] [ 2] ./quicksort[0x402007]
+[s19:17857] [ 3] ./quicksort[0x402176]
+[s19:17857] [ 4] ./quicksort[0x402176]
+[s19:17857] [ 5] ./quicksort[0x40240e]
+[s19:17857] [ 6] ./quicksort[0x40151b]
+[s19:17857] [ 7] /lib64/libc.so.6(__libc_start_main+0xf5)[0x2b9cdbd8a555]
+[s19:17857] [ 8] ./quicksort[0x401838]
+[s19:17857] *** End of error message ***
+[s19:17854] *** An error occurred in MPI_Comm_size
+[s19:17854] *** reported by process [945881089,10]
+[s19:17854] *** on communicator MPI_COMM_WORLD
+[s19:17854] *** MPI_ERR_COMM: invalid communicator
+[s19:17854] *** MPI_ERRORS_ARE_FATAL (processes in this communicator will now abort,
+[s19:17854] ***    and potentially your MPI job)
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+[s19.uppmax.uu.se:17746] PMIX ERROR: UNREACHABLE in file server/pmix_server.c at line 2198
+[s19.uppmax.uu.se:17746] PMIX ERROR: UNREACHABLE in file server/pmix_server.c at line 2198
+[s19:17864] *** Process received signal ***
+[s19:17864] Signal: Segmentation fault (11)
+[s19:17864] Signal code: Address not mapped (1)
+[s19:17864] Failing at address: 0x46ed000046c5
+[s19:17864] [ 0] /lib64/libpthread.so.0(+0xf630)[0x2b9c21f0f630]
+[s19:17864] [ 1] /opt/openmpi/4.1.5gcc13.1.0/lib/libmpi.so.40(MPI_Comm_size+0x7c)[0x2b9c21c35edc]
+[s19:17864] [ 2] ./quicksort[0x402007]
+[s19:17864] [ 3] ./quicksort[0x402176]
+[s19:17864] [ 4] ./quicksort[0x402176]
+[s19:17864] [ 5] ./quicksort[0x40240e]
+[s19:17864] [ 6] ./quicksort[0x40151b]
+[s19:17864] [ 7] /lib64/libc.so.6(__libc_start_main+0xf5)[0x2b9c2213e555]
+[s19:17864] [ 8] ./quicksort[0x401838]
+[s19:17864] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 11 with PID 0 on node s19 exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+[s19.uppmax.uu.se:17746] 4 more processes have sent help message help-mpi-errors.txt / mpi_errors_are_fatal
+[s19.uppmax.uu.se:17746] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+1.874173

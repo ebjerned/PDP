@@ -16,11 +16,13 @@ int find_mean(int *data, int len);
 int pivot(int pivot_strat,int len, int *rcv_buffer, int rank, int size, MPI_Comm group);
 int find_pivot(int* data, int len);
 //Recusive funciton
-int* Parallel_Qsort(MPI_Comm curr_group, int rank, int size,    int* local_arr, int chunk_size);
+int* Parallel_Qsort(MPI_Comm* groups, int rank, int size,    int* local_arr, int chunk_size, int depth);
 //Merge two arrays
 int* merge( int *list1, int n1,    int* list2, int n2, int rank);
 
-int* pad_array(int* arr, int len, int p);
+
+void splitGroup(MPI_Comm curr_group, int rank, int size, int n, MPI_Comm* groups);
+
 //Global Vars
 int STRAT;
 MPI_Status status;
@@ -75,13 +77,14 @@ int main(int argc, char **argv){
 	qsort(local_arr, n , sizeof(int), compare);
 	if(size==1) end = MPI_Wtime()-start;
     
-    
+    	MPI_Comm groups[(int)log2(size)];
+	splitGroup(MPI_COMM_WORLD, rank, size, 0, &groups);
     
 	// Running and then gathering data;
 	int* finaldata;
 	if (size > 1){
 		start = MPI_Wtime();
-		local_arr = Parallel_Qsort(MPI_COMM_WORLD,rank, size, local_arr,n);
+		local_arr = Parallel_Qsort(groups,rank, size, local_arr,n, 0);
 
 		//MPI_Barrier(MPI_COMM_WORLD);
 		end = MPI_Wtime() - start;
@@ -133,8 +136,8 @@ int main(int argc, char **argv){
 	MPI_Finalize();
 }
 
-int* Parallel_Qsort(MPI_Comm curr_group, int rank, int size,  int* local_arr, int n){
-
+int* Parallel_Qsort(MPI_Comm* groups, int rank, int size,  int* local_arr, int n, int depth){
+	MPI_Comm curr_group = groups[depth];
 	MPI_Comm_size( curr_group, &size);
 	MPI_Comm_rank( curr_group, &rank );
 
@@ -158,12 +161,6 @@ int* Parallel_Qsort(MPI_Comm curr_group, int rank, int size,  int* local_arr, in
 		}
 	}
 
-	//int *top = (int*)malloc(len_top*sizeof(int));
-	//int *bot = (int*)malloc(len_bot*sizeof(int));
-	//memcpy(bot, local_arr, len_bot*sizeof(int));
-	//memcpy(top, &local_arr[len_bot], len_top*sizeof(int));
-
-	//free(local_arr);
 
 	//Group up process ids into two groups, high and low, every process has a pair-process in other group
 
@@ -191,67 +188,99 @@ int* Parallel_Qsort(MPI_Comm curr_group, int rank, int size,  int* local_arr, in
 	MPI_Request request1;
 	MPI_Request request2;
 
-	if (rank < group_size) {
-		//low process sends its top to pair in right group and receive pairs bottom
-		MPI_Isend(&local_arr[len_bot], len_top, MPI_INT, pair_high, tag+1, curr_group, &request1);
-		MPI_Probe(pair_high, tag, curr_group, &status);
-		MPI_Get_count(&status, MPI_INT, &recv_size_low);
-		recv_low_from_high= (int *)malloc(recv_size_low*sizeof(int));
-		MPI_Irecv(recv_low_from_high, recv_size_low, MPI_INT, pair_high, tag, curr_group, &request2);
-		MPI_Wait(&request1, &status);
-		MPI_Wait(&request2, &status);
-	} else {
-		//high process sends its bottom to pair in left group and receive pairs top
-		MPI_Isend(local_arr, len_bot, MPI_INT, pair_low, tag, curr_group, &request1);
-		MPI_Probe(pair_low, tag+1, curr_group, &status);
-		MPI_Get_count(&status, MPI_INT, &recv_size_high);
-		recv_high_from_low= (int *)malloc(recv_size_high*sizeof(int));
-		MPI_Irecv(recv_high_from_low, recv_size_high, MPI_INT, pair_low, tag+1, curr_group, &request2);
-		MPI_Wait(&request1, &status);
-		MPI_Wait(&request2, &status);
-	}
-	//MPI_Barrier(curr_group);
-
 	int *merged_arr;
 	int newlen;
 
 	MPI_Comm nextgroup;
 	int newsize,newrank;
 
-	if (rank < group_size){
+
+	if (rank < group_size) {
+		//low process sends its top to pair in right group and receive pairs bottom
+		MPI_Isend(&local_arr[len_bot], len_top, MPI_INT, pair_high, tag+1, curr_group, &request1);
+		MPI_Probe(pair_high, tag, curr_group, &status);
+		MPI_Get_count(&status, MPI_INT, &recv_size_low);
+
+		recv_low_from_high = (int*) realloc(recv_low_from_high, recv_size_low*sizeof(int));
+		MPI_Recv(recv_low_from_high, recv_size_low, MPI_INT, pair_high, tag, curr_group, &status);
 
 		merged_arr = merge(local_arr,len_bot,recv_low_from_high,recv_size_low, rank);
 		newlen = len_bot + recv_size_low;
 		currentsize = newlen;
 
-		free(recv_low_from_high);
+		//free(recv_low_from_high);
 
 		// Split group
-		MPI_Comm_split( curr_group,0, 1, &nextgroup );
-		MPI_Comm_size( nextgroup, &newsize );
-		MPI_Comm_rank( nextgroup, &newrank );
+		/*MPI_Comm_split( curr_group,0, 1, &nextgroup );*/
+		//MPI_Comm_size( groups[depth+1], &newsize );
+		//MPI_Comm_rank( groups[depth+1], &newrank );
+		return Parallel_Qsort(groups, newrank, group_size/2, merged_arr, newlen, depth+1);
 
-		return (Parallel_Qsort(nextgroup, newrank, newsize, merged_arr, newlen));
+	} else {
+		//high process sends its bottom to pair in left group and receive pairs top
+		MPI_Isend(local_arr, len_bot, MPI_INT, pair_low, tag, curr_group, &request1);
+		MPI_Probe(pair_low, tag+1, curr_group, &status);
+		MPI_Get_count(&status, MPI_INT, &recv_size_high);
 
-	}else{
+		recv_high_from_low = (int*) realloc(recv_high_from_low, recv_size_high*sizeof(int));
+		MPI_Recv(recv_high_from_low, recv_size_high, MPI_INT, pair_low, tag+1, curr_group, &status);
 
 		merged_arr = merge(&local_arr[len_bot],len_top,recv_high_from_low,recv_size_high, rank);
 		newlen = len_top + recv_size_high;
 		currentsize = newlen;
 
-		free(recv_high_from_low);
+		//free(recv_high_from_low);
 
 		// Split group
+		/*MPI_Comm_split( curr_group, 1, 1, &nextgroup );*/
+		//MPI_Comm_size( groups[depth+1], &newsize );
+		//MPI_Comm_rank( groups[depth+1], &newrank );
+		return Parallel_Qsort(groups, newrank, group_size/2, merged_arr, newlen, depth+1);
+	}
+	//MPI_Barrier(curr_group);
+
+	free(recv_low_from_high);
+	free(recv_high_from_low);
+	return(local_arr);
+}
+
+void splitGroup(MPI_Comm curr_group, int rank, int size, int n, MPI_Comm* groups){
+
+	MPI_Comm_size( curr_group, &size);
+	MPI_Comm_rank( curr_group, &rank );
+
+	//Recursion statement 
+	if(size < 2){
+		groups[n] = curr_group;
+		return;
+	}
+
+	//Group up process ids into two groups, high and low, every process has a pair-process in other group
+
+	int group_size = size/2;
+	//Sending and recieving
+
+	MPI_Comm nextgroup;
+	int newsize,newrank;
+
+	groups[n] = curr_group;
+	if (rank < group_size) {
+
+		MPI_Comm_split( curr_group,0, 1, &nextgroup );
+		MPI_Comm_size( nextgroup, &newsize );
+		MPI_Comm_rank( nextgroup, &newrank );
+		return splitGroup(nextgroup, newrank, newsize, n+1, groups);
+
+	} else {
+
 		MPI_Comm_split( curr_group, 1, 1, &nextgroup );
 		MPI_Comm_size( nextgroup, &newsize );
 		MPI_Comm_rank( nextgroup, &newrank );
-
-		return (Parallel_Qsort(nextgroup, newrank, newsize, merged_arr, newlen));
-
+		return splitGroup(nextgroup, newrank, newsize, n+1, groups);
 	}
 
-	return(local_arr);
 }
+
 
 int pivot(int pivot_strat,int len, int *local_arr, int rank, int size, MPI_Comm group){
 	int l_pivot = 0;
@@ -375,14 +404,14 @@ int write_output(char *file_name, const int *output, int num_values) {
 		perror("Couldn't open output file");
 		return -1;
 	}
-	for (int i = 0; i < num_values; i++) {
+	/*for (int i = 0; i < num_values; i++) {
 		if (0 > fprintf(file, "%i ", output[i])) {
 			perror("Couldn't write to output file");
 		}
 	}
 	if (0 > fprintf(file, "\n")) {
 		perror("Couldn't write to output file");
-	}
+	}*/
 	if (0 != fclose(file)) {
 		perror("Warning: couldn't close output file");
 	}
