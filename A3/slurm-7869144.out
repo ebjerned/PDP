@@ -1,7 +1,0 @@
-Extracting and entering A3 directory
-Building
-rm -f quicksort
-mpicc -std=c99 -g -O3 -o quicksort new_main.c -lm
-OK
-Checking result of serial runs
-Wrong result for command ./quicksort /proj/uppmax2023-2-13/nobackup/qsort_indata/input10.txt output_to_remove.txt 1
