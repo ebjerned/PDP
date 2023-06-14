@@ -1,0 +1,5 @@
+Function call:
+mc N
+
+N is the total number of runs, which will then be divided among the processing elements. 
+MUST BE DIVISIBLE BY PEs
