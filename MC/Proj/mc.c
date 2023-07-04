@@ -87,7 +87,9 @@ int main(int argc, char **argv){
 	MPI_Barrier(MPI_COMM_WORLD);
 
 	time = MPI_Wtime() - start_time;
-
+	double tmp;
+	MPI_Reduce(&time, &tmp, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
+	if(rank==0) printf("%lf\n", tmp);
 	MPI_Gather(X, n, MPI_INT, recbuf, n, MPI_INT, 0, MPI_COMM_WORLD);		//Gathering all X vectors into the recieve buffer
 
 	MPI_Barrier(MPI_COMM_WORLD);

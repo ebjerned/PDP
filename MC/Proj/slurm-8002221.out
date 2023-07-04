@@ -1,0 +1,12 @@
+--------------------------------------------------------------------------
+ORTE has lost communication with a remote daemon.
+
+  HNP daemon   : [[9572,0],0] on node s107
+  Remote daemon: [[9572,0],1] on node s108
+
+This is usually due to either a failure of the TCP network
+connection to the node, or possibly an internal failure of
+the daemon itself. We cannot recover from this failure, and
+therefore will terminate the job.
+--------------------------------------------------------------------------
+slurmstepd: error: *** JOB 8002221 ON s107 CANCELLED AT 2023-06-29T12:10:09 DUE TO TIME LIMIT ***

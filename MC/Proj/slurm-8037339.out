@@ -1,0 +1,58 @@
+11.864163
+6.112212
+3.107312
+1.603977
+0.839478
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[18669,1],10]
+  Exit code:    1
+--------------------------------------------------------------------------
+large
+0.854467
+1.335702
+1.694500
+weak
+11.866791
+12.192580
+11.996837
+12.446111
+15.539391

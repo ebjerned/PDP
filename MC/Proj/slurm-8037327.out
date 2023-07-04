@@ -1,0 +1,155 @@
+11.981235
+6.008816
+0.000000
+0.000000
+0.000000
+0.000000
+3.099387
+0.000000
+0.000000
+0.000000
+1.618948
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.828282
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+N must be divisible by the number of processing elements
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[46129,1],11]
+  Exit code:    1
+--------------------------------------------------------------------------
+large
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.825576
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+1.325636
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+1.943039
+0.000000
+weak
+11.968634
+11.925982
+0.000000
+11.956468
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+12.466385
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+13.232557
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
+0.000000
