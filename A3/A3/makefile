@@ -1,5 +1,5 @@
 CC = mpicc
-CFLAGS = -std=c99 -g -O3
+CFLAGS = -std=c99 -g -O3 -Wall
 LIBS = -lm
 
 

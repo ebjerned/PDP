@@ -82,7 +82,13 @@ int main(int argc, char **argv){
 		X[i] = x_out[0];	//Saving final number of susceptible humans to the vector that is to be gathered
 		
 	}
+	
 
+	int glob_min;
+	int glob_max;
+
+	MPI_Allreduce(X, &glob_min, 1, MPI_INT, MPI_MIN, MPI_COMM_WORLD);
+	MPI_Allreduce(X, &glob_max, 1, MPI_INT, MPI_MAX, MPI_COMM_WORLD);
 
 	MPI_Barrier(MPI_COMM_WORLD);
 

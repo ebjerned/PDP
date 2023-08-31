@@ -31,7 +31,7 @@ int currentsize = 0;
 int main(int argc, char **argv){
 
 	if (4 != argc) {
-		printf("Usage: qsort input_file output_file pivotstrategy \n");
+		printf("Usage: quicksort input_file output_file pivotstrategy \n");
 		return 1;
 	}
 
@@ -117,9 +117,9 @@ int main(int argc, char **argv){
 	}
 
 	if (rank==0){    
-		int *finald = finaldata;
+		//int *finald = finaldata;
 		if(size != 1){
-			write_output(output_name, finald+padding, SIZE);
+			write_output(output_name, finaldata+padding, SIZE);
 		} else {
 			write_output(output_name, &local_arr[0], SIZE);
 		}
@@ -183,13 +183,12 @@ int* Parallel_Qsort(MPI_Comm curr_group, int rank, int size,  int* local_arr, in
 	int *recv_low_from_high;
 	int *recv_high_from_low;
 	MPI_Request request1;
-	MPI_Request request2;
 
 	int *merged_arr;
 	int newlen;
 
 	MPI_Comm nextgroup;
-	int newsize,newrank;
+	int newrank;
 
 
 	if (rank < group_size) {
