@@ -359,14 +359,14 @@ int write_output(char *file_name, const int *output, int num_values) {
 		perror("Couldn't open output file");
 		return -1;
 	}
-	for (int i = 0; i < num_values; i++) {
+	/*for (int i = 0; i < num_values; i++) {
 		if (0 > fprintf(file, "%i ", output[i])) {
 			perror("Couldn't write to output file");
 		}
 	}
 	if (0 > fprintf(file, "\n")) {
 		perror("Couldn't write to output file");
-	}
+	}*/
 	if (0 != fclose(file)) {
 		perror("Warning: couldn't close output file");
 	}
