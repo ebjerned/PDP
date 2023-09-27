@@ -29,7 +29,7 @@ int currentsize = 0;
 
 
 int main(int argc, char **argv){
-
+     
 	if (4 != argc) {
 		printf("Usage: qsort input_file output_file pivotstrategy \n");
 		return 1;
@@ -39,7 +39,7 @@ int main(int argc, char **argv){
 	char *output_name = argv[2];
 	STRAT = atoi(argv[3]);    
 	MPI_Init(&argc, &argv);
-	int size, rank;
+	/*int size, rank;
 	MPI_Comm_size(MPI_COMM_WORLD, &size);
 	MPI_Comm_rank(MPI_COMM_WORLD, &rank); 
 
@@ -61,7 +61,6 @@ int main(int argc, char **argv){
 		for (int i = 0; i < SIZE; i++) {
 			padded_input[i] = input[i];
 		}
-
 	}
 	MPI_Bcast(&paddedSize, 1, MPI_INT, 0,MPI_COMM_WORLD);
 	n = paddedSize / size;
@@ -80,7 +79,7 @@ int main(int argc, char **argv){
 	int* finaldata;
 	if (size > 1){
 		//start = MPI_Wtime();
-		local_arr = Parallel_Qsort(MPI_COMM_WORLD,rank, size, local_arr,n, 0);
+		//local_arr = Parallel_Qsort(MPI_COMM_WORLD,rank, size, local_arr,n, 0);
 
 		//MPI_Barrier(MPI_COMM_WORLD);
 		end = MPI_Wtime() - start;
@@ -125,12 +124,11 @@ int main(int argc, char **argv){
 		}
 		printf("%lf\n", end);
 		free(input);
-		free(finaldata);
-	}
-
+		free(finald);
+	} 
 	free(local_arr);
         
-
+    */
 	MPI_Finalize();
 }
 
@@ -200,7 +198,7 @@ int* Parallel_Qsort(MPI_Comm curr_group, int rank, int size,  int* local_arr, in
 
 		recv_low_from_high = (int*) realloc(recv_low_from_high, recv_size_low*sizeof(int));
 		MPI_Recv(recv_low_from_high, recv_size_low, MPI_INT, pair_high, tag, curr_group, &status);
-
+		free(merged_arr);
 		merged_arr = merge(local_arr,len_bot,recv_low_from_high,recv_size_low, rank);
 		newlen = len_bot + recv_size_low;
 		currentsize = newlen;
@@ -218,7 +216,7 @@ int* Parallel_Qsort(MPI_Comm curr_group, int rank, int size,  int* local_arr, in
 
 		recv_high_from_low = (int*) realloc(recv_high_from_low, recv_size_high*sizeof(int));
 		MPI_Recv(recv_high_from_low, recv_size_high, MPI_INT, pair_low, tag+1, curr_group, &status);
-
+		free(merged_arr);
 		merged_arr = merge(&local_arr[len_bot],len_top,recv_high_from_low,recv_size_high, rank);
 		newlen = len_top + recv_size_high;
 		currentsize = newlen;
@@ -234,6 +232,7 @@ int* Parallel_Qsort(MPI_Comm curr_group, int rank, int size,  int* local_arr, in
 
 	free(recv_low_from_high);
 	free(recv_high_from_low);
+	free(merged_arr);
 	return(local_arr);
 }
 
@@ -359,7 +358,7 @@ int write_output(char *file_name, const int *output, int num_values) {
 	if (NULL == (file = fopen(file_name, "w"))) {
 		perror("Couldn't open output file");
 		return -1;
-	}
+	}/*
 	for (int i = 0; i < num_values; i++) {
 		if (0 > fprintf(file, "%i ", output[i])) {
 			perror("Couldn't write to output file");
@@ -367,7 +366,7 @@ int write_output(char *file_name, const int *output, int num_values) {
 	}
 	if (0 > fprintf(file, "\n")) {
 		perror("Couldn't write to output file");
-	}
+	}*/
 	if (0 != fclose(file)) {
 		perror("Warning: couldn't close output file");
 	}
